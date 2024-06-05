@@ -1,5 +1,7 @@
 <header>
-    <img src="../../../assets/menuAberto.svg">
+    <ng-container *ngIf="variant == 'neutro'">
+        <img ngSrc="./assets/menuAberto.svg" width="24" height="24">
+    </ng-container>
     <div>
         <h1>Bar Code</h1>
         <h2>Bar e restaurante</h2>

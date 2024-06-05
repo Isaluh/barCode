@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { NgIf, NgOptimizedImage } from '@angular/common';
+
+type headerMenuVariant = "neutro" | "semImg";
 
 @Component({
   selector: 'headerMenuComponent',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage, NgIf],
   templateUrl: './header-menu.component.html',
   styleUrl: './header-menu.component.css'
 })
 export class HeaderMenuComponent {
-
+  @Input() variant : headerMenuVariant = "neutro";
 }

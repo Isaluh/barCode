@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { InputsComponent } from './components/inputs/inputs.component';
-import { ButtonsComponent } from './components/buttons/buttons.component';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +9,5 @@ import { ButtonsComponent } from './components/buttons/buttons.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'UI';
+  title = 'Bar Code';
 }

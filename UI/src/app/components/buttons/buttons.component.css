@@ -13,4 +13,13 @@ button{
         color: var(--branco);
         background-color: var(--laranja);
     }
+
+    &.borda{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+        background-color: var(--branco);
+        border: 1px solid var(--verde);
+    }
 }

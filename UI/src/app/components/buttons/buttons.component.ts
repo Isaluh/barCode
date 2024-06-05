@@ -1,11 +1,12 @@
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-type btnVariant = "neutro" | "verde" | "laranja";
+type btnVariant = "neutro" | "verde" | "laranja" | "borda";
 
 @Component({
   selector: 'buttonsComponent',
   standalone: true,
-  imports: [],
+  imports: [NgIf, NgOptimizedImage],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.css'
 })

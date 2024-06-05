@@ -28,6 +28,17 @@ input{
         border: 1px solid var(--verde);
 
     }
+
+    &.visualMesas{
+        width: 65px;
+        pointer-events: none;
+        border: 1px solid var(--verde);
+        padding-left: 0;
+        text-align: center;
+    }
+    &.visualMesas::placeholder{
+        color: var(--verde);
+    }
 }
 input::placeholder{
     color: var(--verde-opc);
