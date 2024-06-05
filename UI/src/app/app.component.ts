@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { InputsComponent } from './components/inputs/inputs.component';
+import { ButtonsComponent } from './components/buttons/buttons.component';
 
 @Component({
   selector: 'app-root',
