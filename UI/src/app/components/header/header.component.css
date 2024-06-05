@@ -1,3 +1,17 @@
 header{
-    justify-content: space-between;
+    &.neutro{
+        justify-content: space-between;
+    }
+
+    &.semPerm{
+        justify-content: center;
+    }
+    &.semPerm img{
+        position: fixed;
+        right: 10px;
+    }
+
+    &.visual{
+        justify-content: center;
+    }
 }

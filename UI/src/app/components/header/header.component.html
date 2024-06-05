@@ -1,6 +1,15 @@
-<header>
+<header [class]="variant">
     <!-- criar o event de clique para abrir menu -->
-    <img ngSrc="./assets/menuFechado.svg" width="24" height="24">
-    <h1>Bar Code</h1>
-    <img ngSrc="./assets/logOut.svg" width="24" height="24">
+    <ng-container *ngIf="variant == 'neutro'">
+        <img ngSrc="./assets/menuFechado.svg" width="24" height="24">
+        <h1>Bar Code</h1>
+        <img ngSrc="./assets/logOut.svg" width="24" height="24">
+    </ng-container>
+    <ng-container *ngIf="variant == 'semPerm'">
+        <h1>Bar Code</h1>
+        <img ngSrc="./assets/logOut.svg" width="24" height="24">
+    </ng-container>
+    <ng-container *ngIf="variant == 'visual'">
+        <h1>Bar Code - Cardápio</h1>
+    </ng-container>
 </header>
