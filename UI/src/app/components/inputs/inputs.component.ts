@@ -1,6 +1,6 @@
 import { Component, Input, input } from '@angular/core';
 
-type inputVariant = "neutro" | "borda" | "visual" | "filtro";
+type inputVariant = "neutro" | "borda" | "visual" | "filtro" | "visualMesas";
 
 @Component({
   selector: 'inputsComponent',

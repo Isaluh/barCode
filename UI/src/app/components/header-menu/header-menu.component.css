@@ -1,6 +1,10 @@
 header{
     justify-content: center;
 }
+header img{
+    position: fixed;
+    left: 10px;
+}
 header div{
     display: flex;
     flex-direction: column;

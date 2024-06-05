@@ -6,6 +6,7 @@
     border-radius: 10px;
     align-items: center;
     margin-top: 30px;
+    padding: 0 10px;
 }
 
 .infoMesas{
@@ -14,4 +15,28 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+}
+
+.infoMesaCompleto{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.infoMesaCompleto div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.infoMesa{
+    width: 76px;
+    height: 36px;
+    background-color: var(--branco);
+    color: var(--preto);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -1,14 +1,32 @@
-<div class="status">
-    <div class="infoMesas">
-        <img src="" alt="">
-        <h2>Livre</h2>
-        <img src="" alt="">
-        <h2>Ocupada</h2>
-        <img src="" alt="">
-        <h2>A pagar</h2>
+<ng-container *ngIf="variant == 'infoMesas'">
+    <div class="status">
+        <div class="infoMesas">
+            <img ngSrc="./assets/statusVerde.svg" width="24" height="24">
+            <h2>Livre</h2>
+            <img ngSrc="./assets/statusVermelho.svg" width="24" height="24">
+            <h2>Ocupada</h2>
+            <img ngSrc="./assets/statusLaranja.svg" width="24" height="24">
+            <h2>A pagar</h2>
+        </div>
     </div>
-    <span *ngIf="variant == 'infoMesas'" >a</span>
-    <span *ngIf="variant == 'infoMesaCompleto'" >b</span>
-    <span *ngIf="variant == 'infoMesa'" >c</span>
-</div>
-<!-- n funfa -->
+</ng-container>
+
+<ng-container *ngIf="variant == 'infoMesaCompleto'">
+    <div class="status">
+        <div class="infoMesaCompleto">
+            <h2>Mesa 03</h2>
+            <div>
+                <img ngSrc="./assets/statusLaranja.svg" width="24" height="24">
+                <h2>A pagar</h2>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="variant == 'infoMesa'">
+    <div class="infoMesa">
+        <div>
+            <h2>Mesa 03</h2>
+        </div>
+    </div>
+</ng-container>
