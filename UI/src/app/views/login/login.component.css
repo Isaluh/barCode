@@ -9,5 +9,13 @@ main{
     text-align: center;
     color: var(--branco);
     background-color: var(--verde);
+}
+
+main div{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    margin: 150px 0 60px;
 
 }

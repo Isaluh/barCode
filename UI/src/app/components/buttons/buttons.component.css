@@ -1,0 +1,16 @@
+button{
+    padding: 4px 11px;
+    border-radius: 10px;
+    border: 0;
+    color: var(--verde);
+
+    &.verde{
+        color: var(--branco);
+        background-color: var(--verde);
+    }
+
+    &.laranja{
+        color: var(--branco);
+        background-color: var(--laranja);
+    }
+}

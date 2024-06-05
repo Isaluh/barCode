@@ -1,0 +1,38 @@
+input{
+    height: 30px;
+    width: 257px;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 0;
+    color: var(--verde);
+
+    &.borda{
+        width: 220px;
+        border: 1px solid var(--verde);
+    }
+
+    &.visual{
+        width: 220px;
+        pointer-events: none;
+        border: 1px solid var(--verde);
+    }
+    &.visual::placeholder{
+        color: var(--verde);
+    }
+
+    &.filtro{
+        padding-left: 0;
+        text-align: center;
+        width: 66px;
+        height: 24px;
+        border: 1px solid var(--verde);
+
+    }
+}
+input::placeholder{
+    color: var(--verde-opc);
+}
+textarea:focus, input:focus, select:focus {
+    outline: 0;
+
+}
