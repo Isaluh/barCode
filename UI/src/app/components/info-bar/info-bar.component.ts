@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtro"
@@ -6,7 +6,7 @@ type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtro"
 @Component({
   selector: 'infoBarComponent',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgOptimizedImage, NgIf],
   templateUrl: './info-bar.component.html',
   styleUrl: './info-bar.component.css'
 })
