@@ -1,10 +1,9 @@
 .status{
     width: 320px;
-    height: 30px;
+    height: 36px;
     background-color: var(--branco);
     color: var(--preto);
     border-radius: 10px;
-    align-items: center;
     margin-top: 30px;
     padding: 0 10px;
 }
@@ -27,6 +26,7 @@
 .infoMesaCompleto div{
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
 }
 

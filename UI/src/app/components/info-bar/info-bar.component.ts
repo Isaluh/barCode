@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa"
+type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtro"
 
 @Component({
   selector: 'infoBarComponent',
