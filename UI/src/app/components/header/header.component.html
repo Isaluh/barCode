@@ -3,11 +3,11 @@
     <ng-container *ngIf="variant == 'neutro'">
         <img (click)="mandarEventoAbrirMenu()" ngSrc="./assets/menuFechado.svg" width="24" height="24">
         <h1>Bar Code</h1>
-        <img ngSrc="./assets/logOut.svg" width="24" height="24">
+        <img (click)="logOut()" ngSrc="./assets/logOut.svg" width="24" height="24">
     </ng-container>
     <ng-container *ngIf="variant == 'semPerm'">
         <h1>Bar Code</h1>
-        <img ngSrc="./assets/logOut.svg" width="24" height="24">
+        <img (click)="logOut()" ngSrc="./assets/logOut.svg" width="24" height="24">
     </ng-container>
     <ng-container *ngIf="variant == 'visual'">
         <h1>Bar Code - Cardápio</h1>

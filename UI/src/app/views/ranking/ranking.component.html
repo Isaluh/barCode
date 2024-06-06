@@ -1,0 +1,7 @@
+<ng-container *ngIf="!menu">
+    <headerComponent variant="neutro" (abrirMenu)="abrirMenu()"></headerComponent>
+</ng-container>
+
+<ng-container *ngIf="menu">
+    <menuBarView></menuBarView>
+</ng-container>

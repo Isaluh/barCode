@@ -19,4 +19,9 @@ type headerVariant = "neutro" | "semPerm" | "visual"
   mandarEventoAbrirMenu(){
     this.abrirMenu.emit()
   }
+
+  logOut(){
+    // remover cookie
+    console.log("sair da conta");
+  }
 }
