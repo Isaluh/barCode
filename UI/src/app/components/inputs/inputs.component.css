@@ -11,13 +11,20 @@ input{
         border: 1px solid var(--verde);
     }
 
-    &.visual{
+    &.visualTroco{
         width: 220px;
         pointer-events: none;
         border: 1px solid var(--verde);
     }
-    &.visual::placeholder{
+    &.visualTroco::placeholder, &.visualTotal::placeholder{
         color: var(--verde);
+    }
+    &.visualTotal{
+        width: 124px;
+        pointer-events: none;
+        text-align: center;
+        padding: 0;
+        border: 1px solid var(--verde);
     }
 
     &.filtro{

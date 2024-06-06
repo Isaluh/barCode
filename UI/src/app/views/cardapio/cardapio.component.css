@@ -1,0 +1,23 @@
+main{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+main div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+main div.itens{
+    flex-direction: column;
+}
+
+span{
+    width: 100%;
+    height: 2px;
+    background-color: var(--verde-opc);
+}
