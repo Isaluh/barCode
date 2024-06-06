@@ -1,13 +1,19 @@
-<headerComponent variant="neutro"></headerComponent>
-<main>
-    <div>
-        <div class="conteudo">
-            <infoBarComponent variant="filtro"></infoBarComponent>
-            <tableRelatorioComponents></tableRelatorioComponents>
+<ng-container *ngIf="!menu">
+    <headerComponent variant="neutro" (abrirMenu)="abrirMenu()" ></headerComponent>
+    <main>
+        <div>
+            <div class="conteudo">
+                <infoBarComponent variant="filtro"></infoBarComponent>
+                <tableRelatorioComponents></tableRelatorioComponents>
+            </div>
+            <div class="funcoesRelatorio">
+                <inputsComponent variant="visualTotal" placeholder="Total: R$100,00"></inputsComponent>
+                <buttonsComponent variant="verde" text="Gerar relatório"></buttonsComponent>
+            </div>
         </div>
-        <div class="funcoesRelatorio">
-            <inputsComponent variant="visualTotal" placeholder="Total: R$100,00"></inputsComponent>
-            <buttonsComponent variant="verde" text="Gerar relatório"></buttonsComponent>
-        </div>
-    </div>
-</main>
+    </main>
+</ng-container>
+
+<ng-container *ngIf="menu">
+    <menuBarView></menuBarView>
+</ng-container>

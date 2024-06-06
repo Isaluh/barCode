@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgIf, NgOptimizedImage } from '@angular/common';
 
 type headerMenuVariant = "neutro" | "semImg";
@@ -12,4 +12,9 @@ type headerMenuVariant = "neutro" | "semImg";
 })
 export class HeaderMenuComponent {
   @Input() variant : headerMenuVariant = "neutro";
+
+  // @Output() fecharMenu = new EventEmitter();
+  // mandarEventoFecharMenu(){
+  //   this.fecharMenu.emit();
+  // }
 }
