@@ -12,5 +12,8 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
   styleUrl: './comanda.component.css'
 })
 export class ComandaComponent {
-
+  //incluir taxa do funcionario (ou antes ou dps)
+  abrirMetodoPagamento(){
+    console.log("abrir modal metodo de pagamento")
+  }
 }
