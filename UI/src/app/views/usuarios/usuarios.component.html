@@ -1,0 +1,19 @@
+<ng-container *ngIf="!menu">
+    <headerComponent variant="neutro" (abrirMenu)="abrirMenu()" />
+    <main>
+        <div>
+            <div class="conteudo">
+                <infoBarComponent variant="filtro" />
+                <tablesComponent [topicos]="topicosUsuario" />
+            </div>
+            <div class="funcoesCadastro">
+                <inputsComponent variant="visualTotal" placeholder="10 usuários"/>
+                <buttonsComponent (click)="abrirCadastrarUsuario()" variant="verde" text="Cadastrar usuário"/>
+            </div>
+        </div>
+    </main>
+</ng-container>
+
+<ng-container *ngIf="menu">
+    <menuBarView/>
+</ng-container>

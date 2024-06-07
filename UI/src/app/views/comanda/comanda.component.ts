@@ -5,12 +5,15 @@ import { InputsComponent } from '../../components/inputs/inputs.component';
 import { ButtonsComponent } from '../../components/buttons/buttons.component';
 
 @Component({
-  selector: 'app-comanda',
+  selector: 'comandaView',
   standalone: true,
   imports: [HeaderComponent, InfoBarComponent, InputsComponent, ButtonsComponent],
   templateUrl: './comanda.component.html',
   styleUrl: './comanda.component.css'
 })
 export class ComandaComponent {
-
+  //incluir taxa do funcionario (ou antes ou dps)
+  abrirMetodoPagamento(){
+    console.log("abrir modal metodo de pagamento")
+  }
 }

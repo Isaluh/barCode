@@ -14,5 +14,15 @@ import { NgFor } from '@angular/common';
   styleUrl: './cardapio.component.css'
 })
 export class CardapioComponent {
+  searchProduto : string = "";
 
+  pegarSearch(produto : string | number){
+    this.searchProduto = String(produto);
+  }
+
+  produtoSearch(){
+    console.log("procurar produto " + this.searchProduto)
+    // procurar pelo produto no banco de dados do produto e fazer com q so ele ou parecidos apareçam na tela
+    // limpar barra de pesquisa
+  }
 }

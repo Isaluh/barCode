@@ -14,5 +14,12 @@ import { NgFor } from '@angular/common';
   styleUrl: './mesas.component.css'
 })
 export class MesasComponent {
+  adicionarMesa(){
+    console.log("add mesa")
+  }
 
+  removerMesa(){
+    // escolher pelo id
+    console.log("remover mesa")
+  }
 }

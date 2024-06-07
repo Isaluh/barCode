@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableRelatorioComponent } from './table-relatorio.component';
+import { RankingComponent } from './ranking.component';
 
-describe('TableRelatorioComponent', () => {
-  let component: TableRelatorioComponent;
-  let fixture: ComponentFixture<TableRelatorioComponent>;
+describe('RankingComponent', () => {
+  let component: RankingComponent;
+  let fixture: ComponentFixture<RankingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TableRelatorioComponent]
+      imports: [RankingComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TableRelatorioComponent);
+    fixture = TestBed.createComponent(RankingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
