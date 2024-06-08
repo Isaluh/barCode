@@ -1,0 +1,17 @@
+<!-- auteração por permissao -->
+<headerComponent variant="visual" />
+<main>
+    <div>
+        <inputsComponent (eventInputValue)="pegarSearch($event.valorinput)" variant="borda" placeholder="Pesquisar" />
+        <buttonsComponent (click)="produtoSearch()" variant="search" />
+    </div>
+    <span></span>
+    <topicosCardapioComponent/>
+    <div class="itens">
+        <!-- fzr ngFor dos itens do cardapio -->
+        <itemCardapioComponent nome="Arroz" valor="11.00" />
+        <itemCardapioComponent nome="Vinagrete" valor="9.00" />
+        <itemCardapioComponent nome="Limonada" valor="10.00" />
+        <itemCardapioComponent nome="Feijão" valor="8.00" />
+    </div>
+</main>

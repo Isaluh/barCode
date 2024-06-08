@@ -1,0 +1,28 @@
+.item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 350px;
+    height: 100px;
+    background-color: var(--branco);
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.itemInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.itemFunc{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.valor{
+    color: var(--verde);
+}

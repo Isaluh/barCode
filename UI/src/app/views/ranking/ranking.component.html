@@ -1,0 +1,11 @@
+<ng-container *ngIf="!menu">
+    <headerComponent variant="neutro" (abrirMenu)="abrirMenu()" />
+    <main>
+        <tablesComponent [topicos]="topicosProduto" />
+        <tablesComponent [topicos]="topicosData" />
+    </main>
+</ng-container>
+
+<ng-container *ngIf="menu">
+    <menuBarView/>
+</ng-container>

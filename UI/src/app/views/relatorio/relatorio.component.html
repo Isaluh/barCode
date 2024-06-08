@@ -1,0 +1,19 @@
+<ng-container *ngIf="!menu">
+    <headerComponent variant="neutro" (abrirMenu)="abrirMenu()" />
+    <main>
+        <div>
+            <div class="conteudo">
+                <infoBarComponent variant="filtro" />
+                <tablesComponent [topicos]="topicosRelatorio" />
+            </div>
+            <div class="funcoesRelatorio">
+                <inputsComponent variant="visualTotal" placeholder="Total: R$100,00" />
+                <buttonsComponent (click)="abrirGerarRelatorio()" variant="verde" text="Gerar relatório" />
+            </div>
+        </div>
+    </main>
+</ng-container>
+
+<ng-container *ngIf="menu">
+    <menuBarView/>
+</ng-container>

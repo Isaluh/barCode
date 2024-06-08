@@ -1,0 +1,21 @@
+<headerComponent variant="semPerm" />
+<main>
+    <div>
+        <div class="conteudo">
+            <infoBarComponent variant="infoMesaCompleto" />
+            <!-- ngFor para os itens da comanda -->
+            <ul>
+                <li>• [qnt.] Frango a passarinho - R$42.90</li>
+                <li>• [qnt.] Frango a passarinho - R$42.90</li>
+                <li>• [qnt.] Frango a passarinho - R$42.90</li>
+                <li>• [qnt.] Frango a passarinho - R$42.90</li>
+                <li>• [qnt.] Frango a passarinho - R$42.90</li>
+                <li>• [qnt.] Frango a passarinho - R$42.90</li>
+            </ul>
+        </div>
+        <div class="funcoesComanda">
+            <inputsComponent variant="visualTotal" placeholder="Total: R$100,00" />
+            <buttonsComponent (click)="abrirMetodoPagamento()" variant="verde" text="Pagar" />
+        </div>
+    </div>
+</main>

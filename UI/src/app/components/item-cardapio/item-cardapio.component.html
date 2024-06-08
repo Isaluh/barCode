@@ -1,0 +1,13 @@
+<div class="item">
+    <div class="itemInfo">
+        <h1>{{nome}}</h1>
+        <h1 class="valor">R${{valor}}</h1>
+    </div>
+    <div class="itemFunc">
+        <img ngSrc="/assets/cardapio/arroz.png" width="70" height="70">
+        <!-- ngIf se tiver permissão de funcionario aparece o add na tela de cardapio mesas -->
+        <ng-content *ngIf="false">
+            <img ngSrc="./assets/addItem.svg" width="24" height="24">
+        </ng-content>
+    </div>
+</div>

@@ -11,22 +11,20 @@ input{
         border: 1px solid var(--verde);
     }
 
-    &.visual{
+    &.visualTroco{
         width: 220px;
         pointer-events: none;
         border: 1px solid var(--verde);
     }
-    &.visual::placeholder{
+    &.visualTroco::placeholder, &.visualTotal::placeholder{
         color: var(--verde);
     }
-
-    &.filtro{
-        padding-left: 0;
+    &.visualTotal{
+        width: 124px;
+        pointer-events: none;
         text-align: center;
-        width: 66px;
-        height: 24px;
+        padding: 0;
         border: 1px solid var(--verde);
-
     }
 
     &.visualMesas{
@@ -43,7 +41,6 @@ input{
 input::placeholder{
     color: var(--verde-opc);
 }
-textarea:focus, input:focus, select:focus {
+textarea:focus, input:focus {
     outline: 0;
-
 }

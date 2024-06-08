@@ -1,7 +1,7 @@
 import { NgIf, NgOptimizedImage } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-type btnVariant = "neutro" | "verde" | "laranja" | "borda";
+type btnVariant = "neutro" | "verde" | "laranja" | "borda" | "search";
 
 @Component({
   selector: 'buttonsComponent',
@@ -13,4 +13,5 @@ type btnVariant = "neutro" | "verde" | "laranja" | "borda";
 export class ButtonsComponent {
   @Input() variant : btnVariant = "neutro";
   @Input("text") "text" : string = "";
+  @Input("type") "type" : string = "";
 }

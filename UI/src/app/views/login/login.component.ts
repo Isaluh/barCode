@@ -11,5 +11,20 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  CPF : number = 0;
+  senha : string | number = "";
 
+  pegarCPF(cpf : string | number){
+    this.CPF = Number(cpf)
+  }
+
+  pegarSenha(senha : string | number){
+    this.senha = senha
+  }
+
+  login(){
+    // verificar se cpf e senha batem com o banco de dados usuario
+    // criar os erros
+    console.log(this.CPF + " " + this.senha)
+  }
 }

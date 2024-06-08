@@ -1,9 +1,12 @@
-<button [class]="variant" >
+<button type="type" [class]="variant" >
     <ng-container *ngIf="text == 'Adicionar'">
         <img ngSrc="./assets/adicionar.svg" width="15" height="15">
     </ng-container>
     <ng-container *ngIf="text == 'Remover'">
         <img ngSrc="./assets/remover.svg" width="15" height="15">
+    </ng-container>
+    <ng-container *ngIf="text == ''">
+        <img ngSrc="./assets/search.svg" width="20" height="20">
     </ng-container>
     {{text}}
 </button>

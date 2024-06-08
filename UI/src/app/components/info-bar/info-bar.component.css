@@ -1,10 +1,9 @@
 .status{
     width: 320px;
-    height: 30px;
+    height: 36px;
     background-color: var(--branco);
     color: var(--preto);
     border-radius: 10px;
-    align-items: center;
     margin-top: 30px;
     padding: 0 10px;
 }
@@ -17,6 +16,13 @@
     justify-content: space-around;
 }
 
+.infoMesas div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
 .infoMesaCompleto{
     height: 100%;
     display: flex;
@@ -27,6 +33,7 @@
 .infoMesaCompleto div{
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
 }
 
@@ -39,4 +46,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.filtro{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }

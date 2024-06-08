@@ -1,18 +1,18 @@
-<headerComponent></headerComponent>
+<headerComponent variant="semPerm" />
 <main>
-    <infoBarComponent variant="infoMesas"></infoBarComponent>
+    <infoBarComponent variant="infoMesas" />
     <div>
         <!-- *ngFor para a quantidade de mesas + passando atributo do variant e o numero da mesa-->
-        <mesaComponent numMesa="01" variant="livre"></mesaComponent>
-        <mesaComponent numMesa="02" variant="ocupada"></mesaComponent>
-        <mesaComponent numMesa="03" variant="aPagar"></mesaComponent>
-        <mesaComponent numMesa="04" variant="livre"></mesaComponent>
+        <mesaComponent numMesa="01" variant="livre" />
+        <mesaComponent numMesa="02" variant="ocupada" />
+        <mesaComponent numMesa="03" variant="aPagar" />
+        <mesaComponent numMesa="04" variant="livre" />
     </div>
     <div class="funcoesMesa">
         <!-- atribuir eventos de click -->
-        <buttonsComponent variant="borda" text="Adicionar"></buttonsComponent>
-        <buttonsComponent variant="borda" text="Remover"></buttonsComponent>
+        <buttonsComponent (click)="adicionarMesa()" type="button" variant="borda" text="Adicionar" />
+        <buttonsComponent (click)="removerMesa()" variant="borda" text="Remover" />
         <!-- passar o total de mesas -->
-        <inputsComponent variant="visualMesas" placeholder="16 mesas"></inputsComponent>
+        <inputsComponent variant="visualMesas" placeholder="16 mesas" />
     </div>
 </main>
