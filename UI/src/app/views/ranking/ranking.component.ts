@@ -13,8 +13,8 @@ import { TablesComponent } from '../../components/tables/tables.component';
 })
 export class RankingComponent {
 
-  topicosProduto = ["Produto"]
-  topicosData = ["Data"]
+  topicosProduto = ["Produto", "Quantidade"]
+  topicosData = ["Data", "Quantidade"]
 
   menu = false;
   abrirMenu(){

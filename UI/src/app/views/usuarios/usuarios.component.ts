@@ -16,7 +16,7 @@ import { TablesComponent } from '../../components/tables/tables.component';
 })
 export class UsuariosComponent {
 
-  topicosUsuario = ["Nome", "CPF", "Taxa", "", ""];
+  topicosUsuario = ["Nome", "CPF", ""];
 
   menu = false;
   abrirMenu(){

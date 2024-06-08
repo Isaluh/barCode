@@ -1,0 +1,15 @@
+input{
+    width: 66px;
+    height: 24px;
+    padding-left: 10px;
+    border: 2px solid var(--verde);
+    border-radius: 10px;
+    color: var(--verde);
+}
+input::placeholder{
+    color: var(--verde);
+}
+input:focus{
+    outline: 0;
+    border: 2px solid var(--verde);
+}

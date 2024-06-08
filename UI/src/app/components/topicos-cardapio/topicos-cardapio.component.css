@@ -3,3 +3,25 @@ div{
     flex-direction: row;
     gap: 20px;
 }
+
+h1{
+    position: relative;
+    padding-bottom: 4px;
+    transition: all .2s;
+}
+h1:hover, h1:focus, h1.selecionado{
+    color: var(--verde);
+}
+h1::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--verde);
+    transition: width .3s;
+}
+h1.selecionado::before, h1:hover::before, h1.selecionado:focus{
+    width: 100%;
+}

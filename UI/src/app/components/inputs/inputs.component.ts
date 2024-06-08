@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-type inputVariant = "neutro" | "borda" | "visual" | "filtro" | "visualMesas" | "visualTotal";
+type inputVariant = "neutro" | "borda" | "visual" | "visualMesas" | "visualTotal";
 
 @Component({
   selector: 'inputsComponent',

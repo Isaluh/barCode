@@ -1,10 +1,4 @@
 <div>
-    <h1>Porções</h1>
-    <h1>Petiscos</h1>
-    <h1>Peixes</h1>
-    <h1>Carnes</h1>
-    <h1>Saladas</h1>
-    <!-- <h1>Bebidas</h1>
-    <h1>Sobremesas</h1> -->
+    <h1 *ngFor="let item of topicosCardapio" id="teste" (click)="selecionarTopico(item.topico)" class="{{item.status}}">{{ item.topico }}</h1>
 </div>
 <!-- fzr o carrossel -->

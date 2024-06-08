@@ -25,6 +25,6 @@ export class LoginComponent {
   login(){
     // verificar se cpf e senha batem com o banco de dados usuario
     // criar os erros
-    
+    console.log(this.CPF + " " + this.senha)
   }
 }
