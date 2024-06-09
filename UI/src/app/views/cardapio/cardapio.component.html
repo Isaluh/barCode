@@ -8,10 +8,9 @@
     <span></span>
     <topicosCardapioComponent/>
     <div class="itens">
-        <!-- fzr ngFor dos itens do cardapio -->
-        <itemCardapioComponent nome="Arroz" valor="11.00" />
-        <itemCardapioComponent nome="Vinagrete" valor="9.00" />
-        <itemCardapioComponent nome="Limonada" valor="10.00" />
-        <itemCardapioComponent nome="Feijão" valor="8.00" />
+        <ng-container *ngFor="let produto of produtos">
+            <itemCardapioComponent nome="{{ produto.nome }}" valor="{{ produto.preco }}" urlImg="{{ produto.imagemCaminho }}" />
+        </ng-container>
     </div>
+
 </main>

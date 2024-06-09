@@ -2,7 +2,7 @@ import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FiltroComponent } from '../filtro/filtro.component';
 
-type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtro"
+type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtroDate" | "filtroNome"
 
 @Component({
   selector: 'infoBarComponent',

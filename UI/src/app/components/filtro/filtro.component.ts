@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+type filtroVariant = "data" | "nome"
+
 @Component({
   selector: 'filtroComponent',
   standalone: true,
@@ -9,4 +11,5 @@ import { Component, Input } from '@angular/core';
 })
 export class FiltroComponent {
   @Input("placeholder") "placeholder" : string = "";
+  @Input() variant : filtroVariant = "data";
 }
