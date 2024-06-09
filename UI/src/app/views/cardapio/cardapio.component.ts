@@ -5,6 +5,8 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { TopicosCardapioComponent } from '../../components/topicos-cardapio/topicos-cardapio.component';
 import { ItemCardapioComponent } from '../../components/item-cardapio/item-cardapio.component';
 import { NgFor } from '@angular/common';
+import { ProdutosService } from '../../../services/produtos.service';
+import { Produto } from '../../../models/produtos.models';
 
 @Component({
   selector: 'cardapioView',
@@ -14,7 +16,19 @@ import { NgFor } from '@angular/common';
   styleUrl: './cardapio.component.css'
 })
 export class CardapioComponent {
+  produtos : Produto[] = [];
   searchProduto : string = "";
+
+  constructor(private produtosService : ProdutosService){}
+
+  ngOnInit(): void {
+    this.getProdutos();
+  }
+
+  getProdutos(): void {
+    this.produtosService.getProdutos()
+      .subscribe(produtos => this.produtos = produtos);
+  }
 
   pegarSearch(produto : string | number){
     this.searchProduto = String(produto);

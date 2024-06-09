@@ -1,5 +1,6 @@
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { ProdutosService } from '../../../services/produtos.service';
 
 @Component({
   selector: 'itemCardapioComponent',
@@ -11,5 +12,8 @@ import { Component, Input } from '@angular/core';
 export class ItemCardapioComponent {
   @Input("nome") "nome" : string = "";
   @Input("valor") "valor" : string = "";
+  @Input("urlImg") "urlImg" : string = "";
+
+  urlBase : string = ProdutosService.API_url + "/";
   // add img dps
 }

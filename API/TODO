@@ -1,0 +1,9 @@
+- Registro de garçom CPF + Senha
+- Entidades {
+	Comanda,
+	Mesa,
+	Item,
+	Gerente,
+	Salao,
+	Garçom
+}
