@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface ProdutoService {
     Iterable<Produto> listAllProduto();
-    Produto getProdutoById(UUID id);
+    Optional<Produto> getProdutoById(UUID id);
     Produto saveProduto(Produto produto);
     void deleteProduto(UUID id);
 }

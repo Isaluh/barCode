@@ -33,22 +33,4 @@ public class GarcomController {
         return ResponseEntity.created(newGarcomLocation).build();
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<CappedUserResponse> showUser(@PathVariable String id){
-//        UUID uid = UUID.fromString(id);
-//        System.out.println(uid);
-//        return ResponseEntity.ok(new CappedUserResponse(this.userService.getUserById(uid)));
-//    }
-//
-//    @PostMapping("/mod/{id}")
-//    public void modifyUser(@PathVariable UUID id, @RequestBody ModifyUserBody body) {
-//        this.userService.modifyUser(id, body.field, body.value);
-//    }
-//
-//    @GetMapping("/sample-user")
-//    public String newProduct(Model model) {
-//        userService.saveUser(new User("teste","da silva","teste.silva","testedasilva@gmail.com", "ansjkdbnjaskzxk!21"));
-//        return "User criado";
-//    }
-    
 }

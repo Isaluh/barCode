@@ -40,3 +40,4 @@ export class CardapioComponent {
     // limpar barra de pesquisa
   }
 }
+
