@@ -4,6 +4,7 @@ import com.bamboobyte.API.models.Produto;
 import com.bamboobyte.API.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.lang.Override;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,17 +20,26 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public Produto getProdutoById(UUID id) {
-        return produtoRepository.findById(id).get();
+    public Optional<Produto> getProdutoById(UUID id) {
+        return produtoRepository.findById(id);
     }
 
     @Override
     public Produto saveProduto(Produto produto) {
-        return produtoRepository.save(produto);
+        try {
+            return produtoRepository.save(produto);
+        } catch (Exception exception) {
+            System.out.println(produto.getNome()+" nao foi criado, nome repetido");
+            return null;
+        }
     }
 
     @Override
     public void deleteProduto(UUID id) {
         produtoRepository.deleteById(id);
+    }
+
+    public Optional<Produto> getProdutoByNome(String nome) {
+        return this.produtoRepository.getProdutoByNome(nome);
     }
 }

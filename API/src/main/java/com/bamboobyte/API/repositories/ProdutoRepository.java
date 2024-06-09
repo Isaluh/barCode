@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ProdutoRepository extends JpaRepository<Produto, UUID> {
-
+    Optional<Produto> getProdutoByNome(String nome);
 }

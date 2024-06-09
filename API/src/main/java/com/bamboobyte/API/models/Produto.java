@@ -1,12 +1,10 @@
 package com.bamboobyte.API.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -15,20 +13,20 @@ import java.util.UUID;
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private UUID id = null;
+    @Column(unique = true)
     String nome;
     float preco;
     ArrayList<String> categorias;
-    String imagemCaminho;
+    String imagemCaminho="";
 
     public Produto() {
     }
 
-    public Produto(String nome, float preco, ArrayList<String> categorias, String imagemCaminho) {
+    public Produto(String nome, float preco, ArrayList<String> categorias) {
         this.nome = nome;
         this.preco = preco;
         this.categorias = categorias;
-        this.imagemCaminho = imagemCaminho;
     }
 
     public UUID getId() {
