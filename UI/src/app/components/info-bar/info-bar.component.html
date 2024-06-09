@@ -38,13 +38,20 @@
 </ng-container>
 
 <!-- fazer o filtro -->
-<ng-container *ngIf="variant == 'filtro'">
+<ng-container *ngIf="variant == 'filtroDate'">
     <div class="status">
         <div class="filtro">
-            <!-- ver quais filtros tem q ter -->
-            <filtroComponent placeholder="Ano" />
-            <filtroComponent placeholder="Mês" />
-            <filtroComponent placeholder="Dia" />
+            <filtroComponent placeholder="Ano" variant="data" />
+            <filtroComponent placeholder="Mês" variant="data" />
+            <filtroComponent placeholder="Dia" variant="data" />
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="variant == 'filtroNome'">
+    <div class="status">
+        <div class="filtro">
+            <filtroComponent placeholder="Nome" variant="nome" />
         </div>
     </div>
 </ng-container>

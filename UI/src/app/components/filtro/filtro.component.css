@@ -1,10 +1,13 @@
 input{
-    width: 66px;
-    height: 24px;
     padding-left: 10px;
     border: 2px solid var(--verde);
     border-radius: 10px;
     color: var(--verde);
+
+    &.data{
+        width: 66px;
+        height: 24px;
+    }
 }
 input::placeholder{
     color: var(--verde);
