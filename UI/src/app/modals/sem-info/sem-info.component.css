@@ -15,6 +15,9 @@ main{
     height: 40vh;
     width: 100vw;
 }
+.fecharModal.relatorio{
+    height: 32vh;
+}
 
 .container{
     width: 260px;
@@ -27,8 +30,11 @@ main{
     background-color: var(--fundo);
 }
 .container.cadastro{
-    width: 260px;
     height: 236px;
+}
+
+.container.relatorio{
+    height: 248px;
 }
 
 .container div{
