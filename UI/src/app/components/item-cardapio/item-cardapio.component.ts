@@ -14,6 +14,5 @@ export class ItemCardapioComponent {
   @Input("valor") "valor" : string = "";
   @Input("urlImg") "urlImg" : string = "";
 
-  urlBase : string = ProdutosService.API_url + "/";
-  // add img dps
+  urlBase : string = ProdutosService.API_url;
 }

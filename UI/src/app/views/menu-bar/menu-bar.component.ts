@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HeaderMenuComponent } from '../../components/header-menu/header-menu.component';
 import { NgIf } from '@angular/common';
 
@@ -12,8 +12,9 @@ import { NgIf } from '@angular/common';
   styleUrl: './menu-bar.component.css'
 })
 export class MenuBarComponent {
-  // menu = true;
-  // fecharMenu(){
-  //   this.menu = false;
-  // }
+  @Output() voltarTela = new EventEmitter()
+  
+  fecharMenu(){
+    this.voltarTela.emit(false)
+  }
 }

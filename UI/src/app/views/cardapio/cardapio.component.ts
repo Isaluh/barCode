@@ -6,7 +6,7 @@ import { TopicosCardapioComponent } from '../../components/topicos-cardapio/topi
 import { ItemCardapioComponent } from '../../components/item-cardapio/item-cardapio.component';
 import { NgFor } from '@angular/common';
 import { ProdutosService } from '../../../services/produtos.service';
-import { Produto } from '../../../models/produtos.models';
+import { Produto } from '../../../models/models';
 
 @Component({
   selector: 'cardapioView',

@@ -1,0 +1,41 @@
+<main>
+    <div (click)="fecharModal()" class="fecharModal"></div>
+    <div *ngIf="variant != 'aPagarDinheiro'" class="container">
+        <infoBarComponent [numeroMesa]=numeroMesa variant="infoMesa" />
+        <ng-container *ngIf="variant == 'aberta'">
+            <div class="{{ variant }}">
+                <inputsComponent type="number" (eventInputValue)="pegarQntsPessoas($event.valorinput)" variant="borda" placeholder="Qntd. pessoas" />
+                <buttonsComponent (click)="mudarStatuAbrir()" variant="verde" text="Abrir mesa" />
+            </div>
+        </ng-container>
+        <ng-container *ngIf="variant == 'ocupada'">
+            <div class="{{ variant }}">
+                <buttonsComponent (click)="abrirCardapio()" variant="verde" text="Abrir cardápio" />
+                <buttonsComponent (click)="mudarStatusOcupada()" variant="laranja" text="Fechar conta" />
+            </div>
+        </ng-container>
+        <ng-container *ngIf="variant == 'aPagar'">
+            <div class="{{ variant }}">
+                <div>
+                    <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Crédito" />
+                    <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Débito" />
+                </div>
+                <div>
+                    <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Pix" />
+                    <buttonsComponent (click)="abrirModalDinheiro()" variant="verde" text="Dinheiro" />
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div *ngIf="variant == 'aPagarDinheiro'" [class]="'container ' + variant">
+        <infoBarComponent variant="infoMesa" />
+        <ng-container *ngIf="variant == 'aPagarDinheiro'">
+            <div class="{{ variant }}">
+                <inputsComponent type="number" variant="borda" placeholder="Valor recebido" />
+                <inputsComponent variant="visualTroco" placeholder="R$10.00" />
+                <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Fechar comanda" />
+            </div> 
+        </ng-container>
+    </div>
+    <div (click)="fecharModal()" class="fecharModal"></div>
+</main>

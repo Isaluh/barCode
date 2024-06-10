@@ -13,8 +13,8 @@ type headerMenuVariant = "neutro" | "semImg";
 export class HeaderMenuComponent {
   @Input() variant : headerMenuVariant = "neutro";
 
-  // @Output() fecharMenu = new EventEmitter();
-  // mandarEventoFecharMenu(){
-  //   this.fecharMenu.emit();
-  // }
+  @Output() fecharMenu = new EventEmitter();
+  mandarEventoFecharMenu(){
+    this.fecharMenu.emit();
+  }
 }

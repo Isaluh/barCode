@@ -20,9 +20,10 @@ div{
 
 .funcoesCadastro{
     position: fixed;
+    left: 15px;
     bottom: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }

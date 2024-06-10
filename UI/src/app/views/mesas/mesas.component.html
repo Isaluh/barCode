@@ -2,11 +2,11 @@
 <main>
     <infoBarComponent variant="infoMesas" />
     <div>
-        <!-- *ngFor para a quantidade de mesas + passando atributo do variant e o numero da mesa-->
-        <mesaComponent numMesa="01" variant="livre" />
-        <mesaComponent numMesa="02" variant="ocupada" />
-        <mesaComponent numMesa="03" variant="aPagar" />
-        <mesaComponent numMesa="04" variant="livre" />
+         <ng-container *ngFor="let mesa of mesas">
+             <mesaComponent *ngIf="mesa.statusName == 'livre'" (click)="abrirMesa(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+             <mesaComponent *ngIf="mesa.statusName == 'ocupada'" (click)="ocuparMesa(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+             <mesaComponent *ngIf="mesa.statusName == 'aPagar'" (click)="abrirComanda(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+         </ng-container>
     </div>
     <div class="funcoesMesa">
         <!-- atribuir eventos de click -->
@@ -16,3 +16,19 @@
         <inputsComponent variant="visualMesas" placeholder="16 mesas" />
     </div>
 </main>
+
+<ng-container *ngIf="modalAbrirMesa">
+    <infoBarSimplesModal [numeroMesa]=numeroMesa (valorInput)="pegarQntsPessoas($event)" (sairModals)="fecharModal()" (mudarStatus)="statusAberto()" variant="aberta" />
+</ng-container>
+
+<ng-container *ngIf="modalOcuparMesa">
+    <infoBarSimplesModal [numeroMesa]=numeroMesa (cardapioMesa)="abrirCardapio()" (sairModals)="fecharModal()" (mudarStatus)="statusOcupada()" variant="ocupada" />
+</ng-container>
+
+<ng-container *ngIf="modalAddMesa">
+    <semInfoModal (adicionarMesa)="criarMesa()" (valorInput)="pegarNumeroAddMesa($event)" (sairModals)="fecharModal()" variant="adicionarMesa" />
+</ng-container>
+
+<ng-container *ngIf="modalExlusao">
+    <exclusaoModal (sairModals)="fecharModal()" (salvarModal)="salvarModal()" (calcelarModal)="fecharModal()" mgs="Exluir essa mesa?" />
+</ng-container>

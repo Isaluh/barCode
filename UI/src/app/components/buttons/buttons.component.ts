@@ -1,7 +1,7 @@
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-type btnVariant = "neutro" | "verde" | "laranja" | "borda" | "search";
+type btnVariant = "neutro" | "verde" | "laranja" | "vermelho" | "borda" | "search";
 
 @Component({
   selector: 'buttonsComponent',
