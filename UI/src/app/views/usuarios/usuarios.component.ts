@@ -73,7 +73,7 @@ export class UsuariosComponent {
 
   mudarTaxa(){
     //mudar taxa de garçom
-    this.abrirModalExlusao()
+    // criar modal de mudar taxa
   }
 
 }

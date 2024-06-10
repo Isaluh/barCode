@@ -6,11 +6,12 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { NgIf } from '@angular/common';
 import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 import { TablesComponent } from '../../components/tables/tables.component';
+import { SemInfoComponent } from '../../modals/sem-info/sem-info.component';
 
 @Component({
   selector: 'relatorioView',
   standalone: true,
-  imports: [HeaderComponent, InfoBarComponent, TablesComponent, InputsComponent, ButtonsComponent, NgIf, MenuBarComponent],
+  imports: [HeaderComponent, InfoBarComponent, TablesComponent, InputsComponent, ButtonsComponent, NgIf, MenuBarComponent, SemInfoComponent],
   templateUrl: './relatorio.component.html',
   styleUrl: './relatorio.component.css'
 })
@@ -23,12 +24,20 @@ export class RelatorioComponent {
   abrirMenu(){
     this.menu = true;
   }
-
   fecharMenu(event : boolean){
     this.menu = event
   }
 
+  modalGerarRelatorio = false
   abrirGerarRelatorio(){
+    this.modalGerarRelatorio = true;
     console.log("abrir modal de gerar relatorio")
+  }
+  gerarRelatorio(relatorio : any){
+    console.log(relatorio)
+  }
+
+  fecharModals(){
+    this.modalGerarRelatorio = false;
   }
 }

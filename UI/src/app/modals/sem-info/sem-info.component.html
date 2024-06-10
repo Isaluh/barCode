@@ -1,5 +1,5 @@
 <main>
-    <div (click)="fecharModal()" class="fecharModal"></div>
+    <div (click)="fecharModal()" [class]="'fecharModal ' + variant"></div>
     <div [class]="'container ' + variant">
         <ng-container *ngIf="variant == 'cadastro'">
             <div>
@@ -10,7 +10,13 @@
             </div>
         </ng-container>
         <ng-container *ngIf="variant == 'relatorio'">
-
+            <div>
+                <inputsComponent type="date" variant="borda" (eventInputValue)="pegarInicio($event.valorinput)" placeholder="Inicio" />
+                <inputsComponent type="date" variant="borda" (eventInputValue)="pegarFim($event.valorinput)" placeholder="Termino" />
+                <checkboxComponent />
+                <filtroComponent variant="produto" placeholder="Produto" />
+                <buttonsComponent (click)="gerarRelatorio()" variant="verde" text="Gerar relatório" />
+            </div>
         </ng-container>
         <ng-container *ngIf="variant == 'adicionarMesa'">
             <div>
@@ -19,5 +25,5 @@
             </div>
         </ng-container>
     </div>
-    <div (click)="fecharModal()" class="fecharModal"></div>
+    <div (click)="fecharModal()" [class]="'fecharModal ' + variant"></div>
 </main>

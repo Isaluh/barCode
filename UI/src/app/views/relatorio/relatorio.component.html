@@ -14,6 +14,10 @@
     </main>
 </ng-container>
 
+<ng-container *ngIf="modalGerarRelatorio">
+    <semInfoModal variant="relatorio" (criarRelatorio)="gerarRelatorio($event)" (sairModals)="fecharModals()" />
+</ng-container>
+
 <ng-container *ngIf="menu">
     <menuBarView (voltarTela)="fecharMenu($event)" />
 </ng-container>

@@ -12,6 +12,11 @@ input{
     &.nome{
         width: 300px;
     }
+
+    &.produto{
+        height: 30px;
+        width: 220px;
+    }
 }
 input::placeholder{
     color: var(--verde);
