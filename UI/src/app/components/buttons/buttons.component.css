@@ -6,6 +6,7 @@ button{
     border-radius: 10px;
     border: 0;
     color: var(--verde);
+    cursor: pointer;
 
     &.verde, &.search{
         color: var(--branco);
@@ -16,6 +17,12 @@ button{
         justify-content: center;
         width: 30px;
         height: 30px;
+    }
+
+    &.vermelho{
+        font-size: 16px;
+        color: var(--branco);
+        background-color: var(--vermelho);
     }
 
     &.laranja{

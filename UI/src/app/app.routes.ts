@@ -12,7 +12,7 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'mesas', component: MesasComponent},
     {path: 'cardapio', component: CardapioComponent},
-    {path: 'comanda', component: ComandaComponent},
+    {path: `comanda/${0}`, component: ComandaComponent},
     {path: 'relatorio', component: RelatorioComponent},
     {path: 'usuarios', component: UsuariosComponent},
     {path: 'ranking', component: RankingComponent}

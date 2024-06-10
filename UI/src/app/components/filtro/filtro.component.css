@@ -8,6 +8,10 @@ input{
         width: 66px;
         height: 24px;
     }
+
+    &.nome{
+        width: 300px;
+    }
 }
 input::placeholder{
     color: var(--verde);

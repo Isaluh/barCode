@@ -1,0 +1,23 @@
+<main>
+    <div (click)="fecharModal()" class="fecharModal"></div>
+    <div [class]="'container ' + variant">
+        <ng-container *ngIf="variant == 'cadastro'">
+            <div>
+                <inputsComponent type="number" variant="borda" (eventInputValue)="pegarCPF($event.valorinput)" placeholder="CPF" />
+                <inputsComponent type="text" variant="borda" (eventInputValue)="pegarNome($event.valorinput)" placeholder="Nome" />
+                <inputsComponent type="text" variant="borda" (eventInputValue)="pegarSenha($event.valorinput)" placeholder="Senha" />
+                <buttonsComponent (click)="cadastrar()" variant="verde" text="Cadastrar usuário" />
+            </div>
+        </ng-container>
+        <ng-container *ngIf="variant == 'relatorio'">
+
+        </ng-container>
+        <ng-container *ngIf="variant == 'adicionarMesa'">
+            <div>
+                <inputsComponent type="number" variant="borda" (eventInputValue)="numeroMesaNova($event.valorinput)" placeholder="Número da mesa" />
+                <buttonsComponent (click)="criarMesa()"  variant="verde" text="Adicionar mesa" />
+            </div>
+        </ng-container>
+    </div>
+    <div (click)="fecharModal()" class="fecharModal"></div>
+</main>

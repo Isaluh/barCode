@@ -11,32 +11,35 @@ input{
         border: 1px solid var(--verde);
     }
 
-    &.visualTroco{
-        width: 220px;
+    &.visualUsuario, &.visualTotal, &.visualTroco, &.visualMesas{
         pointer-events: none;
         border: 1px solid var(--verde);
     }
-    &.visualTroco::placeholder, &.visualTotal::placeholder{
-        color: var(--verde);
+    &.visualUsuario{
+        width: 90px;
+    }
+    &.visualTroco{
+        width: 220px;
+        border: 1px solid var(--verde);
     }
     &.visualTotal{
         width: 124px;
-        pointer-events: none;
         text-align: center;
         padding: 0;
-        border: 1px solid var(--verde);
+    }
+    &.visualTroco::placeholder, &.visualTotal::placeholder, &.visualUsuario::placeholder{
+        color: var(--verde);
     }
 
     &.visualMesas{
         width: 65px;
-        pointer-events: none;
-        border: 1px solid var(--verde);
         padding-left: 0;
         text-align: center;
     }
     &.visualMesas::placeholder{
         color: var(--verde);
     }
+
 }
 input::placeholder{
     color: var(--verde-opc);

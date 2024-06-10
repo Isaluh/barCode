@@ -7,6 +7,7 @@ div{
     align-items: center;
     gap: 10px;
     padding: 2px 10px;
+    cursor: pointer;
     
     &.livre{
         color: var(--verde);

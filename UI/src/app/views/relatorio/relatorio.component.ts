@@ -24,6 +24,10 @@ export class RelatorioComponent {
     this.menu = true;
   }
 
+  fecharMenu(event : boolean){
+    this.menu = event
+  }
+
   abrirGerarRelatorio(){
     console.log("abrir modal de gerar relatorio")
   }

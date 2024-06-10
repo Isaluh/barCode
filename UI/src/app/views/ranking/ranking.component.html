@@ -7,5 +7,5 @@
 </ng-container>
 
 <ng-container *ngIf="menu">
-    <menuBarView/>
+    <menuBarView (voltarTela)="fecharMenu($event)"/>
 </ng-container>

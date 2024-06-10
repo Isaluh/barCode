@@ -20,7 +20,7 @@
 <ng-container *ngIf="variant == 'infoMesaCompleto'">
     <div class="status">
         <div class="infoMesaCompleto">
-            <h2>Mesa 03</h2>
+            <h2>Mesa {{numeroMesa}}</h2>
             <div>
                 <img ngSrc="assets/statusLaranja.svg" width="15" height="15">
                 <h2>A pagar</h2>
@@ -32,7 +32,7 @@
 <ng-container *ngIf="variant == 'infoMesa'">
     <div class="infoMesa">
         <div>
-            <h2>Mesa 03</h2>
+            <h2>Mesa {{numeroMesa}}</h2>
         </div>
     </div>
 </ng-container>

@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgIf, NgOptimizedImage } from '@angular/common';
 
-type mesaVariant = "livre" | "ocupada" | "aPagar";
-
 @Component({
   selector: 'mesaComponent',
   standalone: true,
@@ -11,6 +9,6 @@ type mesaVariant = "livre" | "ocupada" | "aPagar";
   styleUrl: './mesa.component.css'
 })
 export class MesaComponent {
-  @Input() variant : mesaVariant = "livre";
+  @Input() variant : string = "";
   @Input("numMesa") "numMesa" : string;
 }

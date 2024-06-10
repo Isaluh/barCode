@@ -7,13 +7,22 @@
                 <tablesComponent [topicos]="topicosUsuario" />
             </div>
             <div class="funcoesCadastro">
-                <inputsComponent variant="visualTotal" placeholder="10 usuários"/>
+                <inputsComponent variant="visualUsuario" placeholder="10 usuários"/>
+                <buttonsComponent (click)="mudarTaxa()" variant="verde" text="Mudar Taxa" />
                 <buttonsComponent (click)="abrirCadastrarUsuario()" variant="verde" text="Cadastrar usuário"/>
             </div>
         </div>
     </main>
 </ng-container>
 
+<ng-container *ngIf="modalCadastrarUsuario">
+    <semInfoModal (criarCadastro)="cadastrar()" (sairModals)="fecharModal()" (valorInput)="pegarValoresCadastro($event)" variant="cadastro" />
+</ng-container>
+
+<ng-container *ngIf="modalExlusao">
+    <exclusaoModal (salvarModal)="salvarModal()" (calcelarModal)="fecharModal()" mgs="Exluir esse usuário?" />
+</ng-container>
+
 <ng-container *ngIf="menu">
-    <menuBarView/>
+    <menuBarView (voltarTela)="fecharMenu()"/>
 </ng-container>

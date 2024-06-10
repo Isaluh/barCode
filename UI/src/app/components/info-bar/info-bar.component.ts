@@ -13,5 +13,5 @@ type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtroDat
 })
 export class InfoBarComponent {
   @Input() variant : infoBarVariant = "infoMesas";
-
+  @Input() numeroMesa : number = 0;
 }
