@@ -1,6 +1,6 @@
-//package com.kaique.music.configuration;
+//package com.bamboobyte.API.configuration;
 //
-//import com.kaique.music.service.MyUserDetailService;
+//import com.bamboobyte.API.services.UserDetailService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
@@ -18,14 +18,14 @@
 //@EnableWebSecurity
 //public class SecurityConfiguration {
 //    @Autowired
-//    MyUserDetailService myUserDetailService;
+//    UserDetailService myUserDetailService;
 //    @Bean
 //    protected SecurityFilterChain filterChain(HttpSecurity httpSec) throws Exception {
 //        return httpSec.
 //            csrf(AbstractHttpConfigurer::disable).
 //            authorizeHttpRequests(registry->{
-//                registry.requestMatchers("/public","/register/**", "/music/**").permitAll();
-//                registry.requestMatchers("/user/**", "/playlist/**","/author/**").hasRole("user");
+//                registry.requestMatchers("/content").permitAll();
+//                registry.requestMatchers("/mesa/**","/comanda/**", "/produto/**").hasRole("garcom");
 //                registry.anyRequest().authenticated();
 //            }
 //        ).
@@ -34,7 +34,7 @@
 //    }
 //    @Bean
 //    public UserDetailsService userDetailsService() {
-//        return myUserDetailService;
+//        return userDetailsService();
 //    }
 //    @Bean
 //    public AuthenticationProvider authenticationProvider() {

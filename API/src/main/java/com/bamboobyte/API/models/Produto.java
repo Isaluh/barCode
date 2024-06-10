@@ -13,12 +13,12 @@ import java.util.UUID;
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id = null;
+    private UUID id;
     @Column(unique = true)
     String nome;
     float preco;
     ArrayList<String> categorias;
-    String imagemCaminho="";
+    String imagemCaminho;
 
     public Produto() {
     }
