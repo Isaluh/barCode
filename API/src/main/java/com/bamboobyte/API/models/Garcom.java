@@ -7,8 +7,14 @@ import java.util.UUID;
 @Entity
 public class Garcom {
     public Garcom() {}
-    public Garcom(String cpf, String password) {
+    public Garcom(String cpf, String nome, String password) {
         this.cpf = cpf;
+        this.nome = nome;
+        this.password = password;
+    }
+    public Garcom(Long cpf, String nome, String password) {
+        this.cpf = cpf.toString();
+        this.nome = nome;
         this.password = password;
     }
     @Id
@@ -16,6 +22,7 @@ public class Garcom {
     private UUID id;
     @Column(unique = true)
     private String cpf;
+    private String nome;
     private String password;
 
     public void blankId() {
@@ -41,5 +48,15 @@ public class Garcom {
         this.cpf = cpf;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

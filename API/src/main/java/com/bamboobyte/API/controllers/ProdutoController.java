@@ -45,8 +45,10 @@ public class ProdutoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Produto> showProduto(@PathVariable String id) {
+        System.out.println(id);
         UUID uid = UUID.fromString(id);
         Optional<Produto> produto = this.produtoService.getProdutoById(uid);
+        System.out.println(produto.isPresent());
         if (produto.isPresent()) {
             return ResponseEntity.ok(produto.get());
         } else {
@@ -227,7 +229,7 @@ public class ProdutoController {
             if (!extensaoValida) {
                 return false;
             }
-            Path caminhoReal = fileStorageLocation.resolve("imagens/"+produto.getId().toString()+extensao);
+            Path caminhoReal = fileStorageLocation.resolve("/imagens/"+produto.getId().toString()+extensao);
             Path imagemCaminho = Paths.get("content/"+produto.getId().toString()+extensao);
             imagem.transferTo(caminhoReal);
             produto.setImagemCaminho(imagemCaminho.toString().replaceAll("\\\\","/"));
