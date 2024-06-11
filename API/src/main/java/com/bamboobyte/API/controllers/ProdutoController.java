@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-@RequestMapping({"/produto"})
+@RequestMapping("/produto")
 public class ProdutoController {
     @Autowired
     private ProdutoServiceImpl produtoService;

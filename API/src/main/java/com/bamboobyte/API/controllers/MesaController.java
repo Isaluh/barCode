@@ -14,7 +14,7 @@ import java.net.URI;
 import java.util.*;
 
 @RestController
-@RequestMapping({"/mesa"})
+@RequestMapping("/mesa")
 public class MesaController {
 
     @Autowired
@@ -61,9 +61,11 @@ public class MesaController {
         if (mesa.getNumeroPessoas() != -1) {
             return ResponseEntity.badRequest().build();
         }
-        mesa.setNumeroPessoas(quantidade);
-        mesa.setDataAbertura(new Date().getTime());
-        System.out.println(mesa.getDataAbertura());
+        // TODO gerar comanda ao criar mesa
+//        mesa.setNumeroPessoas(quantidade);
+//        mesa.set
+//        mesa.setDataAbertura(new Date().getTime());
+//        System.out.println(mesa.getDataAbertura());
         mesa.setStatus(StatusMesa.ocupada);
         mesaService.saveMesa(mesa);
         return ResponseEntity.ok().build();
@@ -82,7 +84,8 @@ public class MesaController {
             return ResponseEntity.badRequest().build();
         }
         mesa.setStatus(StatusMesa.aPagar);
-        mesa.setDataFechamento(new Date().getTime());
+        // TODO fechar comanda
+//        mesa.setDataFechamento(new Date().getTime());
         // TODO Verificar como vai ser feita as regras de desconto, acrescimo, etc
         // é aqui que devera ser adicionado a porcentagem do garçom e o desconto por horário
         mesaService.saveMesa(mesa);

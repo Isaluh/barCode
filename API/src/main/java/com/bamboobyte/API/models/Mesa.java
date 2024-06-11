@@ -2,30 +2,36 @@ package com.bamboobyte.API.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 
-@Table(name = "mesas")
+@Table(name = "mesa")
 @Entity
 public class Mesa {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.UUID)
+//    private UUID id;
+//    @Column(unique = true)
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    @Column(unique = true)
     private int numero;
     private int numeroPessoas = -1;
     private StatusMesa status;
-    private long dataAbertura;
-    private long dataFechamento;
-    private UUID idComanda;
+    @OneToMany
+    private List<Comanda> comandas;
 
-    public long getDataFechamento() {
-        return dataFechamento;
+    public void setComandas(List<Comanda> comandas) {
+        this.comandas = comandas;
     }
 
-    public void setDataFechamento(long dataFechamento) {
-        this.dataFechamento = dataFechamento;
+    public List<Comanda> getComandas() {
+        return comandas;
     }
+
+    //    private long dataAbertura;
+//    private long dataFechamento;
+
 
     public Mesa() {
     }
@@ -33,16 +39,6 @@ public class Mesa {
     public Mesa(int numero) {
         this.numero = numero;
         this.status = StatusMesa.livre;
-        this.dataAbertura = -1;
-        this.dataFechamento = -1;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public int getNumero() {
@@ -69,17 +65,7 @@ public class Mesa {
         this.status = status;
     }
 
-    public long getDataAbertura() {
-        return dataAbertura;
-    }
-
-    public void setDataAbertura(long dataAbertura) {
-        this.dataAbertura = dataAbertura;
-    }
-
     public void limparMesa() {
-        this.dataAbertura = -1;
-        this.dataFechamento = -1;
         this.status = StatusMesa.livre;
         this.numeroPessoas = -1;
     }

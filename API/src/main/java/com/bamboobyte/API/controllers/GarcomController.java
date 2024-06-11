@@ -18,7 +18,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping({"/garcom"})
+@RequestMapping("/garcom")
 public class GarcomController {
     @Autowired
     private GarcomServiceImpl garcomService;

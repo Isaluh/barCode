@@ -2,23 +2,27 @@ package com.bamboobyte.API.models;
 
 
 import jakarta.persistence.*;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
-@Table(name = "produtos")
+@Table(name = "produto")
 @Entity
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Column(unique = true)
-    String nome;
-    float preco;
-    ArrayList<String> categorias;
-    String imagemCaminho;
+    private String nome;
+    private float preco;
+    private ArrayList<String> categorias;
+    private String imagemCaminho;
+    @ManyToMany
+    private List<Comanda> pedidos = new ArrayList<>();
 
     public Produto() {
     }

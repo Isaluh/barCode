@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 
 import java.util.UUID;
 
-@Table(name = "garcons")
+@Table(name = "garcom")
 @Entity
 public class Garcom {
     public Garcom() {}
