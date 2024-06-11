@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 
 @Component({
@@ -10,7 +10,8 @@ import { CarouselModule } from 'primeng/carousel';
   styleUrl: './topicos-cardapio.component.css'
 })
 export class TopicosCardapioComponent {
-
+  @Output() topicoProduto = new EventEmitter();
+  // pegar os topicos no banco
   topicosCardapio = [
     {
       "topico" : "Porções",
@@ -50,5 +51,6 @@ export class TopicosCardapioComponent {
       }
     }
     console.log(this.topicosCardapio)
+    this.topicoProduto.emit(topicoSelecionado)
   }
 }

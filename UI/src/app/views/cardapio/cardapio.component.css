@@ -21,3 +21,15 @@ span{
     height: 2px;
     background-color: var(--verde-opc);
 }
+
+.subirPage{
+    position: fixed;
+    right: 30px;
+    bottom: 70px;
+}
+
+.verComanda{
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}

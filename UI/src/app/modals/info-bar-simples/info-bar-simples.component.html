@@ -32,6 +32,7 @@
         <ng-container *ngIf="variant == 'aPagarDinheiro'">
             <div class="{{ variant }}">
                 <inputsComponent type="number" variant="borda" placeholder="Valor recebido" />
+                <!-- pegar valor total + 10% -->
                 <inputsComponent variant="visualTroco" placeholder="R$10.00" />
                 <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Fechar comanda" />
             </div> 

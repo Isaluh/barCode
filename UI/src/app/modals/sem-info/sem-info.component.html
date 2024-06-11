@@ -18,6 +18,7 @@
                 <buttonsComponent (click)="gerarRelatorio()" variant="verde" text="Gerar relatório" />
             </div>
         </ng-container>
+        <!-- ajudar para mudar taxa -->
         <ng-container *ngIf="variant == 'adicionarMesa'">
             <div>
                 <inputsComponent type="number" variant="borda" (eventInputValue)="numeroMesaNova($event.valorinput)" placeholder="Número da mesa" />
