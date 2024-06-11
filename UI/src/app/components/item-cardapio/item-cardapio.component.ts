@@ -1,5 +1,5 @@
 import { NgIf, NgOptimizedImage } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProdutosService } from '../../../services/produtos.service';
 
 @Component({
@@ -13,6 +13,11 @@ export class ItemCardapioComponent {
   @Input("nome") "nome" : string = "";
   @Input("valor") "valor" : string = "";
   @Input("urlImg") "urlImg" : string = "";
+  @Output() produtoEscolhido = new EventEmitter()
 
   urlBase : string = ProdutosService.API_url;
+
+  adicionarProduto(produto : string){
+    this.produtoEscolhido.emit(produto)
+  }
 }

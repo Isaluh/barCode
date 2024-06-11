@@ -21,6 +21,7 @@ import { SemInfoComponent } from '../../modals/sem-info/sem-info.component';
 })
 export class MesasComponent {
   mesas : Mesa[] = [];
+  totalMesas = this.mesas.length
   numeroAddMesa : number = 0;
   numeroMesa : number = 0;
   qntdPessoas : number = 0;
@@ -123,6 +124,10 @@ export class MesasComponent {
   modalExlusao = false;
   // apenas excluir se a mesa for livre
   removerMesa(){
+    if(this.mesas.length == 0){
+      // lançar aviso
+      console.log("não ha nenhuma mesa")
+    }
     // fazer a escolha da mesa antes de abrir modal
     console.log("escolher a mesa antes");
     this.modalExlusao = true;

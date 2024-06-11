@@ -6,11 +6,12 @@
         <buttonsComponent (click)="produtoSearch()" variant="search" />
     </div>
     <span></span>
-    <topicosCardapioComponent/>
+    <topicosCardapioComponent (topicoProduto)="pegarTopico($event)" />
     <div class="itens">
         <ng-container *ngFor="let produto of produtos">
-            <itemCardapioComponent nome="{{ produto.nome }}" valor="{{ produto.preco }}" urlImg="{{ produto.imagemCaminho }}" />
+            <itemCardapioComponent (produtoEscolhido)="adicionarProduto($event)" nome="{{ produto.nome }}" valor="{{ produto.preco }}" urlImg="{{ produto.imagemCaminho }}" />
         </ng-container>
     </div>
-
+    <img class="verComanda" (click)="verComanda()" ngSrc="assets/openComanda.svg" width="30" height="30">
+    <img class="subirPage" (click)="subirPag()" *ngIf="upPage" ngSrc="assets/upPage.svg" width="30" height="30">
 </main>

@@ -20,6 +20,7 @@ import { Usuario } from '../../../models/models';
 })
 export class UsuariosComponent {
   usuarios : Usuario[] = [];
+  totalUsuarios = this.usuarios.length
   topicosUsuario = ["Nome", "CPF", ""];
 
   constructor(private usuariosService : UsuariosService){

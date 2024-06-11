@@ -7,7 +7,7 @@
                 <tablesComponent [topicos]="topicosUsuario" />
             </div>
             <div class="funcoesCadastro">
-                <inputsComponent variant="visualUsuario" placeholder="10 usuários"/>
+                <inputsComponent variant="visualUsuario" placeholder="{{ totalUsuarios }} usuários"/>
                 <buttonsComponent (click)="mudarTaxa()" variant="verde" text="Mudar Taxa" />
                 <buttonsComponent (click)="abrirCadastrarUsuario()" variant="verde" text="Cadastrar usuário"/>
             </div>

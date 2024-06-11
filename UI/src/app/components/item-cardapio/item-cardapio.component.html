@@ -7,7 +7,7 @@
         <img ngSrc="{{ urlBase + urlImg }}" width="70" height="70">
         <!-- ngIf se tiver permissão de funcionario aparece o add na tela de cardapio mesas -->
         <ng-content *ngIf="false">
-            <img ngSrc="./assets/addItem.svg" width="24" height="24">
+            <img (click)="adicionarProduto(nome)" ngSrc="./assets/addItem.svg" width="24" height="24">
         </ng-content>
     </div>
 </div>
