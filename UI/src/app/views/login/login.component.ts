@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HeaderMenuComponent } from '../../components/header-menu/header-menu.component';
 import { InputsComponent } from '../../components/inputs/inputs.component';
 import { ButtonsComponent } from '../../components/buttons/buttons.component';
+import { UsuariosService } from '../../../services/usuarios.service';
+import { Usuario } from '../../../models/models';
 
 @Component({
   selector: 'loginView',
@@ -13,6 +15,10 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
 export class LoginComponent {
   CPF : number = 0;
   senha : string | number = "";
+
+  constructor(private usuariosService : UsuariosService){
+
+  }
 
   pegarCPF(cpf : string | number){
     this.CPF = Number(cpf)
