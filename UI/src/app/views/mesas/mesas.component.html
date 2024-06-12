@@ -25,7 +25,7 @@
 </ng-container>
 
 <ng-container *ngIf="modalAddMesa">
-    <semInfoModal (adicionarMesa)="criarMesa()" (valorInput)="pegarNumeroAddMesa($event)" (sairModals)="fecharModal()" variant="adicionarMesa" />
+    <semInfoModal (eventButton)="criarMesa()" (valorInput)="pegarNumeroAddMesa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Adicionar mesa" placeholderInput="Número da mesa" />
 </ng-container>
 
 <ng-container *ngIf="modalExlusao">

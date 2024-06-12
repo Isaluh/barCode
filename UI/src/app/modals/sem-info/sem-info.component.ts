@@ -5,7 +5,7 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { FiltroComponent } from '../../components/filtro/filtro.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 
-type modalSemInfoVariant = "cadastro" | "relatorio" | "adicionarMesa"
+type modalSemInfoVariant = "cadastro" | "relatorio" | "unicoInput"
 
 @Component({
   selector: 'semInfoModal',
@@ -15,18 +15,20 @@ type modalSemInfoVariant = "cadastro" | "relatorio" | "adicionarMesa"
   styleUrl: './sem-info.component.css'
 })
 export class SemInfoComponent {
-  @Input() variant : modalSemInfoVariant = "adicionarMesa";
-  @Output() adicionarMesa = new EventEmitter();
+  @Input() variant : modalSemInfoVariant = "unicoInput";
+  @Input() textButton : string = "";
+  @Input() placeholderInput : string = "";
+  @Output() eventButton = new EventEmitter();
   @Output() criarCadastro = new EventEmitter();
   @Output() criarRelatorio = new EventEmitter();
   @Output() valorInput = new EventEmitter();
   @Output() sairModals = new EventEmitter();
 
-  numeroMesaNova(numero : string | number){
+  pegarInput(numero : string | number){
     this.valorInput.emit(numero)
   }
-  criarMesa(){
-    this.adicionarMesa.emit()
+  pegarValorInput(){
+    this.eventButton.emit()
   }
 
   cadastro = {
