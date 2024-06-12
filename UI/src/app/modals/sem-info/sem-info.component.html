@@ -19,10 +19,10 @@
             </div>
         </ng-container>
         <!-- ajudar para mudar taxa -->
-        <ng-container *ngIf="variant == 'adicionarMesa'">
+        <ng-container *ngIf="variant == 'unicoInput'">
             <div>
-                <inputsComponent type="number" variant="borda" (eventInputValue)="numeroMesaNova($event.valorinput)" placeholder="Número da mesa" />
-                <buttonsComponent (click)="criarMesa()"  variant="verde" text="Adicionar mesa" />
+                <inputsComponent type="number" variant="borda" (eventInputValue)="pegarInput($event.valorinput)" placeholder="{{placeholderInput}}" />
+                <buttonsComponent (click)="pegarValorInput()"  variant="verde" text="{{textButton}}" />
             </div>
         </ng-container>
     </div>

@@ -22,6 +22,7 @@ export class UsuariosComponent {
   usuarios : Usuario[] = [];
   totalUsuarios = this.usuarios.length
   topicosUsuario = ["Nome", "CPF", ""];
+  novaTaxa = 0;
 
   constructor(private usuariosService : UsuariosService){
 
@@ -44,6 +45,18 @@ export class UsuariosComponent {
     this.menu = false;
   };
   
+  modalTaxa = false;
+  abrirModalTaxa(){
+    this.modalTaxa = true
+  }
+  pegarTaxa(numero : number){
+    this.novaTaxa = numero;
+  }
+  mudarTaxa(){
+    // mudar taxa de garçom
+    console.log(this.novaTaxa)
+  }
+
   modalCadastrarUsuario = false;
   cadastro = [];
   abrirCadastrarUsuario(){
@@ -70,11 +83,7 @@ export class UsuariosComponent {
   fecharModal(){
     this.modalExlusao = false
     this.modalCadastrarUsuario = false;
-  }
-
-  mudarTaxa(){
-    //mudar taxa de garçom
-    // criar modal de mudar taxa
+    this.modalTaxa = false;
   }
 
 }

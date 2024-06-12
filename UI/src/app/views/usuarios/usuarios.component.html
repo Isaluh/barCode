@@ -8,11 +8,15 @@
             </div>
             <div class="funcoesCadastro">
                 <inputsComponent variant="visualUsuario" placeholder="{{ totalUsuarios }} usuários"/>
-                <buttonsComponent (click)="mudarTaxa()" variant="verde" text="Mudar Taxa" />
+                <buttonsComponent (click)="abrirModalTaxa()" variant="verde" text="Mudar Taxa" />
                 <buttonsComponent (click)="abrirCadastrarUsuario()" variant="verde" text="Cadastrar usuário"/>
             </div>
         </div>
     </main>
+</ng-container>
+
+<ng-container *ngIf="modalTaxa">
+    <semInfoModal (valorInput)="pegarTaxa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Mudar taxa" placeholderInput="Nova taxa" (eventButton)="mudarTaxa()" />
 </ng-container>
 
 <ng-container *ngIf="modalCadastrarUsuario">
