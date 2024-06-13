@@ -19,9 +19,10 @@ public class MesaServiceImpl implements MesaService {
     }
 
     @Override
-    public Mesa getMesaById(UUID id) {
-        return mesaRepository.findById(id).get();
+    public void deleteMesaByNumero(int id) {
+        mesaRepository.deleteMesaByNumero(id);
     }
+
     public Optional<Mesa> getMesaByNumero(int numero){
         return mesaRepository.findByNumero(numero);
     }
@@ -36,8 +37,4 @@ public class MesaServiceImpl implements MesaService {
         return this.mesaRepository.findByNumero(numero).isEmpty();
     }
 
-    @Override
-    public void deleteMesa(UUID id) {
-        mesaRepository.deleteById(id);
-    }
 }

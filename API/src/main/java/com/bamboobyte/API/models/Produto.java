@@ -21,9 +21,6 @@ public class Produto {
     private float preco;
     private ArrayList<String> categorias;
     private String imagemCaminho;
-    @ManyToMany
-    private List<Comanda> pedidos = new ArrayList<>();
-
     public Produto() {
     }
 

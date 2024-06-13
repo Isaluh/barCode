@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface MesaRepository extends JpaRepository<Mesa, UUID> {
+public interface MesaRepository extends JpaRepository<Mesa, Integer> {
     Optional<Mesa> findByNumero(int numero);
+    void deleteMesaByNumero(int numero);
 }

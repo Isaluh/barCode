@@ -2,12 +2,12 @@ package com.bamboobyte.API.controllers;
 
 
 import com.bamboobyte.API.models.*;
+import com.bamboobyte.API.services.ComandaServiceImpl;
 import com.bamboobyte.API.services.MesaServiceImpl;
+import com.bamboobyte.API.services.ProdutoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -19,6 +19,10 @@ public class MesaController {
 
     @Autowired
     private MesaServiceImpl mesaService;
+    @Autowired
+    private ComandaServiceImpl comandaService;
+    @Autowired
+    private ProdutoServiceImpl produtoService;
 
     @GetMapping("/all")
     public ResponseEntity<List<MesaResponse>> listarMesas() {
@@ -30,7 +34,7 @@ public class MesaController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<?> createMesa(@RequestParam int numero) {
+    public ResponseEntity<?> createMesa(@RequestParam Integer numero) {
         if (!mesaService.isNumeroAvaliable(numero)) {
             return ResponseEntity.status(409).body("[ ERRO ] Já existe uma mesa com esse numero: "+numero);
         }
@@ -39,11 +43,28 @@ public class MesaController {
         }
         Mesa mesa = new Mesa(numero);
         mesaService.saveMesa(mesa);
-        UUID createdId = this.mesaService.saveMesa(mesa).getId();
-        URI newMesaLocation = ServletUriComponentsBuilder.fromCurrentContextPath().path("/mesa/{id}").buildAndExpand(createdId).toUri();
+        this.mesaService.saveMesa(mesa);
+        URI newMesaLocation = ServletUriComponentsBuilder.fromCurrentContextPath().path("/mesa/{id}").buildAndExpand(mesa.getNumero()).toUri();
         return ResponseEntity.created(newMesaLocation).build();
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarMesa( @PathVariable int id) {
+        Optional<Mesa> mesaOpt = mesaService.getMesaByNumero(id);
+        if (mesaOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Mesa mesa = mesaOpt.get();
+        Optional<Comanda> comandaOpt = comandaService.getComandaById(mesa.getIdComanda());
+        if (comandaOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Comanda comanda = comandaOpt.get();
+        ArrayList<Produto> produtos = new ArrayList<>();
+        for (UUID produtoId:comanda.getItens()) {
+            produtos.add(produtoService.getProdutoById(produtoId).get());
+        }
+        return ResponseEntity.ok(new MesaProdutosResponse(mesa, produtos));
+    }
     @PostMapping("/set/quantidade")
     public ResponseEntity<Void> adicionarQuantidade(
             @RequestParam int numero,
@@ -54,6 +75,7 @@ public class MesaController {
         }
         Optional<Mesa> mesaOptional = mesaService.getMesaByNumero(numero);
         System.out.println(mesaOptional.isPresent());
+
         if (mesaOptional.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -61,18 +83,20 @@ public class MesaController {
         if (mesa.getNumeroPessoas() != -1) {
             return ResponseEntity.badRequest().build();
         }
-        // TODO gerar comanda ao criar mesa
-//        mesa.setNumeroPessoas(quantidade);
-//        mesa.set
-//        mesa.setDataAbertura(new Date().getTime());
-//        System.out.println(mesa.getDataAbertura());
+
+        mesa.setNumeroPessoas(quantidade);
+        Comanda comanda = new Comanda(mesa.getNumero());
+        comanda.setDataAbertura(new Date().getTime());
+        comanda = comandaService.saveComanda(comanda);
+
+        mesa.setIdComanda(comanda.getId());
         mesa.setStatus(StatusMesa.ocupada);
         mesaService.saveMesa(mesa);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/fechar")
-    public ResponseEntity<Void> statusAPagar(
+    public ResponseEntity<?> statusAPagar(
             @RequestParam int numero
     ) {
         Optional<Mesa> mesaOptional = mesaService.getMesaByNumero(numero);
@@ -84,13 +108,19 @@ public class MesaController {
             return ResponseEntity.badRequest().build();
         }
         mesa.setStatus(StatusMesa.aPagar);
+        Optional<Comanda> comandaOpt = comandaService.getComandaById(mesa.getIdComanda());
+        Comanda comanda = null;
+        if (comandaOpt.isPresent()) {
+            comanda = comandaOpt.get();
+            comanda.setDataFechamento(new Date().getTime());
+        }
+        comandaService.saveComanda(comanda);
+        mesaService.saveMesa(mesa);
         // TODO fechar comanda
 //        mesa.setDataFechamento(new Date().getTime());
         // TODO Verificar como vai ser feita as regras de desconto, acrescimo, etc
         // é aqui que devera ser adicionado a porcentagem do garçom e o desconto por horário
-        mesaService.saveMesa(mesa);
-        URI mesaLocation = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produtos/{id}").buildAndExpand(mesa.getId()).toUri();
-        return ResponseEntity.created(mesaLocation).build();
+        return ResponseEntity.ok("mesa fechada");
     }
 
     @PostMapping("/pagar")
@@ -113,7 +143,23 @@ public class MesaController {
         Mesa mesa = mesaOptional.get();
         mesa.limparMesa();
         mesaService.saveMesa(mesa);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Mesa "+mesa.getNumero()+" foi paga");
+    }
+
+    @PostMapping("/add/produto")
+    public ResponseEntity<?> adicionarProduto(
+            @RequestParam(required = false, name="id") String uuidString,
+            @RequestParam(required = false, name="nome") String nome
+    ) {
+        if (uuidString == null && nome == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        Optional<Produto> produtoOpt;
+        if (uuidString != null) {
+            UUID uuid = UUID.fromString(uuidString);
+        } else if (nome != null) {
+            //TODO terminar isso
+        }
     }
 
 

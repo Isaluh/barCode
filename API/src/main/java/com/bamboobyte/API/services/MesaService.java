@@ -7,9 +7,8 @@ import java.util.UUID;
 
 public interface MesaService {
     Iterable<Mesa> listAllMesa();
-    Mesa getMesaById(UUID id);
     Optional<Mesa> getMesaByNumero(int numero);
     Mesa saveMesa(Mesa mesa);
     boolean isNumeroAvaliable(int numero);
-    void deleteMesa(UUID id);
+    void deleteMesaByNumero(int id);
 }

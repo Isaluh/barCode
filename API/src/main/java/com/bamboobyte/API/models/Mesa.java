@@ -18,20 +18,7 @@ public class Mesa {
     private int numero;
     private int numeroPessoas = -1;
     private StatusMesa status;
-    @OneToMany
-    private List<Comanda> comandas;
-
-    public void setComandas(List<Comanda> comandas) {
-        this.comandas = comandas;
-    }
-
-    public List<Comanda> getComandas() {
-        return comandas;
-    }
-
-    //    private long dataAbertura;
-//    private long dataFechamento;
-
+    private UUID idComanda;
 
     public Mesa() {
     }
@@ -39,6 +26,14 @@ public class Mesa {
     public Mesa(int numero) {
         this.numero = numero;
         this.status = StatusMesa.livre;
+    }
+
+    public UUID getIdComanda() {
+        return idComanda;
+    }
+
+    public void setIdComanda(UUID idComanda) {
+        this.idComanda = idComanda;
     }
 
     public int getNumero() {
@@ -68,5 +63,6 @@ public class Mesa {
     public void limparMesa() {
         this.status = StatusMesa.livre;
         this.numeroPessoas = -1;
+        this.idComanda = null;
     }
 }
