@@ -27,3 +27,11 @@ export interface Usuario{
     nome : string,
     cpf : number
 }
+
+export interface RelatorioTabela{
+    numVenda : number,
+    data : Date,
+    mesa : number,
+    preco : number,
+    formaPagamento : string
+}
