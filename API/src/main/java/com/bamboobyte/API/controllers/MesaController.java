@@ -113,8 +113,8 @@ public class MesaController {
         if (comandaOpt.isPresent()) {
             comanda = comandaOpt.get();
             comanda.setDataFechamento(new Date().getTime());
+            comandaService.saveComanda(comanda);
         }
-        comandaService.saveComanda(comanda);
         mesaService.saveMesa(mesa);
         // TODO fechar comanda
 //        mesa.setDataFechamento(new Date().getTime());
@@ -138,11 +138,15 @@ public class MesaController {
         if (mesaOptional.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
         // TODO salvar venda em uma tabela vendas
         Mesa mesa = mesaOptional.get();
         mesa.limparMesa();
         mesaService.saveMesa(mesa);
+
+        if (mesa.getStatus() != StatusMesa.aPagar) {
+            return ResponseEntity.status(403).body("Status da mesa não permite pagamento");
+        }
+
         return ResponseEntity.ok("Mesa "+mesa.getNumero()+" foi paga");
     }
 
