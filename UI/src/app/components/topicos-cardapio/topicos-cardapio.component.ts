@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
+import Swipe from 'swipejs';
 
 @Component({
   selector: 'topicosCardapioComponent',
@@ -33,15 +34,15 @@ export class TopicosCardapioComponent {
       "topico" : "Saladas",
       "status" : ""
     },
-    // {
-    //   "topico" : "Bebidas",
-    //   "status" : false
-    // },
-    // {
-    //   "topico" : "Sobremesas",
-    //   "status" : false
-    // }
-]
+    {
+      "topico" : "Bebidas",
+      "status" : false
+    },
+    {
+      "topico" : "Sobremesas",
+      "status" : false
+    }
+  ]
 
   selecionarTopico(topicoSelecionado : string){
     for(let topico of this.topicosCardapio){
@@ -53,4 +54,5 @@ export class TopicosCardapioComponent {
     console.log(this.topicosCardapio)
     this.topicoProduto.emit(topicoSelecionado)
   }
+
 }

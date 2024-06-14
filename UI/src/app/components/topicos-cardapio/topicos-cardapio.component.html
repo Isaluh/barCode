@@ -1,4 +1,10 @@
-<div>
+<!-- <div>
     <h1 *ngFor="let item of topicosCardapio" id="teste" (click)="selecionarTopico(item.topico)" class="{{item.status}}">{{ item.topico }}</h1>
-</div>
+</div> -->
 <!-- fzr o carrossel -->
+
+<p-carousel [value]="topicosCardapio" [numVisible]="5" [numScroll]="2" circular="true" [showNavigators]="false" [showIndicators]="false">
+    <ng-template let-item pTemplate="item">
+        <h1 id="teste" (click)="selecionarTopico(item.topico)" [ngClass]="item.status">{{ item.topico }}</h1>
+    </ng-template>
+</p-carousel>

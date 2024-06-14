@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 @Injectable({providedIn: 'root'})
 
 export class MesasService{
-    public static API_url: string = "https://a26c-45-176-18-158.ngrok-free.app";
+    public static API_url: string = "https://743b-45-176-18-211.ngrok-free.app";
     // public static API_url: string = "http://10.144.29.77:8080";
     constructor(private httpClient:HttpClient) {
 
