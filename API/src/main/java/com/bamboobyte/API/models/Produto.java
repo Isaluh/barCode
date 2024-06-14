@@ -4,10 +4,7 @@ package com.bamboobyte.API.models;
 import jakarta.persistence.*;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Table(name = "produto")
 @Entity
@@ -19,15 +16,25 @@ public class Produto {
     @Column(unique = true)
     private String nome;
     private float preco;
-    private ArrayList<String> categorias;
+    @ManyToMany
+    @JoinTable(
+            name = "produto_categoria",
+            joinColumns = @JoinColumn(name = "produto_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
+    private Set<Categoria> categorias = new HashSet<>();
     private String imagemCaminho;
     public Produto() {
     }
 
-    public Produto(String nome, float preco, ArrayList<String> categorias) {
+    public Produto(String nome, float preco) {
         this.nome = nome;
         this.preco = preco;
-        this.categorias = categorias;
+    }
+    public Produto(String nome, float preco, Collection<Categoria> categorias) {
+        this.nome = nome;
+        this.preco = preco;
+        this.categorias = new HashSet(categorias);
     }
 
     public UUID getId() {
@@ -50,11 +57,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public ArrayList<String> getCategorias() {
+    public Set<Categoria> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(ArrayList<String> categorias) {
+    public void setCategorias(Set<Categoria> categorias) {
         this.categorias = categorias;
     }
 

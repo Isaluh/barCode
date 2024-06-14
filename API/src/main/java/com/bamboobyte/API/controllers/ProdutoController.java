@@ -1,9 +1,11 @@
 package com.bamboobyte.API.controllers;
 
 import com.bamboobyte.API.configuration.FileStorageConfiguration;
+import com.bamboobyte.API.models.Categoria;
 import com.bamboobyte.API.models.Produto;
 import com.bamboobyte.API.models.ProdutoJSON;
 import com.bamboobyte.API.models.ProdutoResponse;
+import com.bamboobyte.API.services.CategoriaServiceImpl;
 import com.bamboobyte.API.services.ProdutoServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +38,8 @@ import java.util.stream.Collectors;
 public class ProdutoController {
     @Autowired
     private ProdutoServiceImpl produtoService;
-
+    @Autowired
+    private CategoriaServiceImpl categoriaService;
     private final Path fileStorageLocation;
     public ProdutoController(FileStorageConfiguration fileStorageConfiguration) {
         this.fileStorageLocation = Paths.get(fileStorageConfiguration.getUploadDir())
@@ -86,12 +89,22 @@ public class ProdutoController {
     public ResponseEntity<?> createProduto(
         @RequestParam("nome") String nome,
         @RequestParam("preco") float preco,
-        @RequestParam("categorias") String categoriasString,
+        @RequestParam(value = "categorias", required = false) String categoriasString,
         @RequestParam(required = false) Optional<MultipartFile> imagem
     ) {
         System.out.println("criando "+nome);
-        ArrayList<String> categorias = this.parseStringToList(categoriasString);
-        categorias.replaceAll(String::strip);
+        ArrayList<String> categoriasStringList = this.parseStringToList(categoriasString);
+        categoriasStringList.replaceAll(String::strip);
+        Set<Categoria> categorias = new HashSet<>();
+        for (String nomeCategoria : categoriasStringList) {
+            Optional<Categoria> categoriaOpt = categoriaService.getCategoriaByNome(nomeCategoria);
+            if (categoriaOpt.isPresent()) {
+                categorias.add(categoriaOpt.get());
+            } else {
+                Categoria categoria = new Categoria(nomeCategoria);
+                categorias.add(categoriaService.saveCategoria(categoria));
+            }
+        }
         Produto produto = new Produto(nome, preco, categorias);
         Produto produtoCriado = this.produtoService.saveProduto(produto);
         if (produtoCriado == null) {
@@ -120,10 +133,23 @@ public class ProdutoController {
 //        }
         int produtosCriados = 0;
         for (ProdutoJSON produtoJSON:produtoJSONArr) {
+            Set<Categoria> setCategorias = new HashSet<>();
+            for (String nomeCategoria:produtoJSON.getCategorias()) {
+                Optional<Categoria> categoriaOpt = categoriaService.getCategoriaByNome(nomeCategoria);
+                if (categoriaOpt.isPresent()) {
+                    setCategorias.add(categoriaOpt.get());
+                } else {
+                    setCategorias.add(
+                            categoriaService.saveCategoria(
+                                    new Categoria(nomeCategoria)
+                            )
+                    );
+                }
+            }
             Produto produto = new Produto(
                 produtoJSON.getNome(),
                 produtoJSON.getPreco(),
-                new ArrayList<>(Arrays.stream(produtoJSON.getCategorias()).toList())
+                setCategorias
             );
             Produto produtoCriado = this.produtoService.saveProduto(produto);
             if (produtoCriado == null) {
@@ -155,10 +181,10 @@ public class ProdutoController {
         }
         Produto produto = produtoOptional.get();
         preco.ifPresent(produto::setPreco);
-        if (categoriasString.isPresent()) {
-            ArrayList<String> categorias = parseStringToList(categoriasString.get());
-            produto.setCategorias(categorias);
-        }
+//        if (categoriasString.isPresent()) {
+//            ArrayList<String> categorias = parseStringToList(categoriasString.get());
+//            produto.setCategorias(categorias);
+//        }
 
         boolean isImagemAtribuida = false;
         if (imagem.isPresent()) {
