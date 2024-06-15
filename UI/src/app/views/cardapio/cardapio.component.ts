@@ -33,12 +33,7 @@ export class CardapioComponent {
 
   constructor(private produtosService: ProdutosService) { }
 
-  ngOnInit(): void {
-
-  }
-
   getProdutos(categoria: string): void {
-    console.log("teste")
     this.produtosService.getProdutos(categoria)
       .subscribe(produtos => {
         this.produtos = produtos
@@ -49,8 +44,6 @@ export class CardapioComponent {
   pegarTopico(topico: string) {
     this.produtos = []
     this.aMostraProdutos = []
-
-    console.log("FOI EMITIDO " + topico)
     this.getProdutos(topico)
   }
 

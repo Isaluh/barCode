@@ -11,8 +11,8 @@ export const routes: Routes = [
     {path: '', component: CardapioComponent},
     {path: 'login', component: LoginComponent},
     {path: 'mesas', component: MesasComponent},
-    {path: 'cardapio', component: CardapioComponent},
-    {path: `comanda/${0}`, component: ComandaComponent},
+    {path: 'cardapio/:id', component: CardapioComponent},
+    {path: `comanda/:id`, component: ComandaComponent},
     {path: 'relatorio', component: RelatorioComponent},
     {path: 'usuarios', component: UsuariosComponent},
     {path: 'ranking', component: RankingComponent}
