@@ -17,9 +17,10 @@ import { Produto } from '../../../models/models';
 })
 export class CardapioComponent {
   produtos : Produto[] = [];
+  aMostraProdutos :Produto[] = [];
   searchProduto : string = "";
-  upPage : boolean = false
-
+  upPage : boolean = false;
+  
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollPosition = document.documentElement.scrollTop;
@@ -29,21 +30,74 @@ export class CardapioComponent {
       this.upPage = false;
     }
   }
-
+  
   constructor(private produtosService : ProdutosService){}
-
+  
   ngOnInit(): void {
-    this.getProdutos();
+    this.getProdutosPorcoes();
+    this.aMostraProdutos = this.produtos
+  }
+  
+  getProdutosPorcoes(): void {
+    this.produtosService.getProdutosPorcoes()
+      .subscribe(produtos => this.produtos = produtos);
   }
 
-  getProdutos(): void {
-    this.produtosService.getProdutos()
+  getProdutosPetiscos(): void {
+    this.produtosService.getProdutosPetiscos()
+      .subscribe(produtos => this.produtos = produtos);
+  }
+
+  getProdutosPeixes(): void {
+    this.produtosService.getProdutosPeixes()
+      .subscribe(produtos => this.produtos = produtos);
+  }
+
+  getProdutosCarnes(): void {
+    this.produtosService.getProdutosCarnes()
+      .subscribe(produtos => this.produtos = produtos);
+  }
+
+  getProdutosSaladas(): void {
+    this.produtosService.getProdutosSaladas()
+      .subscribe(produtos => this.produtos = produtos);
+  }
+
+  getProdutosBebidas(): void {
+    this.produtosService.getProdutosBebidas()
+      .subscribe(produtos => this.produtos = produtos);
+  }
+
+  getProdutosSobremesas(): void {
+    this.produtosService.getProdutosSobremesas()
       .subscribe(produtos => this.produtos = produtos);
   }
 
   pegarTopico(topico : string){
-    // listar so produtos do topico passado
-    console.log("topico passado " + topico)
+    this.produtos = []
+    this.aMostraProdutos = []
+    if(topico == 'Porções'){
+      this.getProdutosPorcoes()
+    }
+    else if(topico == 'Petiscos'){
+      this.getProdutosPetiscos()
+    }
+    else if(topico == 'Peixes'){
+      this.getProdutosPeixes()
+    }
+    else if(topico == 'Carnes'){
+      this.getProdutosCarnes()
+    }
+    else if(topico == 'Saladas'){
+      this.getProdutosSaladas()
+    }
+    else if(topico == 'Bebidas'){
+      this.getProdutosBebidas()
+    }
+    else{
+      this.getProdutosSobremesas()
+    }
+    this.aMostraProdutos = this.produtos
   }
 
   pegarSearch(produto : string | number){
@@ -52,12 +106,19 @@ export class CardapioComponent {
 
   produtoSearch(){
     console.log("procurar produto " + this.searchProduto)
+    for(let item of this.aMostraProdutos){
+      if(String(item.nome).toLowerCase() == this.searchProduto.toLowerCase()){
+        // colocar produto a mostra
+        this.aMostraProdutos = []
+        this.aMostraProdutos.push(item)
+      }
+    }
     // procurar pelo produto no banco de dados do produto e fazer com q so ele ou parecidos apareçam na tela
     // limpar barra de pesquisa
   }
 
   adicionarProduto(produto : string){
-    // colcocar tudo em uma lista, verificar se ja foi adicionado outra vez e passar pra comanda
+    // mandar pro back colocar na comanda
     console.log("adicionar produto " + produto)
   }
 

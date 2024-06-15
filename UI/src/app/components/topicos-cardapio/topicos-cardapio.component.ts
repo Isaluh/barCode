@@ -1,5 +1,7 @@
 import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { CardapioService } from '../../../services/cardapio.service';
+import { Categorias } from '../../../models/models';
 
 @Component({
   selector: 'topicosCardapioComponent',
@@ -10,42 +12,59 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class TopicosCardapioComponent {
   @Output() topicoProduto = new EventEmitter();
-  // pegar os topicos no banco
+  topicos : Categorias[] = []
+
+  constructor(private cardapioService : CardapioService){}
+
+  ngOnInit(){
+    this.getTopicosCardapio()
+    let cont = 0;
+    for(let item of this.topicos){
+      console.log(item.categoria)
+      this.topicosCardapio[cont].topico = String(item)
+      cont++
+    }
+  }
+
+  getTopicosCardapio(): void {
+    this.cardapioService.getTopicosCardapio()
+      .subscribe(categoria => this.topicos = categoria);
+  }
 
   topicosCardapio = [
     {
-      "topico" : "Porções",
+      "topico" : "",
       "status" : "selecionado",
       "visivel" : true
     },
     {
-      "topico" : "Petiscos",
+      "topico" : "",
       "status" : "",
       "visivel" : true
     },
     {
-      "topico" : "Peixes",
+      "topico" : "",
       "status" : "",
       "visivel" : true
     },
     {
-      "topico" : "Carnes",
+      "topico" : "",
       "status" : "",
       "visivel" : true
     },
     {
-      "topico" : "Saladas",
+      "topico" : "",
       "status" : "",
       "visivel" : false
       
     },
     {
-      "topico" : "Bebidas",
+      "topico" : "",
       "status" : "",
       "visivel" : false
     },
     {
-      "topico" : "Sobremesas",
+      "topico" : "",
       "status" : "",
       "visivel" : false
     }

@@ -35,3 +35,7 @@ export interface RelatorioTabela{
     preco : number,
     formaPagamento : string
 }
+
+export interface Categorias{
+    categoria : string
+}

@@ -8,10 +8,11 @@
     <span></span>
     <topicosCardapioComponent (topicoProduto)="pegarTopico($event)" />
     <div class="itens">
-        <ng-container *ngFor="let produto of produtos">
+        <ng-container *ngFor="let produto of aMostraProdutos">
             <itemCardapioComponent (produtoEscolhido)="adicionarProduto($event)" nome="{{ produto.nome }}" valor="{{ produto.preco }}" urlImg="{{ produto.imagemCaminho }}" />
         </ng-container>
     </div>
+    <!-- ver comanda so se na rota /cardapio -->
     <img class="verComanda" (click)="verComanda()" ngSrc="assets/openComanda.svg" width="30" height="30">
     <img class="subirPage" (click)="subirPag()" *ngIf="upPage" ngSrc="assets/upPage.svg" width="30" height="30">
 </main>
