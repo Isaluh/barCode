@@ -26,9 +26,7 @@ export class MesasComponent {
   numeroMesa : number = 0;
   qntdPessoas : number = 0;
 
-  constructor(private router : Router, private mesasService : MesasService){
-
-  }
+  constructor(private router : Router, private mesasService : MesasService){}
 
   ngOnInit(): void {
     this.getMesas();

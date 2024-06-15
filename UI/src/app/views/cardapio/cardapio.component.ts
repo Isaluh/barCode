@@ -7,6 +7,8 @@ import { ItemCardapioComponent } from '../../components/item-cardapio/item-carda
 import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/models';
+import { CardapioService } from '../../../services/cardapio.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'cardapioView',
@@ -20,6 +22,7 @@ export class CardapioComponent {
   aMostraProdutos: Produto[] = [];
   searchProduto: string = "";
   upPage: boolean = false;
+  id: string | null = '';
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -31,7 +34,13 @@ export class CardapioComponent {
     }
   }
 
-  constructor(private produtosService: ProdutosService) { }
+  constructor(private produtosService: ProdutosService, private cardapioService : CardapioService, private route: ActivatedRoute, private router : Router){}
+
+  ngOnInit(){
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+    })
+  }
 
   getProdutos(categoria: string): void {
     this.produtosService.getProdutos(categoria)
@@ -72,7 +81,7 @@ export class CardapioComponent {
   }
 
   adicionarProduto(produto: string) {
-    // mandar pro back colocar na comanda
+    this.cardapioService.addProdutoComanda(Number(this.id), produto).subscribe(() => {})
     console.log("adicionar produto " + produto)
   }
 
@@ -81,7 +90,7 @@ export class CardapioComponent {
   }
 
   verComanda() {
-    // mostrar comanda porem sem o metodo de pagar
+    this.router.navigate(['/comanda', this.id])
     console.log("mostrar comanda")
   }
 }
