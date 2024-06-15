@@ -43,3 +43,9 @@ main{
     align-items: flex-end;
     gap: 15px;
 }
+
+.container div .filtro{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

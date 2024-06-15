@@ -13,7 +13,7 @@ input{
         width: 300px;
     }
 
-    &.produto{
+    &.produto, &.mesa{
         height: 30px;
         width: 220px;
     }

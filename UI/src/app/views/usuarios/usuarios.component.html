@@ -3,7 +3,7 @@
     <main>
         <div>
             <div class="conteudo">
-                <infoBarComponent variant="filtroNome" />
+                <infoBarComponent (passarFiltro)="pegarNome($event)" variant="filtroNome" />
                 <tablesComponent [topicos]="topicosUsuario" />
             </div>
             <div class="funcoesCadastro">

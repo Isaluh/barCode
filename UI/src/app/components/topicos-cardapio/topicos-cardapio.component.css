@@ -3,6 +3,10 @@ div{
     flex-direction: row;
     gap: 20px;
 }
+.container{
+    align-items: center;
+    gap: 15px;
+}
 
 h1{
     position: relative;
@@ -24,4 +28,8 @@ h1::before{
 }
 h1.selecionado::before, h1:hover::before, h1.selecionado:focus{
     width: 100%;
+}
+
+img{
+    cursor: pointer;
 }

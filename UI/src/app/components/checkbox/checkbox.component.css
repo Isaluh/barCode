@@ -1,0 +1,17 @@
+div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+span{
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--verde);
+    border-radius: 100%;
+}
+
+.selected{
+    background-color: var(--verde);
+}

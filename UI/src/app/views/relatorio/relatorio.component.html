@@ -3,7 +3,7 @@
     <main>
         <div>
             <div class="conteudo">
-                <infoBarComponent variant="filtroDate" />
+                <infoBarComponent (passarFiltro)="pegarFiltro($event)" variant="filtroDate" />
                 <tablesComponent [topicos]="topicosRelatorio" />
             </div>
             <div class="funcoesRelatorio">

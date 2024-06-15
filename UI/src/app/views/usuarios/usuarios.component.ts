@@ -37,6 +37,11 @@ export class UsuariosComponent {
       .subscribe(usuario => this.usuarios = usuario);
   }
 
+  pegarNome(nome : string){
+    // fazer tabela mudar com o filtro
+    console.log(nome)
+  }
+
   menu = false;
   abrirMenu(){
     this.menu = true;

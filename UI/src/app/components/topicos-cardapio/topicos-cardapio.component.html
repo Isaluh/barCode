@@ -1,4 +1,14 @@
-<div>
-    <h1 *ngFor="let item of topicosCardapio" id="teste" (click)="selecionarTopico(item.topico)" class="{{item.status}}">{{ item.topico }}</h1>
+<div class="container">
+    <img *ngIf="topicosCardapio[0].visivel == false" src="assets/ant.svg" width="24" height="24" (click)="anterior()">
+    <div>
+        <ng-container *ngFor="let item of topicosCardapio">
+            <h1 *ngIf="item.visivel == true" id="teste" (click)="selecionarTopico(item.topico)" class="{{item.status}}">{{ item.topico }}</h1>
+        </ng-container>
+    </div>
+    <img *ngIf="topicosCardapio[topicosCardapio.length-1].visivel == false" ngSrc="assets/prox.svg" width="24" height="24" (click)="proximo()">
 </div>
-<!-- fzr o carrossel -->
+
+<!-- tentativa de carrossel -->
+<!-- <div class="swiper-container">
+    <h1 *ngFor="let item of topicosCardapio" id="teste" (click)="selecionarTopico(item.topico)" class="{{item.status}}  swiper-slide">{{ item.topico }}</h1>
+</div> -->
