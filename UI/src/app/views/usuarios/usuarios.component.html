@@ -1,16 +1,14 @@
 <ng-container *ngIf="!menu">
     <headerComponent variant="neutro" (abrirMenu)="abrirMenu()" />
     <main>
-        <div>
-            <div class="conteudo">
-                <infoBarComponent (passarFiltro)="pegarNome($event)" variant="filtroNome" />
-                <tablesComponent [topicos]="topicosUsuario" />
-            </div>
-            <div class="funcoesCadastro">
-                <inputsComponent variant="visualUsuario" placeholder="{{ totalUsuarios }} usuários"/>
-                <buttonsComponent (click)="abrirModalTaxa()" variant="verde" text="Mudar Taxa" />
-                <buttonsComponent (click)="abrirCadastrarUsuario()" variant="verde" text="Cadastrar usuário"/>
-            </div>
+        <div class="conteudo">
+            <infoBarComponent (passarFiltro)="pegarNome($event)" variant="filtroNome" />
+            <tablesComponent [topicos]="topicosUsuario" />
+        </div>
+        <div class="funcoesCadastro">
+            <inputsComponent variant="visualUsuario" placeholder="{{ totalUsuarios }} usuários"/>
+            <buttonsComponent (click)="abrirModalTaxa()" variant="verde" text="Mudar Taxa" />
+            <buttonsComponent (click)="abrirCadastrarUsuario()" variant="verde" text="Cadastrar usuário"/>
         </div>
     </main>
 </ng-container>

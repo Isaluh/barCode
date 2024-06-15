@@ -24,12 +24,6 @@ span{
 
 .subirPage{
     position: fixed;
-    right: 45px;
-    bottom: 70px;
-}
-
-.verComanda{
-    position: fixed;
-    right: 45px;
+    right: 50px;
     bottom: 30px;
 }
