@@ -20,33 +20,38 @@ export class TopicosCardapioComponent {
 
   ngOnInit(){
     this.getTopicosCardapio()
-    let cont = 0;
-    for(let item of this.topicos){
-      console.log(item)
-      this.topicosCardapio.push({
-        "topico": item,
-        "status": "",
-        "visivel": false 
-      })
-      if (cont == 0) {
-        this.topicosCardapio[cont].status = "selecionado"; 
-      }
-      if (cont < 4) {
-        this.topicosCardapio[cont].visivel = true;
-      }
-      cont++
-    }
-    this.selecionarTopico(this.topicosCardapio[0].topico);
+    
   }
 
   getTopicosCardapio(): void {
     this.cardapioService.getTopicosCardapio()
-      .subscribe(categoria => this.topicos = categoria);
+      .subscribe(
+        categoria => {
+          this.topicos = categoria
+          let cont = 0;
+          for(let item of this.topicos){
+            this.topicosCardapio.push({
+              "topico": item,
+              "status": "",
+              "visivel": false 
+            })
+            if (cont == 0) {
+              this.topicosCardapio[cont].status = "selecionado"; 
+            }
+            if (cont < 4) {
+              this.topicosCardapio[cont].visivel = true;
+            }
+            cont++
+          }
+          this.selecionarTopico(this.topicosCardapio[0].topico);
+        }
+      );
   }
 
   topicosCardapio:any[] = []
 
   selecionarTopico(topicoSelecionado : string){
+    console.log(this.topicosCardapio)
     for(let topico of this.topicosCardapio){
       topico.status = "";
       if(topicoSelecionado == topico.topico){
