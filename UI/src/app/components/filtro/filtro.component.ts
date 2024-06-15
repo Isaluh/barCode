@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-type filtroVariant = "data" | "nome" | "produto"
+type filtroVariant = "data" | "nome" | "produto" | "mesa"
 
 @Component({
   selector: 'filtroComponent',

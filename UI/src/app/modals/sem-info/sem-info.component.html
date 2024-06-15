@@ -11,14 +11,17 @@
         </ng-container>
         <ng-container *ngIf="variant == 'relatorio'">
             <div>
-                <inputsComponent type="date" variant="borda" (eventInputValue)="pegarInicio($event.valorinput)" placeholder="Inicio" />
-                <inputsComponent type="date" variant="borda" (eventInputValue)="pegarFim($event.valorinput)" placeholder="Termino" />
-                <checkboxComponent />
-                <filtroComponent variant="produto" placeholder="Produto" />
+                <div class="filtro">
+                    <inputsComponent type="date" variant="borda" (eventInputValue)="pegarInicio($event.valorinput)" placeholder="Inicio" />
+                    <inputsComponent type="date" variant="borda" (eventInputValue)="pegarFim($event.valorinput)" placeholder="Termino" />
+                    <checkboxComponent (eventCheckbox)="pegarEscolha($event)" />
+                    <!-- colocar mesa para aparecer como default -->
+                    <filtroComponent *ngIf="escolha == 'mesa' or escolha == ''" variant="mesa" placeholder="Mesa" />
+                    <filtroComponent *ngIf="escolha == 'produto'" variant="produto" placeholder="Produto" />
+                </div>
                 <buttonsComponent (click)="gerarRelatorio()" variant="verde" text="Gerar relatório" />
             </div>
         </ng-container>
-        <!-- ajudar para mudar taxa -->
         <ng-container *ngIf="variant == 'unicoInput'">
             <div>
                 <inputsComponent type="number" variant="borda" (eventInputValue)="pegarInput($event.valorinput)" placeholder="{{placeholderInput}}" />

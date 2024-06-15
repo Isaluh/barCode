@@ -70,6 +70,11 @@ export class SemInfoComponent {
     this.criarRelatorio.emit(this.relatorio)
   }
 
+  escolha : string = ""
+  pegarEscolha(escolha : string){
+    this.escolha = escolha
+  }
+
   fecharModal(){
     this.sairModals.emit()
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'checkboxComponent',
@@ -8,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './checkbox.component.css'
 })
 export class CheckboxComponent {
+  @Output() eventCheckbox = new EventEmitter;
 
+  mesaSelect(){
+    this.eventCheckbox.emit('mesa')
+  }
+
+  produtoSelect(){
+    this.eventCheckbox.emit('produto')
+  }
 }

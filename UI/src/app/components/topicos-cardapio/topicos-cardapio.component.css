@@ -3,12 +3,15 @@ div{
     flex-direction: row;
     gap: 20px;
 }
+.container{
+    align-items: center;
+    gap: 15px;
+}
 
 h1{
     position: relative;
     padding-bottom: 4px;
     transition: all .2s;
-    width: 50px;
 }
 h1:hover, h1:focus, h1.selecionado{
     color: var(--verde);

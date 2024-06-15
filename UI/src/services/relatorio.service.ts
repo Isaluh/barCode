@@ -18,3 +18,4 @@ export class RelatorioService{
         return this.httpClient.get<RelatorioTabela[]>(url)
     }
 }
+
