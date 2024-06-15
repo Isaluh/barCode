@@ -15,7 +15,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public Iterable<Categoria> listAllCategoria() {
-        return categoriaRepository.findAll();
+        return categoriaRepository.findAllByOrderByIdAsc();
     }
 
     @Override

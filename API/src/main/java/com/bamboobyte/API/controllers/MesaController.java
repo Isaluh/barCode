@@ -152,19 +152,30 @@ public class MesaController {
 
     @PostMapping("/add/produto")
     public ResponseEntity<?> adicionarProduto(
-            @RequestParam(required = false, name="id") String uuidString,
-            @RequestParam(required = false, name="nome") String nome
+            @RequestParam(name="numero") int numeroMesa,
+            @RequestParam(name="produto") String nomeProduto
     ) {
-        if (uuidString == null && nome == null) {
-            return ResponseEntity.badRequest().build();
+        Optional<Produto> produtoOpt = produtoService.getProdutoByNome(nomeProduto);
+        if (produtoOpt.isEmpty()) {
+            return ResponseEntity.status(404).body("Nenhum produto encontrado com esse nome");
         }
-        Optional<Produto> produtoOpt;
-        if (uuidString != null) {
-            UUID uuid = UUID.fromString(uuidString);
-        } else if (nome != null) {
-            //TODO terminar isso
+        Produto produto = produtoOpt.get();
+        Optional<Mesa> mesaOpt = mesaService.getMesaByNumero(numeroMesa);
+        if (mesaOpt.isEmpty()) {
+            return ResponseEntity.status(404).body("Nenhuma mesa encontrada com esse número");
         }
-        return null;
+        Mesa mesa = mesaOpt.get();
+        if (mesa.getIdComanda() == null) {
+            return ResponseEntity.status(404).body("Nenhuma Comanda está aberta para essa mesa ");
+        }
+        Optional<Comanda> comandaOpt = comandaService.getComandaById(mesa.getIdComanda());
+        if (comandaOpt.isEmpty()) {
+            return ResponseEntity.status(404).body("Comanda cadastrada na mesa, porém não encontrada.");
+        }
+        Comanda comanda = comandaOpt.get();
+        comanda.adicionarItem(produto.getId());
+        comandaService.saveComanda(comanda);
+        return ResponseEntity.ok("Produto "+produto.getNome()+" adicionado à comanda.");
     }
 
 
