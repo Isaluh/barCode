@@ -1,5 +1,7 @@
 import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { CardapioService } from '../../../services/cardapio.service';
+import { Categorias } from '../../../models/models';
 
 @Component({
   selector: 'topicosCardapioComponent',
@@ -10,48 +12,46 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class TopicosCardapioComponent {
   @Output() topicoProduto = new EventEmitter();
-  // pegar os topicos no banco
+  topicos : Categorias[] = []
+  offset: number = 0;
+  itemsPorPagina: number = 4;
 
-  topicosCardapio = [
-    {
-      "topico" : "Porções",
-      "status" : "selecionado",
-      "visivel" : true
-    },
-    {
-      "topico" : "Petiscos",
-      "status" : "",
-      "visivel" : true
-    },
-    {
-      "topico" : "Peixes",
-      "status" : "",
-      "visivel" : true
-    },
-    {
-      "topico" : "Carnes",
-      "status" : "",
-      "visivel" : true
-    },
-    {
-      "topico" : "Saladas",
-      "status" : "",
-      "visivel" : false
-      
-    },
-    {
-      "topico" : "Bebidas",
-      "status" : "",
-      "visivel" : false
-    },
-    {
-      "topico" : "Sobremesas",
-      "status" : "",
-      "visivel" : false
-    }
-  ]
+  constructor(private cardapioService : CardapioService){}
+
+  ngOnInit(){
+    this.getTopicosCardapio()
+    
+  }
+
+  getTopicosCardapio(): void {
+    this.cardapioService.getTopicosCardapio()
+      .subscribe(
+        categoria => {
+          this.topicos = categoria
+          let cont = 0;
+          for(let item of this.topicos){
+            this.topicosCardapio.push({
+              "topico": item,
+              "status": "",
+              "visivel": false 
+            })
+            if (cont == 0) {
+              this.topicosCardapio[cont].status = "selecionado"; 
+            }
+            if (cont < 4) {
+              this.topicosCardapio[cont].visivel = true;
+            }
+            cont++
+          }
+          this.selecionarTopico(this.topicosCardapio[0].topico);
+        }
+      );
+  }
+
+  topicosCardapio:any[] = []
 
   selecionarTopico(topicoSelecionado : string){
+    console.log(this.topicosCardapio)
     for(let topico of this.topicosCardapio){
       topico.status = "";
       if(topicoSelecionado == topico.topico){
@@ -63,32 +63,32 @@ export class TopicosCardapioComponent {
   }
 
   anterior(){
-    if(this.topicosCardapio[6].visivel == true){
-      this.topicosCardapio[6].visivel = false;
-      this.topicosCardapio[2].visivel = true;
+    if (this.offset <= 0) {
+      return;
     }
-    else if(this.topicosCardapio[5].visivel == true){
-      this.topicosCardapio[5].visivel = false;
-      this.topicosCardapio[1].visivel = true;
+    let cont = --this.offset;
+    for (let item of this.topicosCardapio) {
+      item.visivel = false;
     }
-    else if(this.topicosCardapio[4].visivel == true){
-      this.topicosCardapio[4].visivel = false;
-      this.topicosCardapio[0].visivel = true;
+    while (cont < this.offset + this.itemsPorPagina && cont < this.topicosCardapio.length) {
+      this.topicosCardapio[cont].visivel = true;
+      cont++;
     }
   }
 
   proximo(){
-    if(this.topicosCardapio[0].visivel == true){
-      this.topicosCardapio[0].visivel = false;
-      this.topicosCardapio[4].visivel = true;
+    if (this.offset >= this.topicosCardapio.length) {
+      return;
     }
-    else if(this.topicosCardapio[1].visivel == true){
-      this.topicosCardapio[1].visivel = false;
-      this.topicosCardapio[5].visivel = true;
+    let cont = ++this.offset;
+    console.log(this.offset)
+    for (let item of this.topicosCardapio) {
+      item.visivel = false;
     }
-    else if(this.topicosCardapio[2].visivel == true){
-      this.topicosCardapio[2].visivel = false;
-      this.topicosCardapio[6].visivel = true;
+    while (cont < this.offset + this.itemsPorPagina && cont < this.topicosCardapio.length) {
+      console.log(this.topicosCardapio[cont])
+      this.topicosCardapio[cont].visivel = true;
+      cont++;
     }
   }
 }

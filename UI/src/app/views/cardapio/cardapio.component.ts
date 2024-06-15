@@ -7,6 +7,8 @@ import { ItemCardapioComponent } from '../../components/item-cardapio/item-carda
 import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/models';
+import { CardapioService } from '../../../services/cardapio.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'cardapioView',
@@ -16,57 +18,79 @@ import { Produto } from '../../../models/models';
   styleUrl: './cardapio.component.css'
 })
 export class CardapioComponent {
-  produtos : Produto[] = [];
-  searchProduto : string = "";
-  upPage : boolean = false
+  produtos: Produto[] = [];
+  aMostraProdutos: Produto[] = [];
+  searchProduto: string = "";
+  upPage: boolean = false;
+  id: string | null = '';
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollPosition = document.documentElement.scrollTop;
-    if (scrollPosition > 600) { 
+    if (scrollPosition > 600) {
       this.upPage = true;
     } else {
       this.upPage = false;
     }
   }
 
-  constructor(private produtosService : ProdutosService){}
+  constructor(private produtosService: ProdutosService, private cardapioService : CardapioService, private route: ActivatedRoute, private router : Router){}
 
-  ngOnInit(): void {
-    this.getProdutos();
+  ngOnInit(){
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+    })
   }
 
-  getProdutos(): void {
-    this.produtosService.getProdutos()
-      .subscribe(produtos => this.produtos = produtos);
+  getProdutos(categoria: string): void {
+    this.produtosService.getProdutos(categoria)
+      .subscribe(produtos => {
+        this.produtos = produtos
+        this.aMostraProdutos = this.produtos
+      });
   }
 
-  pegarTopico(topico : string){
-    // listar so produtos do topico passado
-    console.log("topico passado " + topico)
+  pegarTopico(topico: string) {
+    this.produtos = []
+    this.aMostraProdutos = []
+    this.getProdutos(topico)
   }
 
-  pegarSearch(produto : string | number){
+  pegarSearch(produto: string | number) {
     this.searchProduto = String(produto);
   }
 
-  produtoSearch(){
+  produtoSearch() {
     console.log("procurar produto " + this.searchProduto)
-    // procurar pelo produto no banco de dados do produto e fazer com q so ele ou parecidos apareçam na tela
-    // limpar barra de pesquisa
+    this.aMostraProdutos = []
+    for (let item of this.produtos) {
+      if (this.checkaSeCondizPesquisa(this.searchProduto, item.nome)) {
+        this.aMostraProdutos.push(item)
+      }
+    }
   }
 
-  adicionarProduto(produto : string){
-    // colcocar tudo em uma lista, verificar se ja foi adicionado outra vez e passar pra comanda
+  checkaSeCondizPesquisa(padrao:string, nome:string) {
+    if (nome == "") {
+      return true;
+    }
+    const buscaSemAcentos = nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const padraoSemAcenetos = padrao.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const regex = new RegExp(padraoSemAcenetos, 'i');
+    return regex.test(buscaSemAcentos);
+  }
+
+  adicionarProduto(produto: string) {
+    this.cardapioService.addProdutoComanda(Number(this.id), produto).subscribe(() => {})
     console.log("adicionar produto " + produto)
   }
 
-  subirPag(){
+  subirPag() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  verComanda(){
-    // mostrar comanda porem sem o metodo de pagar
+  verComanda() {
+    this.router.navigate(['/comanda', this.id])
     console.log("mostrar comanda")
   }
 }

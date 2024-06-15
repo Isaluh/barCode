@@ -2,27 +2,23 @@
 <main>
     <div>
         <div class="conteudo">
-            <infoBarComponent [numeroMesa]=1 variant="infoMesaCompleto" />
+            <infoBarComponent [numeroMesa]=id variant="infoMesaCompleto" />
             <!-- ngFor para os itens da comanda -->
             <ul>
-                <li>• [qnt.] Frango a passarinho - R$42.90</li>
-                <li>• [qnt.] Frango a passarinho - R$42.90</li>
-                <li>• [qnt.] Frango a passarinho - R$42.90</li>
-                <li>• [qnt.] Frango a passarinho - R$42.90</li>
-                <li>• [qnt.] Frango a passarinho - R$42.90</li>
-                <li>• [qnt.] Frango a passarinho - R$42.90</li>
+                <li *ngFor="let produto of produtosComanda">• [{{produto.quantidade}}x] {{produto.produto}} - R${{produto.precoUnitario}}</li>
             </ul>
         </div>
         <div class="funcoesComanda">
             <!-- pegar total + 10% -->
-            <inputsComponent variant="visualTotal" placeholder="Total: R$100,00" />
+            <inputsComponent variant="visualTotal" placeholder="Total: R${{total}}" />
+            <!-- so aparecer se comanda estiver aPagar -->
             <buttonsComponent (click)="abrirMetodoPagamento()" variant="verde" text="Pagar" />
         </div>
     </div>
 </main>
 
 <ng-container *ngIf="modalPagarMesa">
-    <infoBarSimplesModal [numeroMesa]=numeroMesa (modalDinheiro)="pagarDinheiro()" (sairModals)="fecharModal()" (mudarStatus)="statusAPagar()" variant="aPagar" />
+    <infoBarSimplesModal [numeroMesa]=id (modalDinheiro)="pagarDinheiro()" (sairModals)="fecharModal()" (mudarStatus)="statusAPagar()" variant="aPagar" />
 </ng-container>
 
 <ng-container *ngIf="modalPagarDinheiro">
