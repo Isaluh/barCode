@@ -28,12 +28,18 @@ export class RelatorioComponent {
     this.menu = event
   }
 
+  pegarFiltro(data : object){
+    // mudar tabela conforme fornecido de filtro
+    console.log(data)
+  }
+
   modalGerarRelatorio = false
   abrirGerarRelatorio(){
     this.modalGerarRelatorio = true;
     console.log("abrir modal de gerar relatorio")
   }
   gerarRelatorio(relatorio : any){
+    // passar relatorio pro back
     console.log(relatorio)
   }
 

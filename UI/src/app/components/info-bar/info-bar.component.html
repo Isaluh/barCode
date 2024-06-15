@@ -41,9 +41,9 @@
 <ng-container *ngIf="variant == 'filtroDate'">
     <div class="status">
         <div class="filtro">
-            <filtroComponent placeholder="Ano" variant="data" />
-            <filtroComponent placeholder="Mês" variant="data" />
-            <filtroComponent placeholder="Dia" variant="data" />
+            <filtroComponent (pegarValorFiltro)="pegarAno($event)" variantDate="ano" placeholder="Ano" variant="data" />
+            <filtroComponent (pegarValorFiltro)="pegarMes($event)" variantDate="mes" placeholder="Mês" variant="data" />
+            <filtroComponent (pegarValorFiltro)="pegarDia($event)" variantDate="dia" placeholder="Dia" variant="data" />
         </div>
     </div>
 </ng-container>
@@ -51,7 +51,7 @@
 <ng-container *ngIf="variant == 'filtroNome'">
     <div class="status">
         <div class="filtro">
-            <filtroComponent placeholder="Nome" variant="nome" />
+            <filtroComponent (pegarValorFiltro)="pegarNome($event)" placeholder="Nome" variant="nome" />
         </div>
     </div>
 </ng-container>

@@ -8,6 +8,10 @@ div{
 span{
     width: 15px;
     height: 15px;
-    border: 1px solid var(--verde);
+    border: 2px solid var(--verde);
     border-radius: 100%;
+}
+
+.selected{
+    background-color: var(--verde);
 }

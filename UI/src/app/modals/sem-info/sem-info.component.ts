@@ -55,9 +55,9 @@ export class SemInfoComponent {
 
   relatorio ={
     "inicio" : "",
-    "fim" : ""
-    // pegar opcao
-    // pegar produto/mesa escolhida
+    "fim" : "",
+    "escolha" : "",
+    "value" : ""
   }
   pegarInicio(dataInicio : string | number){
     this.relatorio.inicio = String(dataInicio)
@@ -65,14 +65,21 @@ export class SemInfoComponent {
   pegarFim(dataFim : string | number){
     this.relatorio.fim = String(dataFim)
   }
-
+  
+  pegarEscolha(escolha : string){
+    this.relatorio.escolha = escolha
+  }
+  
+  pegarMesa(mesa : string){
+    this.relatorio.value = mesa
+  }
+  
+  pegarProduto(produto : string){
+    this.relatorio.value = produto
+  }
+  
   gerarRelatorio(){
     this.criarRelatorio.emit(this.relatorio)
-  }
-
-  escolha : string = ""
-  pegarEscolha(escolha : string){
-    this.escolha = escolha
   }
 
   fecharModal(){
