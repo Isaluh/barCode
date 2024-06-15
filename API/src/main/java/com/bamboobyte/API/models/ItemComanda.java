@@ -28,8 +28,8 @@ public class ItemComanda {
         this.quantidade = quantidade;
     }
 
-    public float getPrecoUnitario() {
-        return precoUnitario;
+    public String getPrecoUnitario() {
+        return String.format("%.2f", this.precoUnitario);
     }
 
     public void setPrecoUnitario(float precoUnitario) {
