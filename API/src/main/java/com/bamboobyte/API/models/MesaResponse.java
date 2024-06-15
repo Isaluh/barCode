@@ -4,7 +4,6 @@ public class MesaResponse {
     private int numero;
     private String statusName;
     private int statusCode;
-
     public MesaResponse() {
     }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.Override;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,6 +33,11 @@ public class ProdutoServiceImpl implements ProdutoService {
             System.out.println(produto.getNome()+" nao foi criado, nome repetido");
             return null;
         }
+    }
+
+    @Override
+    public List<Produto> listAllByCategoria(String nomeCategoria) {
+        return produtoRepository.findByCategoriasNome(nomeCategoria);
     }
 
     @Override
