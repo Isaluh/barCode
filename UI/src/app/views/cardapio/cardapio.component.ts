@@ -16,117 +16,78 @@ import { Produto } from '../../../models/models';
   styleUrl: './cardapio.component.css'
 })
 export class CardapioComponent {
-  produtos : Produto[] = [];
-  aMostraProdutos :Produto[] = [];
-  searchProduto : string = "";
-  upPage : boolean = false;
-  
+  produtos: Produto[] = [];
+  aMostraProdutos: Produto[] = [];
+  searchProduto: string = "";
+  upPage: boolean = false;
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollPosition = document.documentElement.scrollTop;
-    if (scrollPosition > 600) { 
+    if (scrollPosition > 600) {
       this.upPage = true;
     } else {
       this.upPage = false;
     }
   }
-  
-  constructor(private produtosService : ProdutosService){}
-  
+
+  constructor(private produtosService: ProdutosService) { }
+
   ngOnInit(): void {
-    this.getProdutosPorcoes();
-    this.aMostraProdutos = this.produtos
-  }
-  
-  getProdutosPorcoes(): void {
-    this.produtosService.getProdutosPorcoes()
-      .subscribe(produtos => this.produtos = produtos);
+
   }
 
-  getProdutosPetiscos(): void {
-    this.produtosService.getProdutosPetiscos()
-      .subscribe(produtos => this.produtos = produtos);
+  getProdutos(categoria: string): void {
+    console.log("teste")
+    this.produtosService.getProdutos(categoria)
+      .subscribe(produtos => {
+        this.produtos = produtos
+        this.aMostraProdutos = this.produtos
+      });
   }
 
-  getProdutosPeixes(): void {
-    this.produtosService.getProdutosPeixes()
-      .subscribe(produtos => this.produtos = produtos);
-  }
-
-  getProdutosCarnes(): void {
-    this.produtosService.getProdutosCarnes()
-      .subscribe(produtos => this.produtos = produtos);
-  }
-
-  getProdutosSaladas(): void {
-    this.produtosService.getProdutosSaladas()
-      .subscribe(produtos => this.produtos = produtos);
-  }
-
-  getProdutosBebidas(): void {
-    this.produtosService.getProdutosBebidas()
-      .subscribe(produtos => this.produtos = produtos);
-  }
-
-  getProdutosSobremesas(): void {
-    this.produtosService.getProdutosSobremesas()
-      .subscribe(produtos => this.produtos = produtos);
-  }
-
-  pegarTopico(topico : string){
+  pegarTopico(topico: string) {
     this.produtos = []
     this.aMostraProdutos = []
-    if(topico == 'Porções'){
-      this.getProdutosPorcoes()
-    }
-    else if(topico == 'Petiscos'){
-      this.getProdutosPetiscos()
-    }
-    else if(topico == 'Peixes'){
-      this.getProdutosPeixes()
-    }
-    else if(topico == 'Carnes'){
-      this.getProdutosCarnes()
-    }
-    else if(topico == 'Saladas'){
-      this.getProdutosSaladas()
-    }
-    else if(topico == 'Bebidas'){
-      this.getProdutosBebidas()
-    }
-    else{
-      this.getProdutosSobremesas()
-    }
-    this.aMostraProdutos = this.produtos
+
+    console.log("FOI EMITIDO " + topico)
+    this.getProdutos(topico)
   }
 
-  pegarSearch(produto : string | number){
+  pegarSearch(produto: string | number) {
     this.searchProduto = String(produto);
   }
 
-  produtoSearch(){
+  produtoSearch() {
     console.log("procurar produto " + this.searchProduto)
-    for(let item of this.aMostraProdutos){
-      if(String(item.nome).toLowerCase() == this.searchProduto.toLowerCase()){
-        // colocar produto a mostra
-        this.aMostraProdutos = []
+    this.aMostraProdutos = []
+    for (let item of this.produtos) {
+      if (this.checkaSeCondizPesquisa(this.searchProduto, item.nome)) {
         this.aMostraProdutos.push(item)
       }
     }
-    // procurar pelo produto no banco de dados do produto e fazer com q so ele ou parecidos apareçam na tela
-    // limpar barra de pesquisa
   }
 
-  adicionarProduto(produto : string){
+  checkaSeCondizPesquisa(padrao:string, nome:string) {
+    if (nome == "") {
+      return true;
+    }
+    const buscaSemAcentos = nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const padraoSemAcenetos = padrao.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const regex = new RegExp(padraoSemAcenetos, 'i');
+    return regex.test(buscaSemAcentos);
+  }
+
+  adicionarProduto(produto: string) {
     // mandar pro back colocar na comanda
     console.log("adicionar produto " + produto)
   }
 
-  subirPag(){
+  subirPag() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  verComanda(){
+  verComanda() {
     // mostrar comanda porem sem o metodo de pagar
     console.log("mostrar comanda")
   }

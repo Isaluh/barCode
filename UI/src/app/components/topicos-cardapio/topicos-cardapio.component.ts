@@ -13,6 +13,8 @@ import { Categorias } from '../../../models/models';
 export class TopicosCardapioComponent {
   @Output() topicoProduto = new EventEmitter();
   topicos : Categorias[] = []
+  offset: number = 0;
+  itemsPorPagina: number = 4;
 
   constructor(private cardapioService : CardapioService){}
 
@@ -20,10 +22,21 @@ export class TopicosCardapioComponent {
     this.getTopicosCardapio()
     let cont = 0;
     for(let item of this.topicos){
-      console.log(item.categoria)
-      this.topicosCardapio[cont].topico = String(item)
+      console.log(item)
+      this.topicosCardapio.push({
+        "topico": item,
+        "status": "",
+        "visivel": false 
+      })
+      if (cont == 0) {
+        this.topicosCardapio[cont].status = "selecionado"; 
+      }
+      if (cont < 4) {
+        this.topicosCardapio[cont].visivel = true;
+      }
       cont++
     }
+    this.selecionarTopico(this.topicosCardapio[0].topico);
   }
 
   getTopicosCardapio(): void {
@@ -31,44 +44,7 @@ export class TopicosCardapioComponent {
       .subscribe(categoria => this.topicos = categoria);
   }
 
-  topicosCardapio = [
-    {
-      "topico" : "",
-      "status" : "selecionado",
-      "visivel" : true
-    },
-    {
-      "topico" : "",
-      "status" : "",
-      "visivel" : true
-    },
-    {
-      "topico" : "",
-      "status" : "",
-      "visivel" : true
-    },
-    {
-      "topico" : "",
-      "status" : "",
-      "visivel" : true
-    },
-    {
-      "topico" : "",
-      "status" : "",
-      "visivel" : false
-      
-    },
-    {
-      "topico" : "",
-      "status" : "",
-      "visivel" : false
-    },
-    {
-      "topico" : "",
-      "status" : "",
-      "visivel" : false
-    }
-  ]
+  topicosCardapio:any[] = []
 
   selecionarTopico(topicoSelecionado : string){
     for(let topico of this.topicosCardapio){
@@ -82,32 +58,32 @@ export class TopicosCardapioComponent {
   }
 
   anterior(){
-    if(this.topicosCardapio[6].visivel == true){
-      this.topicosCardapio[6].visivel = false;
-      this.topicosCardapio[2].visivel = true;
+    if (this.offset <= 0) {
+      return;
     }
-    else if(this.topicosCardapio[5].visivel == true){
-      this.topicosCardapio[5].visivel = false;
-      this.topicosCardapio[1].visivel = true;
+    let cont = --this.offset;
+    for (let item of this.topicosCardapio) {
+      item.visivel = false;
     }
-    else if(this.topicosCardapio[4].visivel == true){
-      this.topicosCardapio[4].visivel = false;
-      this.topicosCardapio[0].visivel = true;
+    while (cont < this.offset + this.itemsPorPagina && cont < this.topicosCardapio.length) {
+      this.topicosCardapio[cont].visivel = true;
+      cont++;
     }
   }
 
   proximo(){
-    if(this.topicosCardapio[0].visivel == true){
-      this.topicosCardapio[0].visivel = false;
-      this.topicosCardapio[4].visivel = true;
+    if (this.offset >= this.topicosCardapio.length) {
+      return;
     }
-    else if(this.topicosCardapio[1].visivel == true){
-      this.topicosCardapio[1].visivel = false;
-      this.topicosCardapio[5].visivel = true;
+    let cont = ++this.offset;
+    console.log(this.offset)
+    for (let item of this.topicosCardapio) {
+      item.visivel = false;
     }
-    else if(this.topicosCardapio[2].visivel == true){
-      this.topicosCardapio[2].visivel = false;
-      this.topicosCardapio[6].visivel = true;
+    while (cont < this.offset + this.itemsPorPagina && cont < this.topicosCardapio.length) {
+      console.log(this.topicosCardapio[cont])
+      this.topicosCardapio[cont].visivel = true;
+      cont++;
     }
   }
 }
