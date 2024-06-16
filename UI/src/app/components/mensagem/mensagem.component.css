@@ -1,0 +1,30 @@
+div{
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+
+span{
+    display: flex; 
+    align-items: center; 
+    border-radius: 5px; 
+    height: 50px; 
+    padding: 0 15px; 
+    gap: 10px;  
+
+    &.erro{
+        background-color: #2b0b0e; 
+        border: 1px solid #DE848D; 
+        color: #DE848D; 
+    }
+
+    &.adicionado{
+        background-color: #051a11;
+        border: 1px solid #7cb49b;
+        color: #7cb49b;
+        gap: 10px;
+    }
+}

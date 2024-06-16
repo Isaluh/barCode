@@ -9,11 +9,12 @@ import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/models';
 import { CardapioService } from '../../../services/cardapio.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MensagemComponent } from '../../components/mensagem/mensagem.component';
 
 @Component({
   selector: 'cardapioView',
   standalone: true,
-  imports: [HeaderComponent, InputsComponent, ButtonsComponent, TopicosCardapioComponent, ItemCardapioComponent, NgFor, NgOptimizedImage, NgIf],
+  imports: [HeaderComponent, InputsComponent, ButtonsComponent, TopicosCardapioComponent, ItemCardapioComponent, NgFor, NgOptimizedImage, NgIf, MensagemComponent],
   templateUrl: './cardapio.component.html',
   styleUrl: './cardapio.component.css'
 })
@@ -23,6 +24,8 @@ export class CardapioComponent {
   searchProduto: string = "";
   upPage: boolean = false;
   id: string | null = '';
+  msgAdd : string = "";
+  abrirMensagem = false
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -82,6 +85,9 @@ export class CardapioComponent {
 
   adicionarProduto(produto: string) {
     this.cardapioService.addProdutoComanda(Number(this.id), produto).subscribe(() => {})
+    // durar por pouco tempo
+    this.msgAdd = `Produto adicionado`
+    this.abrirMensagem = true
     console.log("adicionar produto " + produto)
   }
 

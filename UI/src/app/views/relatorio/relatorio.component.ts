@@ -17,7 +17,8 @@ import { SemInfoComponent } from '../../modals/sem-info/sem-info.component';
 })
 
 export class RelatorioComponent {
-
+  msgErro : string = "";
+  abrirMensagem = false
   topicosRelatorio = ["N° venda", "Data", "Mesa", "Valor", "Pagamento"];
 
   menu = false;
@@ -39,11 +40,19 @@ export class RelatorioComponent {
     console.log("abrir modal de gerar relatorio")
   }
   gerarRelatorio(relatorio : any){
+    // fazer verificação de campos brancos correta
+    if(relatorio){
+      this.msgErro = "Campos nulos"
+      this.abrirMensagem = true
+      return
+    }
     // passar relatorio pro back
     console.log(relatorio)
+    this.fecharModals()
   }
 
   fecharModals(){
     this.modalGerarRelatorio = false;
+    this.abrirMensagem = false
   }
 }

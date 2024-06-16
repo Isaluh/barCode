@@ -14,11 +14,11 @@
 </ng-container>
 
 <ng-container *ngIf="modalTaxa">
-    <semInfoModal (valorInput)="pegarTaxa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Mudar taxa" placeholderInput="Nova taxa" (eventButton)="mudarTaxa()" />
+    <semInfoModal [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" (valorInput)="pegarTaxa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Mudar taxa" placeholderInput="Nova taxa" (eventButton)="mudarTaxa()" />
 </ng-container>
 
 <ng-container *ngIf="modalCadastrarUsuario">
-    <semInfoModal (criarCadastro)="cadastrar()" (sairModals)="fecharModal()" (valorInput)="pegarValoresCadastro($event)" variant="cadastro" />
+    <semInfoModal [abrirMensagem]=abrirMensagem  msgErro="{{msgErro}}" (criarCadastro)="cadastrar()" (sairModals)="fecharModal()" (valorInput)="pegarValoresCadastro($event)" variant="cadastro" />
 </ng-container>
 
 <ng-container *ngIf="modalExlusao">

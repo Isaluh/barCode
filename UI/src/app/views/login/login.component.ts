@@ -4,17 +4,20 @@ import { InputsComponent } from '../../components/inputs/inputs.component';
 import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Usuario } from '../../../models/models';
+import { MensagemComponent } from '../../components/mensagem/mensagem.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'loginView',
   standalone: true,
-  imports: [HeaderMenuComponent, InputsComponent, ButtonsComponent],
+  imports: [NgIf, HeaderMenuComponent, InputsComponent, ButtonsComponent, MensagemComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
   CPF : number = 0;
   senha : string | number = "";
+  msgErro : string = "";
 
   constructor(private usuariosService : UsuariosService){
 
@@ -28,9 +31,16 @@ export class LoginComponent {
     this.senha = senha
   }
 
+  abrirMensagem = false
   login(){
+    if(this.CPF == 0 || this.senha == ""){
+      this.msgErro = "Campos nulos"
+      this.abrirMensagem = true
+      return
+    }
+    this.abrirMensagem = false
     // verificar se cpf e senha batem com o banco de dados usuario
-    // criar os erros
+    // criar erro de usuario ou senha invalidos
     console.log(this.CPF + " " + this.senha)
   }
 }

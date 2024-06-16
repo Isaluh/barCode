@@ -1,6 +1,7 @@
 <!-- alterar header por permissao -->
 <headerComponent variant="visual" />
 <main>
+    <mensagemComponent *ngIf="abrirMensagem" mensagem="{{msgAdd}}" variant="adicionado" />
     <div>
         <!-- ver comanda se estiver logado -->
         <img (click)="verComanda()" ngSrc="assets/openComanda.svg" width="30" height="30">

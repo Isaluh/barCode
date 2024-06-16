@@ -4,13 +4,14 @@ import { InputsComponent } from '../../components/inputs/inputs.component';
 import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { FiltroComponent } from '../../components/filtro/filtro.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
+import { MensagemComponent } from '../../components/mensagem/mensagem.component';
 
 type modalSemInfoVariant = "cadastro" | "relatorio" | "unicoInput"
 
 @Component({
   selector: 'semInfoModal',
   standalone: true,
-  imports: [NgIf, InputsComponent, ButtonsComponent, FiltroComponent, CheckboxComponent],
+  imports: [NgIf, InputsComponent, ButtonsComponent, FiltroComponent, CheckboxComponent, MensagemComponent],
   templateUrl: './sem-info.component.html',
   styleUrl: './sem-info.component.css'
 })
@@ -18,6 +19,8 @@ export class SemInfoComponent {
   @Input() variant : modalSemInfoVariant = "unicoInput";
   @Input() textButton : string = "";
   @Input() placeholderInput : string = "";
+  @Input() msgErro : string = "";
+  @Input() abrirMensagem : boolean = false;
   @Output() eventButton = new EventEmitter();
   @Output() criarCadastro = new EventEmitter();
   @Output() criarRelatorio = new EventEmitter();

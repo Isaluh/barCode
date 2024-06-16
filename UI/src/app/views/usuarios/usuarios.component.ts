@@ -10,6 +10,7 @@ import { ExclusaoComponent } from '../../modals/exclusao/exclusao.component';
 import { SemInfoComponent } from '../../modals/sem-info/sem-info.component';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Usuario } from '../../../models/models';
+import { MensagemComponent } from '../../components/mensagem/mensagem.component';
 
 @Component({
   selector: 'usuariosView',
@@ -22,7 +23,9 @@ export class UsuariosComponent {
   usuarios : Usuario[] = [];
   totalUsuarios = this.usuarios.length
   topicosUsuario = ["Nome", "CPF", ""];
-  novaTaxa = 0;
+  novaTaxa = -1;
+  msgErro : string = "";
+  abrirMensagem = false
 
   constructor(private usuariosService : UsuariosService){
 
@@ -58,8 +61,14 @@ export class UsuariosComponent {
     this.novaTaxa = numero;
   }
   mudarTaxa(){
+    if(this.novaTaxa < 0){
+      this.msgErro = "Valor inválido"
+      this.abrirMensagem = true
+      return
+    }
     // mudar taxa de garçom
     console.log(this.novaTaxa)
+    this.fecharModal()
   }
 
   modalCadastrarUsuario = false;
@@ -71,6 +80,12 @@ export class UsuariosComponent {
     this.cadastro = valorInput;
   }
   cadastrar(){
+    // fazer com q olhe todos os campos (aqui so ta olhando por completo)
+    if(this.cadastro.length == 0){
+      this.msgErro = "Campos nulos"
+      this.abrirMensagem = true
+      return
+    }
     this.usuariosService.cadastro(this.cadastro).subscribe((x : any) => {});
     this.cadastro = [];
     this.fecharModal()
@@ -86,7 +101,8 @@ export class UsuariosComponent {
     this.fecharModal()
   }
   fecharModal(){
-    this.modalExlusao = false
+    this.abrirMensagem = false;
+    this.modalExlusao = false;
     this.modalCadastrarUsuario = false;
     this.modalTaxa = false;
   }

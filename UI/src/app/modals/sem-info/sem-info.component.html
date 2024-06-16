@@ -1,5 +1,7 @@
 <main>
-    <div (click)="fecharModal()" [class]="'fecharModal ' + variant"></div>
+    <div (click)="fecharModal()" [class]="'fecharModal ' + variant">
+        <mensagemComponent variant="erro" *ngIf="abrirMensagem" mensagem="{{msgErro}}" />
+    </div>
     <div [class]="'container ' + variant">
         <ng-container *ngIf="variant == 'cadastro'">
             <div>

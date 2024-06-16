@@ -25,6 +25,7 @@
 </ng-container>
 
 <ng-container *ngIf="modalAddMesa">
+    <mensagemComponent variant="erro" *ngIf="abrirMensagem" mensagem="{{msgErro}}" />
     <semInfoModal (eventButton)="criarMesa()" (valorInput)="pegarNumeroAddMesa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Adicionar mesa" placeholderInput="Número da mesa" />
 </ng-container>
 

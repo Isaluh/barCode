@@ -16,7 +16,7 @@
 </ng-container>
 
 <ng-container *ngIf="modalGerarRelatorio">
-    <semInfoModal variant="relatorio" (criarRelatorio)="gerarRelatorio($event)" (sairModals)="fecharModals()" />
+    <semInfoModal [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" variant="relatorio" (criarRelatorio)="gerarRelatorio($event)" (sairModals)="fecharModals()" />
 </ng-container>
 
 <ng-container *ngIf="menu">

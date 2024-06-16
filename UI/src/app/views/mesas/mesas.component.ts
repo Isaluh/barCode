@@ -11,11 +11,12 @@ import { Router } from '@angular/router';
 import { Mesa } from '../../../models/models';
 import { MesasService } from '../../../services/mesas.service';
 import { SemInfoComponent } from '../../modals/sem-info/sem-info.component';
+import { MensagemComponent } from '../../components/mensagem/mensagem.component';
 
 @Component({
   selector: 'mesasView',
   standalone: true,
-  imports: [HeaderComponent, InfoBarComponent, MesaComponent, ButtonsComponent, InputsComponent, NgFor, ExclusaoComponent, NgIf, InfoBarSimplesComponent, SemInfoComponent],
+  imports: [HeaderComponent, InfoBarComponent, MesaComponent, ButtonsComponent, InputsComponent, NgFor, ExclusaoComponent, NgIf, InfoBarSimplesComponent, SemInfoComponent, MensagemComponent],
   templateUrl: './mesas.component.html',
   styleUrl: './mesas.component.css'
 })
@@ -25,18 +26,20 @@ export class MesasComponent {
   numeroAddMesa : number = 0;
   numeroMesa : number = 0;
   qntdPessoas : number = 0;
-
+  msgErro : string = "";
+  abrirMensagem = false
+  
   constructor(private router : Router, private mesasService : MesasService){}
-
+  
   ngOnInit(): void {
     this.getMesas();
   }
-
+  
   getMesas(): void {
     this.mesasService.getMesas()
-      .subscribe(mesas => this.mesas = mesas.sort((a, b) => a.numero - b.numero));
+    .subscribe(mesas => this.mesas = mesas.sort((a, b) => a.numero - b.numero));
   }
-
+  
   modalAbrirMesa = false;
   abrirMesa(numero : number){
     this.numeroMesa = numero;
@@ -103,6 +106,11 @@ export class MesasComponent {
     this.numeroAddMesa = numero;
   }
   criarMesa(){
+    if(this.numeroAddMesa == 0){
+      this.msgErro = "Número da mesa não foi inserido"
+      this.abrirMensagem = true
+      return
+    }
     // se numero ja existir em mesas mandar um erro
     this.mesasService.adicionarMesa(this.numeroAddMesa).subscribe(
       (res) => {
@@ -136,6 +144,7 @@ export class MesasComponent {
     this.fecharModal();
   }
   fecharModal(){
+    this.abrirMensagem = false;
     this.modalExlusao = false;
     this.modalAbrirMesa = false;
     this.modalOcuparMesa = false;
