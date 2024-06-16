@@ -9,10 +9,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*") // Allow all origins
+//                .allowedOrigins("3afb-45-176-17-206.ngrok-free.app", "192.168.0.110:8080") // Allow all origins
+                .allowedOriginPatterns("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow specific HTTP methods
                 .allowedHeaders("*") // Allow all headers
-//                .allowCredentials(true) // Allow credentials like cookies, authorization headers
+                .allowCredentials(true) // Allow credentials like cookies, authorization headers
                 .maxAge(3600); // Max age of the pre-flight request
     }
 }

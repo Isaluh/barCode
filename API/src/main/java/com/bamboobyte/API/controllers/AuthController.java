@@ -9,15 +9,23 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
 public class AuthController {
 
     @Autowired
     private AuthService authService;
 
-    @PostMapping(value="/login")
-    public ResponseEntity<?> login(@RequestBody AuthenticationDTO authenticationDTO) {
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestParam String cpf, @RequestParam String password) {
+        System.out.println(cpf);
+        System.out.println(password);
+        AuthenticationDTO authenticationDTO = new AuthenticationDTO(cpf, password);
+        System.out.println("chegou aqui");
         return ResponseEntity.ok(authService.login(authenticationDTO));
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<?> login() {
+        return ResponseEntity.ok("foi");
     }
 
 }

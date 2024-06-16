@@ -120,7 +120,7 @@ public class MesaController {
 //        mesa.setDataFechamento(new Date().getTime());
         // TODO Verificar como vai ser feita as regras de desconto, acrescimo, etc
         // é aqui que devera ser adicionado a porcentagem do garçom e o desconto por horário
-        return ResponseEntity.ok("mesa fechada");
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/pagar")
@@ -147,7 +147,7 @@ public class MesaController {
             return ResponseEntity.status(403).body("Status da mesa não permite pagamento");
         }
 
-        return ResponseEntity.ok("Mesa "+mesa.getNumero()+" foi paga");
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/add/produto")

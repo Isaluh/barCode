@@ -23,18 +23,42 @@ public class UserDetailImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-//    public static UserDetailImpl build(Garcom usuario) {
-//        return new
-//    }
+    public static UserDetailImpl build(Garcom usuario) {
+
+		return new UserDetailImpl(
+				usuario.getId(),
+				usuario.getNome(),
+                usuario.getCpf(),
+                usuario.getPassword()
+        );
+	}
+
+    public UserDetailImpl(UUID id, String nome, String cpf, String password,
+                          Collection<? extends GrantedAuthority> authorities) {
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.password = password;
+        this.authorities = authorities;
+    }
 
 
-    public UserDetailImpl(Garcom garcom) {
-        this.id = garcom.getId();
-        this.nome = garcom.getNome();
-        this.cpf = garcom.getCpf();
-        this.password = garcom.getPassword();
+    public UserDetailImpl(UUID id, String nome, String cpf, String password) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.password = password;
         this.authorities = new ArrayList<>();
     }
+
+    //    public UserDetailImpl(Garcom garcom) {
+//        this.id = garcom.getId();
+//        this.nome = garcom.getNome();
+//        this.cpf = garcom.getCpf();
+//        this.password = garcom.getPassword();
+//        this.authorities = new ArrayList<>();
+//    }
 
 
     @Override

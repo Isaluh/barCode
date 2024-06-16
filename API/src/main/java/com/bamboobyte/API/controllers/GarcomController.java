@@ -2,7 +2,9 @@ package com.bamboobyte.API.controllers;
 
 import com.bamboobyte.API.models.Garcom;
 import com.bamboobyte.API.models.GarcomResponse;
+import com.bamboobyte.API.models.Taxa;
 import com.bamboobyte.API.services.GarcomServiceImpl;
+import com.bamboobyte.API.services.TaxaServiceImpl;
 import com.bamboobyte.API.utils.Validador;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +16,18 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-
 
 @RestController
 @RequestMapping("/garcom")
 public class GarcomController {
     @Autowired
     private GarcomServiceImpl garcomService;
+
+    @Autowired
+    private TaxaServiceImpl taxaService;
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Garcom> showGarcom(@PathVariable String id) {
@@ -37,6 +43,26 @@ public class GarcomController {
         }
         return ResponseEntity.ok(garcomList);
 
+    }
+
+    @PostMapping("/set/taxa")
+    public ResponseEntity<?> mudarTaxa(
+        @RequestParam float taxa
+    ) {
+        if (taxa < 0 || taxa > 1) {
+            return ResponseEntity.badRequest().build();
+        }
+        String gorjetaStr = "gorjeta";
+        Optional<Taxa> gorjetaOpt = taxaService.findTaxaByName(gorjetaStr);
+        Taxa gorjeta = null;
+        if (gorjetaOpt.isEmpty()) {
+            gorjeta = new Taxa(gorjetaStr, taxa);
+        } else {
+            gorjeta = gorjetaOpt.get();
+            gorjeta.setTaxa(taxa);
+        }
+        taxaService.save(gorjeta);
+        return ResponseEntity.ok().build();
     }
 
 
@@ -56,10 +82,20 @@ public class GarcomController {
             return ResponseEntity.badRequest().body("[ ERRO ] CPF inválido.");
         }
         Garcom garcom = new Garcom(cpf, nome, password);
-        garcomService.saveGarcom(garcom);
+        garcomService.inserirGarcom(garcom);
         UUID createdId = this.garcomService.saveGarcom(garcom).getId();
         URI newGarcomLocation = ServletUriComponentsBuilder.fromCurrentContextPath().path("/garcom/{id}").buildAndExpand(createdId).toUri();
         return ResponseEntity.created(newGarcomLocation).build();
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteGarcom(@RequestParam String cpf) {
+        Optional<Garcom> toDelete = garcomService.getGarcomByCpf(cpf);
+        if (toDelete.isEmpty()) {
+            return ResponseEntity.status(404).build();
+        }
+        garcomService.deleteGarcom(toDelete.get().getId());
+        return ResponseEntity.ok().build();
     }
 
 }

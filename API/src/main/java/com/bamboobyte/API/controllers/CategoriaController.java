@@ -21,7 +21,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/categoria")
 public class CategoriaController {

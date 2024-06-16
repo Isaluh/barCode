@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -16,7 +18,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
-        Optional<Garcom> userOpt = garcomRepository.findByCpf(cpf);
-        return userOpt.map(UserDetailImpl::new).orElse(null);
+        Garcom garcom = garcomRepository.findByCpf(cpf).get();
+        return UserDetailImpl.build(garcom);
     }
 }

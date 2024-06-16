@@ -198,16 +198,16 @@ public class ProdutoController {
 
     @PostMapping("/set/imagem")
     public ResponseEntity<Void> adicionarImagem(
-            @RequestParam(required = false) Optional<String> nome ,
-            @RequestParam(required = false) Optional<String> uuidString,
+            @RequestParam(required = false) String nome ,
+            @RequestParam(required = false, name = "uuid") String uuidString,
             @RequestParam MultipartFile imagem
     ) {
         Optional<Produto> produtoOptional;
-        if (uuidString.isPresent()) {
-            UUID uid = UUID.fromString(uuidString.get());
+        if (uuidString != null) {
+            UUID uid = UUID.fromString(uuidString);
             produtoOptional = this.produtoService.getProdutoById(uid);
-        } else if(nome.isPresent()) {
-            produtoOptional = this.produtoService.getProdutoByNome(nome.get());
+        } else if(nome != null) {
+            produtoOptional = this.produtoService.getProdutoByNome(nome);
         } else {
             return ResponseEntity.badRequest().build();
         }
@@ -216,8 +216,7 @@ public class ProdutoController {
         }
         Produto produto = produtoOptional.get();
         atribuirImagem(produto, imagem);
-        URI newProdutoLocation = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produtos/{id}").buildAndExpand(produto.getId()).toUri();
-        return ResponseEntity.created(newProdutoLocation).build();
+        return ResponseEntity.ok().build();
     }
 
 
@@ -255,7 +254,7 @@ public class ProdutoController {
             if (!extensaoValida) {
                 return false;
             }
-            Path caminhoReal = fileStorageLocation.resolve("/imagens/"+produto.getId().toString()+extensao);
+            Path caminhoReal = fileStorageLocation.resolve("imagens/"+produto.getId().toString()+extensao);
             Path imagemCaminho = Paths.get("content/"+produto.getId().toString()+extensao);
             imagem.transferTo(caminhoReal);
             produto.setImagemCaminho(imagemCaminho.toString().replaceAll("\\\\","/"));

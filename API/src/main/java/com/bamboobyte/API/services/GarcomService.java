@@ -9,6 +9,7 @@ public interface GarcomService {
     Iterable<Garcom> listAllGarcom();
     Garcom getGarcomById(UUID id);
     Optional<Garcom> getGarcomByCpf(String cpf);
+    Garcom inserirGarcom(Garcom garcom);
     Garcom saveGarcom(Garcom garcom);
     void deleteGarcom(UUID id);
 }

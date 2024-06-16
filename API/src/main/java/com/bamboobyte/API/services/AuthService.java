@@ -28,8 +28,9 @@ public class AuthService {
             String token = jwtUtil.generateTokenFromUserDetailImpl(userAuthenticated);
             return new AcessDTO(token);
         } catch (BadCredentialsException e) {
-            return null;
+
         }
+        return  new AcessDTO("Acesso Negado");
     }
 
 }

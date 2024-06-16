@@ -8,6 +8,8 @@ public class AuthenticationDTO {
     public AuthenticationDTO() {
     }
 
+
+
     public AuthenticationDTO(String cpf, String password) {
         this.cpf = cpf;
         this.password = password;
