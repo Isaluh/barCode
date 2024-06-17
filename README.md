@@ -4,17 +4,29 @@
 Projeto feito para um trabalho da faculdade que consiste em gerenciar algum estabelecimento que lida com comidas e pessoas. (Escolhemos bar) <br/>
 </p>
 
-<p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-contexto">Contexto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-problema">Problema</a>
-</p>
-
 <br>
 
 <p align="center">
-    <!-- falta a img -->
-  <img alt="Imagem" src="./src/assets/imgs/page.png" width="100%">
+  <h3>Tela Cliente</h3>
+  <div align="center">
+    <img alt="Imagem" src="ui/src/assets/telaCardapioCliente.png" width="360px">
+  </div>
+  <h3>Tela Garçons</h3>
+  <div align="center">
+    <img alt="Imagem" src="ui/src/assets/telaMesas.png" width="360px">
+    <img alt="Imagem" src="ui/src/assets/telaCardapioGarcom.png" width="360px">
+  </div>
+  <div align="center">
+    <img alt="Imagem" src="ui/src/assets/telaComanda.png" width="360px">
+  </div>
+  <h3>Tela Admin</h3>
+  <div align="center">
+    <img alt="Imagem" src="ui/src/assets/telaRelatorio.png" width="360px">
+    <img alt="Imagem" src="ui/src/assets/telaUsuarios.png" width="360px">
+  </div>
+  <div align="center">
+    <img alt="Imagem" src="ui/src/assets/telaRanking.png" width="360px">
+  </div>
 </p>
 
 ## 🎓 Tecnologias
