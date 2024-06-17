@@ -1,9 +1,8 @@
-<!-- alterar header por permissao -->
-<headerComponent variant="visual" />
+<headerComponent *ngIf="isGarcom" variant="semPerm" />
+<headerComponent *ngIf="!isGarcom" variant="visual" />
 <main>
     <div>
-        <!-- ver comanda se estiver logado -->
-        <img (click)="verComanda()" ngSrc="assets/openComanda.svg" width="30" height="30">
+        <img *ngIf="isGarcom" (click)="verComanda()" ngSrc="assets/openComanda.svg" width="30" height="30" priority="true">
         <inputsComponent (eventInputValue)="pegarSearch($event.valorinput)" variant="borda" placeholder="Pesquisar" />
         <buttonsComponent (click)="produtoSearch()" variant="search" />
     </div>
@@ -11,8 +10,10 @@
     <topicosCardapioComponent (topicoProduto)="pegarTopico($event)" />
     <div class="itens">
         <ng-container *ngFor="let produto of aMostraProdutos">
-            <itemCardapioComponent (produtoEscolhido)="adicionarProduto($event)" nome="{{ produto.nome }}" valor="{{ produto.preco }}" urlImg="{{ produto.imagemCaminho }}" />
+            <itemCardapioComponent [isGarcom]=isGarcom (produtoEscolhido)="adicionarProduto($event)" nome="{{ produto.nome }}" valor="{{ produto.preco }}" urlImg="{{ produto.imagemCaminho }}" />
         </ng-container>
     </div>
     <img class="subirPage" (click)="subirPag()" *ngIf="upPage" ngSrc="assets/upPage.svg" width="30" height="30">
 </main>
+
+<mensagemComponent *ngIf="abrirMensagem" mensagem="{{msgAdd}}" variant="adicionado" />

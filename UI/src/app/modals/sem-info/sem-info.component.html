@@ -1,5 +1,7 @@
 <main>
-    <div (click)="fecharModal()" [class]="'fecharModal ' + variant"></div>
+    <div (click)="fecharModal()" [class]="'fecharModal ' + variant">
+        <mensagemComponent variant="erro" *ngIf="abrirMensagem" mensagem="{{msgErro}}" />
+    </div>
     <div [class]="'container ' + variant">
         <ng-container *ngIf="variant == 'cadastro'">
             <div>
@@ -12,11 +14,11 @@
         <ng-container *ngIf="variant == 'relatorio'">
             <div>
                 <div class="filtro">
-                    <inputsComponent type="date" variant="borda" (eventInputValue)="pegarInicio($event.valorinput)" placeholder="Inicio" />
+                    <inputsComponent type="Date" variant="borda" (eventInputValue)="pegarInicio($event.valorinput)" placeholder="Inicio" />
                     <inputsComponent type="date" variant="borda" (eventInputValue)="pegarFim($event.valorinput)" placeholder="Termino" />
                     <checkboxComponent (eventCheckbox)="pegarEscolha($event)" />
-                    <filtroComponent (pegarValorFiltro)="pegarMesa($event)" *ngIf="relatorio.escolha != 'produto'" variant="mesa" placeholder="Mesa" />
-                    <filtroComponent (pegarValorFiltro)="pegarProduto($event)" *ngIf="relatorio.escolha == 'produto'" variant="produto" placeholder="Produto" />
+                    <filtroComponent [mesas]=mesas (pegarValorFiltro)="pegarMesa($event)" *ngIf="relatorio.escolha != 'produto'" variant="mesa" placeholder="Mesa" />
+                    <filtroComponent [produtos]=produtos (pegarValorFiltro)="pegarProduto($event)" *ngIf="relatorio.escolha == 'produto'" variant="produto" placeholder="Produto" />
                 </div>
                 <buttonsComponent (click)="gerarRelatorio()" variant="verde" text="Gerar relatório" />
             </div>
@@ -24,7 +26,7 @@
         <ng-container *ngIf="variant == 'unicoInput'">
             <div>
                 <inputsComponent type="number" variant="borda" (eventInputValue)="pegarInput($event.valorinput)" placeholder="{{placeholderInput}}" />
-                <buttonsComponent (click)="pegarValorInput()"  variant="verde" text="{{textButton}}" />
+                <buttonsComponent (click)="pegarValorInput()" variant="verde" text="{{textButton}}" />
             </div>
         </ng-container>
     </div>

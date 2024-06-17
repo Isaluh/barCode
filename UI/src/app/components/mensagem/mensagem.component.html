@@ -1,0 +1,16 @@
+<ng-container *ngIf="variant == 'erro'">
+    <div>
+        <span [class]="variant">
+            <img src="assets/erro.svg">
+            <strong>Erro!</strong> {{ mensagem }}
+        </span>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="variant == 'adicionado'">
+    <div class="adicionado">
+        <span [class]="variant">
+            <img src="assets/add.svg"> {{ mensagem }}
+        </span>
+    </div>
+</ng-container>

@@ -1,5 +1,7 @@
 <main>
-    <div (click)="fecharModal()" class="fecharModal"></div>
+    <div (click)="fecharModal()" class="fecharModal">
+        <mensagemComponent variant="erro" *ngIf="abrirMensagem" mensagem="{{msgErro}}" />
+    </div>
     <div *ngIf="variant != 'aPagarDinheiro'" class="container">
         <infoBarComponent [numeroMesa]=numeroMesa variant="infoMesa" />
         <ng-container *ngIf="variant == 'aberta'">
@@ -17,24 +19,23 @@
         <ng-container *ngIf="variant == 'aPagar'">
             <div class="{{ variant }}">
                 <div>
-                    <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Crédito" />
-                    <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Débito" />
+                    <buttonsComponent (click)="mudarStatusAPagar('Crédito')" variant="pagamento" text="Crédito" />
+                    <buttonsComponent (click)="mudarStatusAPagar('Débito')" variant="pagamento" text="Débito" />
                 </div>
                 <div>
-                    <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Pix" />
-                    <buttonsComponent (click)="abrirModalDinheiro()" variant="verde" text="Dinheiro" />
+                    <buttonsComponent (click)="mudarStatusAPagar('Pix')" variant="pagamento" text="Pix" />
+                    <buttonsComponent (click)="abrirModalDinheiro()" variant="pagamento" text="Dinheiro" />
                 </div>
             </div>
         </ng-container>
     </div>
     <div *ngIf="variant == 'aPagarDinheiro'" [class]="'container ' + variant">
-        <infoBarComponent variant="infoMesa" />
+        <infoBarComponent [numeroMesa]=numeroMesa variant="infoMesa" />
         <ng-container *ngIf="variant == 'aPagarDinheiro'">
             <div class="{{ variant }}">
-                <inputsComponent type="number" variant="borda" placeholder="Valor recebido" />
-                <!-- pegar valor total + 10% -->
-                <inputsComponent variant="visualTroco" placeholder="R$10.00" />
-                <buttonsComponent (click)="mudarStatusAPagar()" variant="verde" text="Fechar comanda" />
+                <inputsComponent (eventInputValue)="pegarRecebido($event.valorinput)" type="number" variant="borda" placeholder="Valor recebido" />
+                <inputsComponent variant="visualTroco" placeholder="R${{troco}}" />
+                <buttonsComponent (click)="mudarStatusAPagar('Dinheiro')" variant="verde" text="Fechar comanda" />
             </div> 
         </ng-container>
     </div>

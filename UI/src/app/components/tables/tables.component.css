@@ -1,4 +1,11 @@
+div{
+    min-width: 320px;
+    max-height: 526px;
+    overflow-y: scroll;
+}
+
 table {
+    width: 100%;
     background-color: var(--branco);
     border-collapse: collapse;
     border-radius: 10px;
@@ -20,7 +27,7 @@ th {
 td{
     font-size: 12px;
 }
-            
+      
 tr:nth-child(even){
     background-color: var(--verde-opc);
     color: var(--branco);

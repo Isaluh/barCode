@@ -17,10 +17,9 @@ div{
     align-items: center;
     gap: 20px;
 }
-
 .funcoesRelatorio{
-    position: fixed;
-    bottom: 10px;
+    position: absolute;
+    bottom: 15px;
     display: flex;
     flex-direction: row;
     align-items: center;

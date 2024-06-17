@@ -1,8 +1,8 @@
 <ng-container *ngIf="!menu">
     <headerComponent variant="neutro" (abrirMenu)="abrirMenu()" />
     <main>
-        <tablesComponent [topicos]="topicosProduto" />
-        <tablesComponent [topicos]="topicosData" />
+        <tablesComponent variant="ranking" [topicos]="topicosProduto" />
+        <tablesComponent variant="ranking" [topicos]="topicosData" />
     </main>
 </ng-container>
 

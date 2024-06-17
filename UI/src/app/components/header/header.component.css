@@ -15,3 +15,7 @@ header{
         justify-content: center;
     }
 }
+
+img{
+    cursor: pointer;
+}

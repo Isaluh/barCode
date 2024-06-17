@@ -1,40 +1,35 @@
-<!-- colocar informações corretas na tabela -->
 <div>
-    <table>
+    <table [class]="variant">
         <thead>
             <tr>
                 <th *ngFor="let topico of topicos">{{topico}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>01</td>
-                <td>03/06/24</td>
-                <td>01</td>
-                <td>20.00</td>
-                <td>Crédito</td>
-            </tr>
-            <tr>
-                <td>01</td>
-                <td>03/06/24</td>
-                <td>01</td>
-                <td>20.00</td>
-                <td>Crédito</td>
-            </tr>
-            <tr>
-                <td>01</td>
-                <td>03/06/24</td>
-                <td>01</td>
-                <td>20.00</td>
-                <td>Crédito</td>
-            </tr>
-            <tr>
-                <td>01</td>
-                <td>03/06/24</td>
-                <td>01</td>
-                <td>20.00</td>
-                <td>Crédito</td>
-            </tr>
+            <ng-container *ngIf="variant == 'usuario'">
+                <tr *ngFor="let usuario of conteudoUsuario; let i = index">
+                    <!-- passar usuario com letra maiuscula -->
+                    <td>{{usuario.nome.split(" ")[0]}}</td>
+                    <td>{{usuario.cpf}}</td>
+                    <td><img (click)="excluirUsuario(usuario.cpf)" *ngIf="i % 2 == 0" src="assets/lixoPreto.svg" alt=""><img (click)="excluirUsuario(usuario.cpf)" *ngIf="i % 2 != 0" src="assets/lixoBranco.svg" alt=""></td>
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="variant == 'relatorio'">
+                <tr *ngFor="let venda of conteudoVendas">
+                    <td>{{venda.numero}}</td>
+                    <td>{{venda.data}}</td>
+                    <td>{{venda.numMesa}}</td>
+                    <td>{{venda.valor}}</td>
+                    <td>{{venda.meioPagamento}}</td>
+                </tr>
+            </ng-container>
+            <!-- fazer o ranking -->
+            <ng-container *ngIf="variant == 'ranking'">
+                <tr>
+                    <td>01</td>
+                    <td>03/06/24</td>
+                </tr>
+            </ng-container>
         </tbody>
     </table>
 </div>

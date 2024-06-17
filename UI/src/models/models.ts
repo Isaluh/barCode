@@ -17,11 +17,11 @@ export interface Usuario{
 }
 
 export interface RelatorioTabela{
-    numVenda : number,
-    data : Date,
-    mesa : number,
-    preco : number,
-    formaPagamento : string
+    numero : number,
+    data : string,
+    numMesa : number,
+    valor : number,
+    meioPagamento : string
 }
 
 export interface Categorias{
@@ -40,4 +40,8 @@ export interface ProdutoComanda{
     quantidade : number,
     produto : string,
     precoUnitario : number
+}
+
+export interface Login{
+    acessLevel : string
 }

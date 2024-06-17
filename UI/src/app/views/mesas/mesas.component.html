@@ -1,23 +1,39 @@
 <headerComponent variant="semPerm" />
 <main>
+    <div class="msgErro">
+        <mensagemComponent *ngIf="abrirMensagemForaModal" mensagem="{{msgErro}}" />
+    </div>
     <infoBarComponent variant="infoMesas" />
-    <div>
-         <ng-container *ngFor="let mesa of mesas">
-             <mesaComponent *ngIf="mesa.statusName == 'livre'" (click)="abrirMesa(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
-             <mesaComponent *ngIf="mesa.statusName == 'ocupada'" (click)="ocuparMesa(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
-             <mesaComponent *ngIf="mesa.statusName == 'aPagar'" (click)="abrirComanda(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+    <div class="mesas">
+         <ng-container *ngIf="excluirMesas">
+            <ng-container *ngFor="let mesa of mesas">
+                <mesaComponent *ngIf="mesa.statusName == 'livre'" (click)="mesaExluir(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+                <mesaComponent *ngIf="mesa.statusName == 'ocupada'" (click)="mesaExluir(0)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+                <mesaComponent *ngIf="mesa.statusName == 'aPagar'" (click)="mesaExluir(0)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+            </ng-container>
+         </ng-container>
+         <ng-container *ngIf="!excluirMesas">
+            <ng-container *ngFor="let mesa of mesas">
+                <mesaComponent *ngIf="mesa.statusName == 'livre'" (click)="abrirMesa(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+                <mesaComponent *ngIf="mesa.statusName == 'ocupada'" (click)="ocuparMesa(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+                <mesaComponent *ngIf="mesa.statusName == 'aPagar'" (click)="abrirComanda(mesa.numero)" numMesa="{{ mesa.numero }}" variant="{{ mesa.statusName }}" />
+            </ng-container>
          </ng-container>
     </div>
     <div class="funcoesMesa">
         <buttonsComponent (click)="adicionarMesa()" type="button" variant="borda" text="Adicionar" />
-        <buttonsComponent (click)="removerMesa()" variant="borda" text="Remover" />
-        <!-- passar o total de mesas -->
-        <inputsComponent variant="visualMesas" placeholder="{{ totalMesas }} mesas" />
+        <ng-container *ngIf="!excluirMesas">
+            <buttonsComponent (click)="selecionarMesas()" variant="borda" text="Remover" />
+        </ng-container>
+        <ng-container *ngIf="excluirMesas">
+            <buttonsComponent (click)="removerMesas()" variant="borda" text="Concluir" />
+        </ng-container>
+        <inputsComponent variant="visualMesas" placeholder="{{ mesas.length }} mesas" />
     </div>
 </main>
 
 <ng-container *ngIf="modalAbrirMesa">
-    <infoBarSimplesModal [numeroMesa]=numeroMesa (valorInput)="pegarQntsPessoas($event)" (sairModals)="fecharModal()" (mudarStatus)="statusAberto()" variant="aberta" />
+    <infoBarSimplesModal [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" [numeroMesa]=numeroMesa (valorInput)="pegarQntsPessoas($event)" (sairModals)="fecharModal()" (mudarStatus)="statusAberto()" variant="aberta" />
 </ng-container>
 
 <ng-container *ngIf="modalOcuparMesa">
@@ -25,9 +41,9 @@
 </ng-container>
 
 <ng-container *ngIf="modalAddMesa">
-    <semInfoModal (eventButton)="criarMesa()" (valorInput)="pegarNumeroAddMesa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Adicionar mesa" placeholderInput="Número da mesa" />
+    <semInfoModal [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" (eventButton)="criarMesa()" (valorInput)="pegarNumeroAddMesa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Adicionar mesa" placeholderInput="Número da mesa" />
 </ng-container>
 
 <ng-container *ngIf="modalExlusao">
-    <exclusaoModal (sairModals)="fecharModal()" (salvarModal)="salvarModal()" (calcelarModal)="fecharModal()" mgs="Exluir essa mesa?" />
+    <exclusaoModal (sairModals)="fecharModal()" (salvarModal)="salvarModal()" (calcelarModal)="fecharModal()" mgs="Exluir essa(s) mesa(s)?" />
 </ng-container>
