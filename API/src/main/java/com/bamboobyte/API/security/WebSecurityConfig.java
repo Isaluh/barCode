@@ -42,6 +42,7 @@ public class WebSecurityConfig {
     }
 
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -52,13 +53,12 @@ public class WebSecurityConfig {
 //        corsConfiguration.setExposedHeaders(List.of("Authorization"));
         http.cors(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable())
-            .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//            .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
             .authorizeHttpRequests(
                     auth -> auth
-//                    .requestMatchers("/auth/**", "/auth", "/content/**", "/produto","/produto/**", "/categoria/**","/garcom/**",).permitAll()
-                    .requestMatchers("*/**").permitAll()
-
+//                    .requestMatchers("/auth/**", "/auth", "/content/**", "/produto","/produto/**", "/categoria/**","/garcom/**").permitAll()
+                            .requestMatchers("*/**").permitAll()
             );
         return http.build();
     }

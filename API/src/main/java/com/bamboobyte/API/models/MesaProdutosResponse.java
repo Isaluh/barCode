@@ -7,7 +7,7 @@ public class MesaProdutosResponse {
     private String statusName;
     private int statusCode;
     private List<ItemComanda> produtos = new ArrayList<>();
-//    private float total;
+    private float total;
 
     public MesaProdutosResponse() {
     }
@@ -33,11 +33,11 @@ public class MesaProdutosResponse {
     }
 
     public String getTotal() {
-        float total = 0;
-        for (ItemComanda item: this.getProdutos()) {
-            total += Float.parseFloat(item.getPrecoUnitario()) * item.getQuantidade();
-        }
         return String.format("%.2f", total);
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 
     public List<ItemComanda> getProdutos() {

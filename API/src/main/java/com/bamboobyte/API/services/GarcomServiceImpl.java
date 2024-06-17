@@ -32,7 +32,7 @@ public class GarcomServiceImpl implements GarcomService {
     @Override
     public Garcom inserirGarcom(Garcom garcom) {
         garcom.setId(null);
-        garcom.setPassword(passwordEncoder.encode(garcom.getPassword()));
+//        garcom.setPassword(passwordEncoder.encode(garcom.getPassword()));
         return this.saveGarcom(garcom);
     }
 

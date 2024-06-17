@@ -3,6 +3,7 @@ package com.bamboobyte.API.controllers;
 import com.bamboobyte.API.models.Garcom;
 import com.bamboobyte.API.models.GarcomResponse;
 import com.bamboobyte.API.models.Taxa;
+import com.bamboobyte.API.services.AuthService;
 import com.bamboobyte.API.services.GarcomServiceImpl;
 import com.bamboobyte.API.services.TaxaServiceImpl;
 import com.bamboobyte.API.utils.Validador;
@@ -24,6 +25,9 @@ import java.util.UUID;
 public class GarcomController {
     @Autowired
     private GarcomServiceImpl garcomService;
+
+    @Autowired
+    private AuthService authService;
 
     @Autowired
     private TaxaServiceImpl taxaService;
