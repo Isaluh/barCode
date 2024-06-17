@@ -11,40 +11,52 @@ import { Router } from '@angular/router';
 import { Mesa } from '../../../models/models';
 import { MesasService } from '../../../services/mesas.service';
 import { SemInfoComponent } from '../../modals/sem-info/sem-info.component';
+import { MensagemComponent } from '../../components/mensagem/mensagem.component';
+import { LocalStorageService } from '../../../services/localStorage.service';
 
 @Component({
   selector: 'mesasView',
   standalone: true,
-  imports: [HeaderComponent, InfoBarComponent, MesaComponent, ButtonsComponent, InputsComponent, NgFor, ExclusaoComponent, NgIf, InfoBarSimplesComponent, SemInfoComponent],
+  imports: [HeaderComponent, InfoBarComponent, MesaComponent, ButtonsComponent, InputsComponent, NgFor, ExclusaoComponent, NgIf, InfoBarSimplesComponent, SemInfoComponent, MensagemComponent],
   templateUrl: './mesas.component.html',
   styleUrl: './mesas.component.css'
 })
 export class MesasComponent {
   mesas : Mesa[] = [];
-  totalMesas = this.mesas.length
   numeroAddMesa : number = 0;
   numeroMesa : number = 0;
   qntdPessoas : number = 0;
-
-  constructor(private router : Router, private mesasService : MesasService){}
-
+  msgErro : string = "";
+  abrirMensagem = false
+  
+  constructor(private localStorageService : LocalStorageService, private router : Router, private mesasService : MesasService){}
+  
   ngOnInit(): void {
+    if(this.localStorageService.getLogin().usuario == null && this.localStorageService.getLogin().senha == null){
+      this.router.navigate(["/login"])
+    }
+    else if(this.localStorageService.getLogin().acessLevel != 'GARCOM'){
+      this.router.navigate([this.localStorageService.getLogin().rota])
+    }
     this.getMesas();
   }
-
+  
   getMesas(): void {
     this.mesasService.getMesas()
-      .subscribe(mesas => this.mesas = mesas.sort((a, b) => a.numero - b.numero));
+    .subscribe(mesas => this.mesas = mesas.sort((a, b) => a.numero - b.numero));
   }
-
+  
   modalAbrirMesa = false;
   abrirMesa(numero : number){
     this.numeroMesa = numero;
     this.modalAbrirMesa = true;
   }
   statusAberto(){
-    console.log("passando pro back mesa: " + this.numeroMesa + " qntd: " + this.qntdPessoas )
-    // adicionar errozinho de sem valor input
+    if(this.qntdPessoas < 1){
+      this.msgErro = "Quantidade inválida"
+      this.abrirMensagem = true
+      return
+    }
     this.mesasService.setQntdMesa(this.numeroMesa, this.qntdPessoas).subscribe(
       (res) => {
         for(let mesa of this.mesas){
@@ -85,13 +97,11 @@ export class MesasComponent {
     );
     this.fecharModal();
   }
-  // falta abrir cardapio, abrir comanda da mesa e remover mesas
+  // remover mesas
   abrirCardapio(){
     this.router.navigate(['/cardapio', this.numeroMesa])
-    console.log("abrir cardapio da mesa " + this.numeroMesa)
   }
   abrirComanda(numero : number){
-    // passar o numero certo para abrir comanda
     this.router.navigate(['/comanda', numero])
   }
 
@@ -103,6 +113,11 @@ export class MesasComponent {
     this.numeroAddMesa = numero;
   }
   criarMesa(){
+    if(this.numeroAddMesa <= 0){
+      this.msgErro = "Número inválido"
+      this.abrirMensagem = true
+      return
+    }
     // se numero ja existir em mesas mandar um erro
     this.mesasService.adicionarMesa(this.numeroAddMesa).subscribe(
       (res) => {
@@ -136,6 +151,7 @@ export class MesasComponent {
     this.fecharModal();
   }
   fecharModal(){
+    this.abrirMensagem = false;
     this.modalExlusao = false;
     this.modalAbrirMesa = false;
     this.modalOcuparMesa = false;

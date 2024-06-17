@@ -17,9 +17,9 @@ export class InputsComponent {
   @Input() variant: inputVariant = "neutro";
   @Input("placeholder") placeholder : string = "";
 
-  @Output() eventInputValue = new EventEmitter<{valorinput : string | number}>();
+  @Output() eventInputValue = new EventEmitter<{valorinput : string}>();
 
   mandarValores(){
-    this.eventInputValue.emit({valorinput : this.valorInput})
+    this.eventInputValue.emit({valorinput : String(this.valorInput)})
   }
 }

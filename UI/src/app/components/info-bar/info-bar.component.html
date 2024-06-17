@@ -52,7 +52,7 @@
 <ng-container *ngIf="variant == 'filtroNome'">
     <div class="status">
         <div class="filtro">
-            <filtroComponent (pegarValorFiltro)="pegarNome($event)" placeholder="Nome" variant="nome" />
+            <filtroComponent [usuarios]=usuarios (pegarValorFiltro)="pegarNome($event)" placeholder="Nome" variant="nome" />
         </div>
     </div>
 </ng-container>

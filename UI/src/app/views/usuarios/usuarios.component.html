@@ -2,11 +2,11 @@
     <headerComponent variant="neutro" (abrirMenu)="abrirMenu()" />
     <main>
         <div class="conteudo">
-            <infoBarComponent (passarFiltro)="pegarNome($event)" variant="filtroNome" />
-            <tablesComponent [topicos]="topicosUsuario" />
+            <infoBarComponent [usuarios]=usuarios (passarFiltro)="pegarNome($event)" variant="filtroNome" />
+            <tablesComponent (deleteUsuario)="abrirModalExlusao($event)" variant="usuario" [conteudoUsuario]=aMostraUsuarios [topicos]="topicosUsuario" />
         </div>
         <div class="funcoesCadastro">
-            <inputsComponent variant="visualUsuario" placeholder="{{ totalUsuarios }} usuários"/>
+            <inputsComponent variant="visualUsuario" placeholder="{{ usuarios.length }} usuários"/>
             <buttonsComponent (click)="abrirModalTaxa()" variant="verde" text="Mudar Taxa" />
             <buttonsComponent (click)="abrirCadastrarUsuario()" variant="verde" text="Cadastrar usuário"/>
         </div>
@@ -14,11 +14,11 @@
 </ng-container>
 
 <ng-container *ngIf="modalTaxa">
-    <semInfoModal (valorInput)="pegarTaxa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Mudar taxa" placeholderInput="Nova taxa" (eventButton)="mudarTaxa()" />
+    <semInfoModal [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" (valorInput)="pegarTaxa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Mudar taxa" placeholderInput="Nova taxa" (eventButton)="mudarTaxa()" />
 </ng-container>
 
 <ng-container *ngIf="modalCadastrarUsuario">
-    <semInfoModal (criarCadastro)="cadastrar()" (sairModals)="fecharModal()" (valorInput)="pegarValoresCadastro($event)" variant="cadastro" />
+    <semInfoModal [abrirMensagem]=abrirMensagem  msgErro="{{msgErro}}" (criarCadastro)="cadastrar($event)" (sairModals)="fecharModal()" variant="cadastro" />
 </ng-container>
 
 <ng-container *ngIf="modalExlusao">

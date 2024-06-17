@@ -9,20 +9,26 @@ import { ProdutosService } from '../../../services/produtos.service';
 import { Produto } from '../../../models/models';
 import { CardapioService } from '../../../services/cardapio.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MensagemComponent } from '../../components/mensagem/mensagem.component';
+import { LocalStorageService } from '../../../services/localStorage.service';
 
 @Component({
   selector: 'cardapioView',
   standalone: true,
-  imports: [HeaderComponent, InputsComponent, ButtonsComponent, TopicosCardapioComponent, ItemCardapioComponent, NgFor, NgOptimizedImage, NgIf],
+  imports: [HeaderComponent, InputsComponent, ButtonsComponent, TopicosCardapioComponent, ItemCardapioComponent, NgFor, NgOptimizedImage, NgIf, MensagemComponent],
   templateUrl: './cardapio.component.html',
   styleUrl: './cardapio.component.css'
 })
 export class CardapioComponent {
   produtos: Produto[] = [];
+  isGarcom = false;
   aMostraProdutos: Produto[] = [];
   searchProduto: string = "";
   upPage: boolean = false;
   id: string | null = '';
+  msgAdd : string = "";
+  abrirMensagem = false
+  
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -34,12 +40,21 @@ export class CardapioComponent {
     }
   }
 
-  constructor(private produtosService: ProdutosService, private cardapioService : CardapioService, private route: ActivatedRoute, private router : Router){}
+  constructor(private localStorageService : LocalStorageService, private produtosService: ProdutosService, private cardapioService : CardapioService, private route: ActivatedRoute, private router : Router){}
 
   ngOnInit(){
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
     })
+    if(this.localStorageService.getLogin().usuario == null && this.localStorageService.getLogin().senha == null){
+      this.router.navigate([""])
+    }
+    else if(this.localStorageService.getLogin().acessLevel != 'GARCOM'){
+      this.router.navigate([this.localStorageService.getLogin().rota])
+    }
+    else{
+      this.isGarcom = true;
+    }
   }
 
   getProdutos(categoria: string): void {
@@ -82,6 +97,12 @@ export class CardapioComponent {
 
   adicionarProduto(produto: string) {
     this.cardapioService.addProdutoComanda(Number(this.id), produto).subscribe(() => {})
+    // durar por pouco tempo
+    this.msgAdd = `Produto adicionado`
+    this.abrirMensagem = true
+    setTimeout(() =>{
+      this.abrirMensagem = false
+    }, 1000)
     console.log("adicionar produto " + produto)
   }
 
@@ -91,7 +112,6 @@ export class CardapioComponent {
 
   verComanda() {
     this.router.navigate(['/comanda', this.id])
-    console.log("mostrar comanda")
   }
 }
 

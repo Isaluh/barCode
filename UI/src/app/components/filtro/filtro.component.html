@@ -66,23 +66,20 @@
 <ng-container *ngIf="variant == 'nome'">
     <input #value (change)="valorFiltro(value.value)" list="nome" placeholder="{{ placeholder }}" class="{{variant}}" />
     <datalist id="nome">
-        <!-- ngfor nos usuarios -->
-        <option value="usuario">
+        <option *ngFor="let item of usuarios" value="{{item.nome}}">
     </datalist>
 </ng-container>
 
 <ng-container *ngIf="variant == 'produto'">
     <input #value (change)="valorFiltro(value.value)" list="produto" placeholder="{{ placeholder }}" class="{{variant}}" />
     <datalist id="produto">
-        <!-- ngfor nos produtos -->
-        <option value="produto">
+        <option *ngFor="let item of produtos" value="{{item.nome}}">
     </datalist>
 </ng-container>
 
 <ng-container *ngIf="variant == 'mesa'">
     <input #value (change)="valorFiltro(value.value)" list="mesa" placeholder="{{ placeholder }}" class="{{variant}}" />
     <datalist id="mesa">
-        <!-- ngfor nas mesas -->
-        <option value="mesa 01">
+        <option *ngFor="let item of mesas" value="Mesa {{item.numero}}">
     </datalist>
 </ng-container>

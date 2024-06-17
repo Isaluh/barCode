@@ -1,8 +1,9 @@
 <main>
     <headerMenuComponent variant="semImg" />
     <h1>Login</h1>
+    <mensagemComponent variant="erro" *ngIf="abrirMensagem" mensagem="{{msgErro}}" />
     <div>
-        <inputsComponent (eventInputValue)="pegarCPF($event.valorinput)" type="number" variant="neutro" placeholder="CPF" />
+        <inputsComponent (eventInputValue)="pegarCPF($event.valorinput)" type="text" variant="neutro" placeholder="CPF" />
         <inputsComponent (eventInputValue)="pegarSenha($event.valorinput)" type="password" variant="neutro" placeholder="Senha" />
     </div>
     <buttonsComponent (click)="login()" type="submit" text="Entrar" variant="neutro" />
