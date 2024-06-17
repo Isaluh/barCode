@@ -1,6 +1,7 @@
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FiltroComponent } from '../filtro/filtro.component';
+import { Mesa, Produto, Usuario } from '../../../models/models';
 
 type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtroDate" | "filtroNome"
 
@@ -14,6 +15,8 @@ type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtroDat
 export class InfoBarComponent {
   @Input() variant : infoBarVariant = "infoMesas";
   @Input() numeroMesa : number = 0;
+  @Input() usuarios : Usuario[] = [];
+  @Input() produtos : Produto[] = [];
   @Output() passarFiltro = new EventEmitter();
 
   filtro = {

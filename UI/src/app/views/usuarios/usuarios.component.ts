@@ -10,7 +10,8 @@ import { ExclusaoComponent } from '../../modals/exclusao/exclusao.component';
 import { SemInfoComponent } from '../../modals/sem-info/sem-info.component';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Usuario } from '../../../models/models';
-import { MensagemComponent } from '../../components/mensagem/mensagem.component';
+import { Router } from '@angular/router';
+import { LocalStorageService } from '../../../services/localStorage.service';
 
 @Component({
   selector: 'usuariosView',
@@ -21,28 +22,45 @@ import { MensagemComponent } from '../../components/mensagem/mensagem.component'
 })
 export class UsuariosComponent {
   usuarios : Usuario[] = [];
-  totalUsuarios = this.usuarios.length
+  aMostraUsuarios : Usuario[] = [] //usar pra mudar a tabela
   topicosUsuario = ["Nome", "CPF", ""];
   novaTaxa = -1;
   msgErro : string = "";
+  deleteUsuario = 0;
   abrirMensagem = false
 
-  constructor(private usuariosService : UsuariosService){
-
-  }
+  constructor(private usuariosService : UsuariosService, private localStorageService : LocalStorageService, private router : Router){}
 
   ngOnInit(): void {
+    if(this.localStorageService.getLogin().usuario == null && this.localStorageService.getLogin().senha == null){
+      this.router.navigate(["/login"])
+    }
+    else if(this.localStorageService.getLogin().acessLevel != 'ADMIN'){
+      this.router.navigate([this.localStorageService.getLogin().rota])
+    }
     this.getUsuarios();
   }
 
   getUsuarios(): void {
     this.usuariosService.getUsuarios()
-      .subscribe(usuario => this.usuarios = usuario);
+      .subscribe(usuario => {
+        this.usuarios = usuario
+        this.aMostraUsuarios = usuario
+      });
   }
 
   pegarNome(nome : string){
-    // fazer tabela mudar com o filtro
-    console.log(nome)
+    if(nome == ""){
+      this.getUsuarios()
+    }
+    else{
+      this.aMostraUsuarios = []
+      for(let usuario of this.usuarios){
+        if(usuario.nome == nome){
+          this.aMostraUsuarios.push(usuario)
+        }
+      }
+    }
   }
 
   menu = false;
@@ -66,38 +84,46 @@ export class UsuariosComponent {
       this.abrirMensagem = true
       return
     }
-    // mudar taxa de garçom
-    console.log(this.novaTaxa)
+    this.usuariosService.trocarTaxa((this.novaTaxa / 100)).subscribe(() => {})
     this.fecharModal()
   }
 
   modalCadastrarUsuario = false;
-  cadastro = [];
   abrirCadastrarUsuario(){
     this.modalCadastrarUsuario = true;
   };
-  pegarValoresCadastro(valorInput : any){
-    this.cadastro = valorInput;
-  }
-  cadastrar(){
-    // fazer com q olhe todos os campos (aqui so ta olhando por completo)
-    if(this.cadastro.length == 0){
+  cadastrar(cadastro : any){
+    if(cadastro.cpf == "" || cadastro.nome == "" || cadastro.senha == ""){
       this.msgErro = "Campos nulos"
       this.abrirMensagem = true
       return
     }
-    this.usuariosService.cadastro(this.cadastro).subscribe((x : any) => {});
-    this.cadastro = [];
+    this.usuariosService.cadastro(cadastro).subscribe(
+      (res) => {
+        this.getUsuarios()
+      }
+    );;
     this.fecharModal()
   }
 
   modalExlusao = false;
-  abrirModalExlusao(){
+  abrirModalExlusao(usuario : number){
+    this.deleteUsuario = usuario;
     this.modalExlusao = true;
   }
   salvarModal(){
-    // fazer a exlusão
-    console.log("exclui")
+    this.usuariosService.deleteUsuarios(this.deleteUsuario).subscribe({
+      next: (data) => {
+        let cont = 0
+        for(let usuario of this.usuarios){
+          if(Number(usuario.cpf) == this.deleteUsuario){
+            this.usuarios.splice(cont, 1)
+            break
+          }
+          cont++
+        }
+      }
+    })
     this.fecharModal()
   }
   fecharModal(){
@@ -106,5 +132,4 @@ export class UsuariosComponent {
     this.modalCadastrarUsuario = false;
     this.modalTaxa = false;
   }
-
 }

@@ -4,11 +4,10 @@
         <div>
             <div class="conteudo">
                 <infoBarComponent (passarFiltro)="pegarFiltro($event)" variant="filtroDate" />
-                <tablesComponent [topicos]="topicosRelatorio" />
+                <tablesComponent [conteudoVendas]=aMostraVendas variant="relatorio" [topicos]="topicosRelatorio" />
             </div>
             <div class="funcoesRelatorio">
-                <!-- pegar a soma de todas as vendas do dia -->
-                <inputsComponent variant="visualTotal" placeholder="Total: R$100,00" />
+                <inputsComponent variant="visualTotal" placeholder="Total: R${{totalVendas}}" />
                 <buttonsComponent (click)="abrirGerarRelatorio()" variant="verde" text="Gerar relatório" />
             </div>
         </div>
@@ -16,7 +15,7 @@
 </ng-container>
 
 <ng-container *ngIf="modalGerarRelatorio">
-    <semInfoModal [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" variant="relatorio" (criarRelatorio)="gerarRelatorio($event)" (sairModals)="fecharModals()" />
+    <semInfoModal [mesas]="mesas" [produtos]=produtos [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" variant="relatorio" (criarRelatorio)="gerarRelatorio($event)" (sairModals)="fecharModals()" />
 </ng-container>
 
 <ng-container *ngIf="menu">

@@ -12,6 +12,7 @@ import { Mesa } from '../../../models/models';
 import { MesasService } from '../../../services/mesas.service';
 import { SemInfoComponent } from '../../modals/sem-info/sem-info.component';
 import { MensagemComponent } from '../../components/mensagem/mensagem.component';
+import { LocalStorageService } from '../../../services/localStorage.service';
 
 @Component({
   selector: 'mesasView',
@@ -22,16 +23,21 @@ import { MensagemComponent } from '../../components/mensagem/mensagem.component'
 })
 export class MesasComponent {
   mesas : Mesa[] = [];
-  totalMesas = this.mesas.length
   numeroAddMesa : number = 0;
   numeroMesa : number = 0;
   qntdPessoas : number = 0;
   msgErro : string = "";
   abrirMensagem = false
   
-  constructor(private router : Router, private mesasService : MesasService){}
+  constructor(private localStorageService : LocalStorageService, private router : Router, private mesasService : MesasService){}
   
   ngOnInit(): void {
+    if(this.localStorageService.getLogin().usuario == null && this.localStorageService.getLogin().senha == null){
+      this.router.navigate(["/login"])
+    }
+    else if(this.localStorageService.getLogin().acessLevel != 'GARCOM'){
+      this.router.navigate([this.localStorageService.getLogin().rota])
+    }
     this.getMesas();
   }
   
@@ -46,8 +52,11 @@ export class MesasComponent {
     this.modalAbrirMesa = true;
   }
   statusAberto(){
-    console.log("passando pro back mesa: " + this.numeroMesa + " qntd: " + this.qntdPessoas )
-    // adicionar errozinho de sem valor input
+    if(this.qntdPessoas < 1){
+      this.msgErro = "Quantidade inválida"
+      this.abrirMensagem = true
+      return
+    }
     this.mesasService.setQntdMesa(this.numeroMesa, this.qntdPessoas).subscribe(
       (res) => {
         for(let mesa of this.mesas){
@@ -88,13 +97,11 @@ export class MesasComponent {
     );
     this.fecharModal();
   }
-  // falta abrir cardapio, abrir comanda da mesa e remover mesas
+  // remover mesas
   abrirCardapio(){
     this.router.navigate(['/cardapio', this.numeroMesa])
-    console.log("abrir cardapio da mesa " + this.numeroMesa)
   }
   abrirComanda(numero : number){
-    // passar o numero certo para abrir comanda
     this.router.navigate(['/comanda', numero])
   }
 
@@ -106,8 +113,8 @@ export class MesasComponent {
     this.numeroAddMesa = numero;
   }
   criarMesa(){
-    if(this.numeroAddMesa == 0){
-      this.msgErro = "Número da mesa não foi inserido"
+    if(this.numeroAddMesa <= 0){
+      this.msgErro = "Número inválido"
       this.abrirMensagem = true
       return
     }

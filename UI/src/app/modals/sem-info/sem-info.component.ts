@@ -5,6 +5,8 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { FiltroComponent } from '../../components/filtro/filtro.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 import { MensagemComponent } from '../../components/mensagem/mensagem.component';
+import { Mesa, Produto, Usuario } from '../../../models/models';
+import { ProdutosService } from '../../../services/produtos.service';
 
 type modalSemInfoVariant = "cadastro" | "relatorio" | "unicoInput"
 
@@ -21,6 +23,8 @@ export class SemInfoComponent {
   @Input() placeholderInput : string = "";
   @Input() msgErro : string = "";
   @Input() abrirMensagem : boolean = false;
+  @Input() produtos : Produto[] = []
+  @Input() mesas : Mesa[] = [];
   @Output() eventButton = new EventEmitter();
   @Output() criarCadastro = new EventEmitter();
   @Output() criarRelatorio = new EventEmitter();
@@ -41,19 +45,15 @@ export class SemInfoComponent {
   }
   pegarCPF(cpf : string | number ){
     this.cadastro.cpf = String(cpf);
-    this.valorInput.emit(this.cadastro);
   }
   pegarNome(nome : string | number){
     this.cadastro.nome = String(nome);
-    this.valorInput.emit(this.cadastro);
   }
   pegarSenha(senha : string | number){
     this.cadastro.senha = String(senha);
-    this.valorInput.emit(this.cadastro);
   }
-
   cadastrar(){
-    this.criarCadastro.emit()
+    this.criarCadastro.emit(this.cadastro)
   }
 
   relatorio ={

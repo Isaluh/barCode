@@ -13,6 +13,7 @@ export class ItemCardapioComponent {
   @Input("nome") "nome" : string = "";
   @Input("valor") "valor" : string = "";
   @Input("urlImg") "urlImg" : string = "";
+  @Input() isGarcom : boolean = false;
   @Output() produtoEscolhido = new EventEmitter()
 
   urlBase : string = ProdutosService.API_url;

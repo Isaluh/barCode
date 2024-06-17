@@ -11,13 +11,12 @@
     <div class="funcoesMesa">
         <buttonsComponent (click)="adicionarMesa()" type="button" variant="borda" text="Adicionar" />
         <buttonsComponent (click)="removerMesa()" variant="borda" text="Remover" />
-        <!-- passar o total de mesas -->
-        <inputsComponent variant="visualMesas" placeholder="{{ totalMesas }} mesas" />
+        <inputsComponent variant="visualMesas" placeholder="{{ mesas.length }} mesas" />
     </div>
 </main>
 
 <ng-container *ngIf="modalAbrirMesa">
-    <infoBarSimplesModal [numeroMesa]=numeroMesa (valorInput)="pegarQntsPessoas($event)" (sairModals)="fecharModal()" (mudarStatus)="statusAberto()" variant="aberta" />
+    <infoBarSimplesModal [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" [numeroMesa]=numeroMesa (valorInput)="pegarQntsPessoas($event)" (sairModals)="fecharModal()" (mudarStatus)="statusAberto()" variant="aberta" />
 </ng-container>
 
 <ng-container *ngIf="modalOcuparMesa">
@@ -25,8 +24,7 @@
 </ng-container>
 
 <ng-container *ngIf="modalAddMesa">
-    <mensagemComponent variant="erro" *ngIf="abrirMensagem" mensagem="{{msgErro}}" />
-    <semInfoModal (eventButton)="criarMesa()" (valorInput)="pegarNumeroAddMesa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Adicionar mesa" placeholderInput="Número da mesa" />
+    <semInfoModal [abrirMensagem]=abrirMensagem msgErro="{{msgErro}}" (eventButton)="criarMesa()" (valorInput)="pegarNumeroAddMesa($event)" (sairModals)="fecharModal()" variant="unicoInput" textButton="Adicionar mesa" placeholderInput="Número da mesa" />
 </ng-container>
 
 <ng-container *ngIf="modalExlusao">
