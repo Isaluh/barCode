@@ -9,23 +9,23 @@ Projeto feito para um trabalho da faculdade que consiste em gerenciar algum esta
 <p align="center">
   <h3>Tela Cliente</h3>
   <div align="center">
-    <img alt="Imagem" src="ui/src/assets/telaCardapioCliente.png" width="360px">
+    <img alt="Imagem" src="assets/telaCardapioCliente.png" width="360px">
   </div>
   <h3>Tela Garçons</h3>
   <div align="center">
-    <img alt="Imagem" src="ui/src/assets/telaMesas.png" width="360px">
-    <img alt="Imagem" src="ui/src/assets/telaCardapioGarcom.png" width="360px">
+    <img alt="Imagem" src="assets/telaMesas.png" width="360px">
+    <img alt="Imagem" src="assets/telaCardapioGarcom.png" width="360px">
   </div>
   <div align="center">
-    <img alt="Imagem" src="ui/src/assets/telaComanda.png" width="360px">
+    <img alt="Imagem" src="assets/telaComanda.png" width="360px">
   </div>
   <h3>Tela Admin</h3>
   <div align="center">
-    <img alt="Imagem" src="ui/src/assets/telaRelatorio.png" width="360px">
-    <img alt="Imagem" src="ui/src/assets/telaUsuarios.png" width="360px">
+    <img alt="Imagem" src="assets/telaRelatorio.png" width="360px">
+    <img alt="Imagem" src="assets/telaUsuarios.png" width="360px">
   </div>
   <div align="center">
-    <img alt="Imagem" src="ui/src/assets/telaRanking.png" width="360px">
+    <img alt="Imagem" src="assets/telaRanking.png" width="360px">
   </div>
 </p>
 
