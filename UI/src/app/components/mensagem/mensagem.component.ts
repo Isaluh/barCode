@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-type variantMensagem = 'erro' | 'adicionado'
+type variantMensagem = 'erro' | 'adicionado';
 
 @Component({
   selector: 'mensagemComponent',
@@ -11,6 +11,6 @@ type variantMensagem = 'erro' | 'adicionado'
   styleUrl: './mensagem.component.css'
 })
 export class MensagemComponent {
-  @Input() mensagem : string = ""
-  @Input() variant : variantMensagem = 'erro'
+  @Input() mensagem : string = "";
+  @Input() variant : variantMensagem = 'erro';
 }

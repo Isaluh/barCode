@@ -14,11 +14,11 @@ export class ItemCardapioComponent {
   @Input("valor") "valor" : string = "";
   @Input("urlImg") "urlImg" : string = "";
   @Input() isGarcom : boolean = false;
-  @Output() produtoEscolhido = new EventEmitter()
+  @Output() produtoEscolhido = new EventEmitter();
 
   urlBase : string = ProdutosService.API_url;
 
   adicionarProduto(produto : string){
-    this.produtoEscolhido.emit(produto)
-  }
+    this.produtoEscolhido.emit(produto);
+  };
 }

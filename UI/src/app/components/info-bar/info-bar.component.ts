@@ -1,7 +1,7 @@
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FiltroComponent } from '../filtro/filtro.component';
-import { Mesa, Produto, Usuario } from '../../../models/models';
+import { Produto, Usuario } from '../../../models/models';
 
 type infoBarVariant = "infoMesas" | "infoMesaCompleto" | "infoMesa" | "filtroDate" | "filtroNome"
 
@@ -23,26 +23,24 @@ export class InfoBarComponent {
     "ano" : "",
     "mes" : "",
     "dia" : ""
-  }
+  };
 
-  // fazer a tabela mudar conforme o filtro selecionado
   pegarAno(ano : string){
-    this.filtro.ano = ano
-    this.passarFiltro.emit(this.filtro)
-  }
+    this.filtro.ano = ano;
+    this.passarFiltro.emit(this.filtro);
+  };
 
   pegarMes(mes : string){
-    this.filtro.mes = mes
-    this.passarFiltro.emit(this.filtro)
-  }
+    this.filtro.mes = mes;
+    this.passarFiltro.emit(this.filtro);
+  };
 
   pegarDia(dia : string){
-    this.filtro.dia = dia
-    this.passarFiltro.emit(this.filtro)
-  }
+    this.filtro.dia = dia;
+    this.passarFiltro.emit(this.filtro);
+  };
 
-  // fazer a tabela mudar conforme o filtro selecionado
   pegarNome(nome : string){
-    this.passarFiltro.emit(nome)
-  }
+    this.passarFiltro.emit(nome);
+  };
 }

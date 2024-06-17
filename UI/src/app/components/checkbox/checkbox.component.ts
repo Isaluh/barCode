@@ -19,7 +19,7 @@ export class CheckboxComponent {
       escolha : "produto",
       classe : ""
     }
-  ]
+  ];
 
   mesaSelect(){
     for(let item of this.escolhaRelatorio){
@@ -28,10 +28,10 @@ export class CheckboxComponent {
       }
       else{
         item.classe = "";
-      }
-    }
-    this.eventCheckbox.emit('mesa')
-  }
+      };
+    };
+    this.eventCheckbox.emit('mesa');
+  };
 
   produtoSelect(){
     for(let item of this.escolhaRelatorio){
@@ -40,8 +40,8 @@ export class CheckboxComponent {
       }
       else{
         item.classe = "";
-      }
-    }
-    this.eventCheckbox.emit('produto')
-  }
+      };
+    };
+    this.eventCheckbox.emit('produto');
+  };
 }

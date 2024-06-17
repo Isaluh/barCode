@@ -19,12 +19,12 @@
         <ng-container *ngIf="variant == 'aPagar'">
             <div class="{{ variant }}">
                 <div>
-                    <buttonsComponent (click)="mudarStatusAPagar('Crédito')" variant="verde" text="Crédito" />
-                    <buttonsComponent (click)="mudarStatusAPagar('Débito')" variant="verde" text="Débito" />
+                    <buttonsComponent (click)="mudarStatusAPagar('Crédito')" variant="pagamento" text="Crédito" />
+                    <buttonsComponent (click)="mudarStatusAPagar('Débito')" variant="pagamento" text="Débito" />
                 </div>
                 <div>
-                    <buttonsComponent (click)="mudarStatusAPagar('Pix')" variant="verde" text="Pix" />
-                    <buttonsComponent (click)="abrirModalDinheiro()" variant="verde" text="Dinheiro" />
+                    <buttonsComponent (click)="mudarStatusAPagar('Pix')" variant="pagamento" text="Pix" />
+                    <buttonsComponent (click)="abrirModalDinheiro()" variant="pagamento" text="Dinheiro" />
                 </div>
             </div>
         </ng-container>
@@ -34,7 +34,6 @@
         <ng-container *ngIf="variant == 'aPagarDinheiro'">
             <div class="{{ variant }}">
                 <inputsComponent (eventInputValue)="pegarRecebido($event.valorinput)" type="number" variant="borda" placeholder="Valor recebido" />
-                <!-- pegar valor total + 10%  + botar erro de falta de valor recebido -->
                 <inputsComponent variant="visualTroco" placeholder="R${{troco}}" />
                 <buttonsComponent (click)="mudarStatusAPagar('Dinheiro')" variant="verde" text="Fechar comanda" />
             </div> 

@@ -44,6 +44,14 @@ export class MesasService{
         return this.httpClient.post<any>(MesasService.API_url + "/mesa/new", formData)
     }
 
+    removerMesas(numMesa : number){
+        const formData = new FormData();
+        this.localStorageService.adicionarLogin(formData)
+        formData.append("numero", String(numMesa))
+
+        return this.httpClient.post<any>(MesasService.API_url + "/mesa/excluir", formData)
+    }
+
     getMesas(){
         let url : string = MesasService.API_url + `/mesa/all?username=${this.localStorageService.getLogin().usuario}&password=${this.localStorageService.getLogin().senha}`;
         return this.httpClient.get<Mesa[]>(url)

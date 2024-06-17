@@ -26,7 +26,7 @@
         <ng-container *ngIf="variant == 'unicoInput'">
             <div>
                 <inputsComponent type="number" variant="borda" (eventInputValue)="pegarInput($event.valorinput)" placeholder="{{placeholderInput}}" />
-                <buttonsComponent (click)="pegarValorInput()"  variant="verde" text="{{textButton}}" />
+                <buttonsComponent (click)="pegarValorInput()" variant="verde" text="{{textButton}}" />
             </div>
         </ng-container>
     </div>

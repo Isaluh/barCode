@@ -8,7 +8,7 @@ button{
     color: var(--verde);
     cursor: pointer;
 
-    &.verde, &.search{
+    &.pagamento, &.verde, &.search{
         color: var(--branco);
         background-color: var(--verde);
     }
@@ -17,6 +17,10 @@ button{
         justify-content: center;
         width: 30px;
         height: 30px;
+    }
+    &.pagamento{
+        display: block;
+        min-width: 78px;
     }
 
     &.vermelho{

@@ -21,11 +21,11 @@ type headerVariant = "neutro" | "semPerm" | "visual"
   constructor(private router : Router, private localStorageService : LocalStorageService){}
 
   mandarEventoAbrirMenu(){
-    this.abrirMenu.emit()
-  }
+    this.abrirMenu.emit();
+  };
 
   logOut(){
-    this.localStorageService.removeLogin()
-    this.router.navigate(['/login'])
-  }
+    this.localStorageService.removeLogin();
+    this.router.navigate(['/login']);
+  };
 }

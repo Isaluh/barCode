@@ -14,10 +14,10 @@ export class ExclusaoComponent {
   @Output() salvarModal = new EventEmitter();
 
   mandarEventoCancelar(){
-    this.calcelarModal.emit(false)
-  }
+    this.calcelarModal.emit(false);
+  };
 
   salvarExlusao(){
-    this.salvarModal.emit()
-  }
+    this.salvarModal.emit();
+  };
 }

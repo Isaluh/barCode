@@ -16,6 +16,15 @@
     --preto-opc: rgba(0,0,0, 0.5);
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--verde);
+    border-radius: 5px;
+}
+
 @font-face{
     font-family: Bree Serif;
     src: url("./assets/fonts/Bree_Serif/BreeSerif-Regular.ttf");
