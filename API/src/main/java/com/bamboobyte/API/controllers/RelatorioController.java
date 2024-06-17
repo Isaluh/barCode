@@ -67,14 +67,14 @@ public class RelatorioController {
                         }
                     }
                     if (temOProduto) {
-                        resposta.append("Venda ").append(venda.getId());
+                        resposta.append("Venda ").append(venda.getId()).append("\n");
                         resposta.append(String.format("\tMesa: \t%d\n", venda.getMesa()));
                         resposta.append(String.format("\tData: \t%s\n", Validador.converteData(venda.getData())));
                         resposta.append(String.format("\tValor: \t%.2f\n", venda.getValor()));
                         resposta.append(String.format("\tProdutos: \t%s\n", produtos.toString()));
                         resposta.append(String.format("\tForma Pagamento: \t%s\n", venda.getPagamento()));
                         resposta.append(String.format("\tPessoas na mesa: \t%s\n", venda.getPessoasNaMesa()));
-                        resposta.append("-----------------------------------------------");
+                        resposta.append("-----------------------------------------------\n");
                     }
                 }
             }
