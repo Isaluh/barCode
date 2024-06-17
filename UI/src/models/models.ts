@@ -45,3 +45,13 @@ export interface ProdutoComanda{
 export interface Login{
     acessLevel : string
 }
+
+export interface RankingDia{
+    dia : string
+    quantidade : number
+}
+
+export interface RankingProduto{
+    produto : string
+    quantidade : number
+}
