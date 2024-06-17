@@ -21,13 +21,13 @@ public class Venda {
     private float valor;
     private String pagamento;
     private List<UUID> itens = new ArrayList<>();
-    private int pessoasNaMesa = 0;
+    private Integer pessoasNaMesa = 0;
 
-    public int getPessoasNaMesa() {
+    public Integer getPessoasNaMesa() {
         return pessoasNaMesa;
     }
 
-    public void setPessoasNaMesa(int pessoasNaMesa) {
+    public void setPessoasNaMesa(Integer pessoasNaMesa) {
         this.pessoasNaMesa = pessoasNaMesa;
     }
 
