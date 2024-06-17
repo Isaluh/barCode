@@ -7,7 +7,6 @@ import { NgIf } from '@angular/common';
 import { LoginService } from '../../../services/login.service';
 import { LocalStorageService } from '../../../services/localStorage.service';
 import { Router } from '@angular/router';
-import { MesasService } from '../../../services/mesas.service';
 
 @Component({
   selector: 'loginView',
@@ -21,47 +20,45 @@ export class LoginComponent {
   senha : string = "";
   msgErro : string = "";
 
-  constructor(private loginService : LoginService, private localStorageService : LocalStorageService, private router : Router){}
+  constructor(private loginService : LoginService, private localStorageService : LocalStorageService, private router : Router){};
 
   ngOnInit(){
     if(this.localStorageService.getLogin().usuario != null && this.localStorageService.getLogin().senha != null){
-      this.router.navigate([this.localStorageService.getLogin().rota])
-    }
-  }
+      this.router.navigate([this.localStorageService.getLogin().rota]);
+    };
+  };
 
   pegarCPF(cpf : string){
-    this.CPF = cpf
-  }
+    this.CPF = cpf;
+  };
 
   pegarSenha(senha : string){
-    this.senha = senha
-  }
+    this.senha = senha;
+  };
 
-  abrirMensagem = false
+  abrirMensagem = false;
   login(){
     if(this.CPF == "" || this.senha == ""){
-      this.msgErro = "Campos nulos."
-      this.abrirMensagem = true
-      return
-    }
-    this.abrirMensagem = false
+      this.msgErro = "Campos nulos.";
+      this.abrirMensagem = true;
+      return;
+    };
+    this.abrirMensagem = false;
     this.loginService.verificarLogin(this.CPF, this.senha).subscribe({
       next: (acessLevel) => {
-        this.localStorageService.setLogin(this.CPF,  this.senha, acessLevel.acessLevel)
+        this.localStorageService.setLogin(this.CPF,  this.senha, acessLevel.acessLevel);
         if(acessLevel.acessLevel == 'ADMIN'){
-          // tlvz n entre pq n existe
-          this.localStorageService.setRota("/relatorio")
-          this.router.navigate(['/relatorio'])
+          this.localStorageService.setRota("/relatorio");
+          this.router.navigate(['/relatorio']);
         }
         else if(acessLevel.acessLevel == 'GARCOM'){
-          this.localStorageService.setRota("/mesas")
-          this.router.navigate(['/mesas'])
-        }
+          this.localStorageService.setRota("/mesas");
+          this.router.navigate(['/mesas']);
+        };
       },
       error: (err) => {
-        this.msgErro = "Usuário ou senha inválidos."
-        this.abrirMensagem = true
-      }})
-    console.log(this.CPF + " " + this.senha)
-  }
+        this.msgErro = "Usuário ou senha inválidos.";
+        this.abrirMensagem = true;
+      }});
+  };
 }

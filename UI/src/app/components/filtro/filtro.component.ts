@@ -16,13 +16,13 @@ type filtroVariantDate = "ano" | "mes" | "dia"
 export class FiltroComponent {
   @Input("placeholder") "placeholder" : string = "";
   @Input() variant : filtroVariant = "data";
-  @Input() variantDate : filtroVariantDate = "ano"
+  @Input() variantDate : filtroVariantDate = "ano";
   @Input() usuarios : Usuario[] = [];
   @Input() produtos : Produto[] = [];
   @Input() mesas : Mesa[] = [];
   @Output() pegarValorFiltro = new EventEmitter();
 
   valorFiltro(value : string){
-    this.pegarValorFiltro.emit(value)
-  }
+    this.pegarValorFiltro.emit(value);
+  };
 }

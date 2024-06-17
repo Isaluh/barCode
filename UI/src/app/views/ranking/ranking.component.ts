@@ -17,16 +17,18 @@ export class RankingComponent {
   topicosProduto = ["Produto", "Quantidade"];
   topicosData = ["Data", "Quantidade"];
 
-  constructor(private localStorageService : LocalStorageService, private router : Router){}
+  constructor(private localStorageService : LocalStorageService, private router : Router){};
 
   ngOnInit(){
     if(this.localStorageService.getLogin().usuario == null && this.localStorageService.getLogin().senha == null){
-      this.router.navigate(["/login"])
+      this.router.navigate(["/login"]);
     }
     else if(this.localStorageService.getLogin().acessLevel != 'ADMIN'){
-      this.router.navigate([this.localStorageService.getLogin().rota])
-    }
-  }
+      this.router.navigate([this.localStorageService.getLogin().rota]);
+    };
+  };
+
+  // pegar o ranking
 
   menu = false;
   abrirMenu(){

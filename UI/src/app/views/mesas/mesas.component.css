@@ -13,6 +13,11 @@ main div{
     gap: 20px;
 }
 
+.msgErro{
+    position: absolute;
+    width: 100%;
+}
+
 .funcoesMesa{
     position: fixed;
     bottom: 10px;

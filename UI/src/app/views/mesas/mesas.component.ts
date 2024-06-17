@@ -27,44 +27,46 @@ export class MesasComponent {
   numeroMesa : number = 0;
   qntdPessoas : number = 0;
   msgErro : string = "";
-  abrirMensagem = false
+  abrirMensagem = false;
+  abrirMensagemForaModal = false;
+  excluirMesas = false
+  escolherMesas : Mesa[] = [];
   
-  constructor(private localStorageService : LocalStorageService, private router : Router, private mesasService : MesasService){}
+  constructor(private localStorageService : LocalStorageService, private router : Router, private mesasService : MesasService){};
   
   ngOnInit(): void {
     if(this.localStorageService.getLogin().usuario == null && this.localStorageService.getLogin().senha == null){
-      this.router.navigate(["/login"])
+      this.router.navigate(["/login"]);
     }
     else if(this.localStorageService.getLogin().acessLevel != 'GARCOM'){
-      this.router.navigate([this.localStorageService.getLogin().rota])
-    }
-    this.getMesas();
-  }
+      this.router.navigate([this.localStorageService.getLogin().rota]);
+    };
+    this.getMesas();;
+  };
   
   getMesas(): void {
     this.mesasService.getMesas()
     .subscribe(mesas => this.mesas = mesas.sort((a, b) => a.numero - b.numero));
-  }
+  };
   
   modalAbrirMesa = false;
   abrirMesa(numero : number){
     this.numeroMesa = numero;
     this.modalAbrirMesa = true;
-  }
+  };
   statusAberto(){
     if(this.qntdPessoas < 1){
-      this.msgErro = "Quantidade inválida"
-      this.abrirMensagem = true
-      return
-    }
+      this.msgErro = "Quantidade inválida";
+      this.abrirMensagem = true;
+      return;
+    };
     this.mesasService.setQntdMesa(this.numeroMesa, this.qntdPessoas).subscribe(
       (res) => {
         for(let mesa of this.mesas){
-          console.log(mesa.numero + " " + this.numeroMesa)
           if(mesa.numero == this.numeroMesa){
             mesa.statusName = 'ocupada';
             mesa.statusCode = 1;
-            break
+            break;
           };
         };
         this.numeroMesa = 0;
@@ -72,16 +74,16 @@ export class MesasComponent {
       }
     );
     this.fecharModal();
-  }
+  };
   pegarQntsPessoas(qntdPessoas : number){
     this.qntdPessoas = qntdPessoas;
-  }
+  };
 
   modalOcuparMesa = false;
   ocuparMesa(numero : number){
     this.numeroMesa = numero;
     this.modalOcuparMesa = true;
-  }
+  };
   statusOcupada(){
     this.mesasService.fecharMesa(this.numeroMesa).subscribe(
       (res) => {
@@ -89,7 +91,7 @@ export class MesasComponent {
           if(mesa.numero == this.numeroMesa){
             mesa.statusName = 'aPagar';
             mesa.statusCode = 2;
-            break
+            break;
           };
         };
         this.numeroMesa = 0;
@@ -97,65 +99,104 @@ export class MesasComponent {
     );
     this.fecharModal();
   }
-  // remover mesas
+
   abrirCardapio(){
-    this.router.navigate(['/cardapio', this.numeroMesa])
-  }
+    this.router.navigate(['/cardapio', this.numeroMesa]);
+  };
   abrirComanda(numero : number){
-    this.router.navigate(['/comanda', numero])
-  }
+    this.router.navigate(['/comanda', numero]);
+  };
 
   modalAddMesa = false;
   adicionarMesa(){
     this.modalAddMesa = true;
-  }
+  };
   pegarNumeroAddMesa(numero : number){
     this.numeroAddMesa = numero;
-  }
+  };
   criarMesa(){
     if(this.numeroAddMesa <= 0){
-      this.msgErro = "Número inválido"
-      this.abrirMensagem = true
-      return
-    }
-    // se numero ja existir em mesas mandar um erro
+      this.msgErro = "Número inválido";
+      this.abrirMensagem = true;
+      return;
+    };
+    for(let mesa of this.mesas){
+      if(mesa.numero == this.numeroAddMesa){
+        this.msgErro = "Mesa já existente";
+        this.abrirMensagem = true;
+        return;
+      };
+    };
     this.mesasService.adicionarMesa(this.numeroAddMesa).subscribe(
       (res) => {
         let mesa : Mesa = {
           "numero" : this.numeroAddMesa,
           "statusName" : 'livre',
           "statusCode" : 0
-        }
-        this.mesas.push(mesa)
-        this.mesas.sort((a, b) => a.numero - b.numero)
+        };
+        this.mesas.push(mesa);
+        this.mesas.sort((a, b) => a.numero - b.numero);
         this.numeroAddMesa = 0;
       }
     );
-    this.fecharModal()
-  }
+    this.fecharModal();
+  };
 
   modalExlusao = false;
-  // apenas excluir se a mesa for livre
-  removerMesa(){
+  selecionarMesas(){
     if(this.mesas.length == 0){
-      // lançar aviso
-      console.log("não ha nenhuma mesa")
+      this.msgErro = "Não ha nenhuma mesa registrada";
+      this.abrirMensagemForaModal = true
+      return
+    };
+    this.excluirMesas = true
+  };
+  mesaExluir(numero : number){
+    if(numero == 0){
+      this.msgErro = "Apenas mesas livres"
+      this.abrirMensagemForaModal = true
+      setTimeout(() =>{
+        this.abrirMensagemForaModal = false;
+      }, 1000);
+      return
     }
-    // fazer a escolha da mesa antes de abrir modal
-    console.log("escolher a mesa antes");
-    this.modalExlusao = true;
+    for(let mesa of this.mesas){
+      if(mesa.numero == numero){
+        this.escolherMesas.push(mesa)
+        console.log(this.escolherMesas)
+        return
+      }
+    }
+  }
+  removerMesas(){
+    console.log(this.escolherMesas + " escolhidas")
+    if(this.escolherMesas.length != 0){
+      this.modalExlusao = true;
+    }
+    else{
+      this.fecharModal()
+    }
   }
   salvarModal(){
-    // fazer a exlusão
-    console.log("exclui");
+    for(let mesa of this.mesas){
+      let cont = 0
+      for(; cont < this.escolherMesas.length; cont++){
+        if(mesa.numero == this.escolherMesas[cont].numero){
+          // rever questão das mesas a se excluir
+          this.mesasService.removerMesas(mesa.numero).subscribe(() => this.getMesas());
+        };
+      };
+    };
     this.fecharModal();
-  }
+  };
   fecharModal(){
+    this.escolherMesas = [];
+    this.excluirMesas = false;
     this.abrirMensagem = false;
     this.modalExlusao = false;
     this.modalAbrirMesa = false;
     this.modalOcuparMesa = false;
     this.modalAddMesa = false;
-  }
+  };
 
 }

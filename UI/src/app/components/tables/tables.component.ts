@@ -2,7 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RelatorioTabela, Usuario } from '../../../models/models';
 
-type variantTable = "relatorio" | "usuario" | "ranking"
+type variantTable = "relatorio" | "usuario" | "ranking";
 
 @Component({
   selector: 'tablesComponent',
@@ -15,10 +15,10 @@ export class TablesComponent {
   @Input() topicos :  string[] = [];
   @Input() variant : variantTable = "relatorio";
   @Input() conteudoUsuario : Usuario[] = [];
-  @Input() conteudoVendas : RelatorioTabela[] = []
+  @Input() conteudoVendas : RelatorioTabela[] = [];
   @Output() deleteUsuario = new EventEmitter();
 
   excluirUsuario(usuario : number){
-    this.deleteUsuario.emit(usuario)
-  }
+    this.deleteUsuario.emit(usuario);
+  };
 }

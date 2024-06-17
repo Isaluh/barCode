@@ -51,7 +51,3 @@ main{
     flex-direction: column;
     align-items: flex-start;
 }
-
-input[type="date"]:not(.has-value):before{
-    content: attr(placeholder);
-  }

@@ -8,7 +8,7 @@ import { MensagemComponent } from '../../components/mensagem/mensagem.component'
 import { Mesa, Produto, Usuario } from '../../../models/models';
 import { ProdutosService } from '../../../services/produtos.service';
 
-type modalSemInfoVariant = "cadastro" | "relatorio" | "unicoInput"
+type modalSemInfoVariant = "cadastro" | "relatorio" | "unicoInput";
 
 @Component({
   selector: 'semInfoModal',
@@ -23,7 +23,7 @@ export class SemInfoComponent {
   @Input() placeholderInput : string = "";
   @Input() msgErro : string = "";
   @Input() abrirMensagem : boolean = false;
-  @Input() produtos : Produto[] = []
+  @Input() produtos : Produto[] = [];
   @Input() mesas : Mesa[] = [];
   @Output() eventButton = new EventEmitter();
   @Output() criarCadastro = new EventEmitter();
@@ -32,60 +32,60 @@ export class SemInfoComponent {
   @Output() sairModals = new EventEmitter();
 
   pegarInput(numero : string | number){
-    this.valorInput.emit(numero)
-  }
+    this.valorInput.emit(numero);
+  };
   pegarValorInput(){
-    this.eventButton.emit()
-  }
+    this.eventButton.emit();
+  };
 
   cadastro = {
     "cpf" : "",
     "nome" : "",
     "senha" : "",
-  }
+  };
   pegarCPF(cpf : string | number ){
     this.cadastro.cpf = String(cpf);
-  }
+  };
   pegarNome(nome : string | number){
     this.cadastro.nome = String(nome);
-  }
+  };
   pegarSenha(senha : string | number){
     this.cadastro.senha = String(senha);
-  }
+  };
   cadastrar(){
-    this.criarCadastro.emit(this.cadastro)
-  }
+    this.criarCadastro.emit(this.cadastro);
+  };
 
   relatorio ={
     "inicio" : "",
     "fim" : "",
     "escolha" : "",
     "value" : ""
-  }
+  };
   pegarInicio(dataInicio : string | number){
-    this.relatorio.inicio = String(dataInicio)
-  }
+    this.relatorio.inicio = String(dataInicio);
+  };
   pegarFim(dataFim : string | number){
-    this.relatorio.fim = String(dataFim)
-  }
+    this.relatorio.fim = String(dataFim);
+  };
   
   pegarEscolha(escolha : string){
-    this.relatorio.escolha = escolha
-  }
+    this.relatorio.escolha = escolha;
+  };
   
   pegarMesa(mesa : string){
-    this.relatorio.value = mesa
-  }
+    this.relatorio.value = mesa;
+  };
   
   pegarProduto(produto : string){
-    this.relatorio.value = produto
-  }
+    this.relatorio.value = produto;
+  };
   
   gerarRelatorio(){
-    this.criarRelatorio.emit(this.relatorio)
-  }
+    this.criarRelatorio.emit(this.relatorio);
+  };
 
   fecharModal(){
-    this.sairModals.emit()
-  }
+    this.sairModals.emit();
+  };
 }

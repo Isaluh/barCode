@@ -3,15 +3,12 @@
     <div>
         <div class="conteudo">
             <infoBarComponent [numeroMesa]=id variant="infoMesaCompleto" />
-            <!-- ngFor para os itens da comanda -->
             <ul class="produtos">
                 <li *ngFor="let produto of produtosComanda">• [{{produto.quantidade}}x] {{produto.produto}} - R${{produto.precoUnitario}}</li>
             </ul>
         </div>
         <div class="funcoesComanda">
-            <!-- pegar total + 10% -->
             <inputsComponent variant="visualTotal" placeholder="Total: R${{total}}" />
-            <!-- so aparecer se comanda estiver aPagar -->
             <buttonsComponent *ngIf="mesaFechada" (click)="abrirMetodoPagamento()" variant="verde" text="Pagar" />
         </div>
     </div>

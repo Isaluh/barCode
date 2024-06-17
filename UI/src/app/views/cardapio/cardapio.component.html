@@ -2,7 +2,7 @@
 <headerComponent *ngIf="!isGarcom" variant="visual" />
 <main>
     <div>
-        <img *ngIf="isGarcom" (click)="verComanda()" ngSrc="assets/openComanda.svg" width="30" height="30">
+        <img *ngIf="isGarcom" (click)="verComanda()" ngSrc="assets/openComanda.svg" width="30" height="30" priority="true">
         <inputsComponent (eventInputValue)="pegarSearch($event.valorinput)" variant="borda" placeholder="Pesquisar" />
         <buttonsComponent (click)="produtoSearch()" variant="search" />
     </div>

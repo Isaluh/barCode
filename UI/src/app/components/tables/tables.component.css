@@ -1,5 +1,7 @@
 div{
     min-width: 320px;
+    max-height: 526px;
+    overflow-y: scroll;
 }
 
 table {

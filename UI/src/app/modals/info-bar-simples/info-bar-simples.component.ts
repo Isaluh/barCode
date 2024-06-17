@@ -18,7 +18,7 @@ export class InfoBarSimplesComponent {
   @Input() variant : modalInfoBarSimplesVariant = "aberta";
   @Input() numeroMesa : number = 0;
   @Input() msgErro : string = "";
-  @Input() abrirMensagem = false
+  @Input() abrirMensagem = false;
   @Input() totalComanda = 0;
   @Output() mudarStatus  =  new EventEmitter();
   @Output() modalDinheiro = new EventEmitter();
@@ -26,44 +26,44 @@ export class InfoBarSimplesComponent {
   @Output() cardapioMesa = new EventEmitter()
   @Output() sairModals = new EventEmitter();
   @Output() poderPagar = new EventEmitter();
+
   troco : number = 0;
 
   mudarStatuAbrir(){
-    this.mudarStatus.emit()
-  }
+    this.mudarStatus.emit();
+  };
 
   mudarStatusOcupada(){
-    this.mudarStatus.emit()
-  }
+    this.mudarStatus.emit();
+  };
 
   mudarStatusAPagar(metodo : string){
-    this.mudarStatus.emit(metodo)
-  }
+    this.mudarStatus.emit(metodo);
+  };
 
   abrirModalDinheiro(){
-    this.modalDinheiro.emit()
-  }
+    this.modalDinheiro.emit();
+  };
 
   pegarQntsPessoas(event : string | number){
-    this.valorInput.emit(Number(event))
-  }
+    this.valorInput.emit(Number(event));
+  };
 
   pegarRecebido(valor : string){
     this.troco = Number(valor) - this.totalComanda;
     if(this.troco >= 0){
-      this.poderPagar.emit(true)
+      this.poderPagar.emit(true);
     }
     else{
-      this.poderPagar.emit(false)
-
-    }
-  }
+      this.poderPagar.emit(false);
+    };
+  };
 
   abrirCardapio(){
-    this.cardapioMesa.emit()
-  }
+    this.cardapioMesa.emit();
+  };
 
   fecharModal(){
-    this.sairModals.emit()
-  }
+    this.sairModals.emit();
+  };
 }
