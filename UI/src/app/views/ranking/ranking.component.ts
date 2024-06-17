@@ -5,6 +5,7 @@ import { NgIf } from '@angular/common';
 import { TablesComponent } from '../../components/tables/tables.component';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../../services/localStorage.service';
+import { RankingService } from '../../../services/ranking.service';
 
 @Component({
   selector: 'rankingView',
@@ -17,7 +18,7 @@ export class RankingComponent {
   topicosProduto = ["Produto", "Quantidade"];
   topicosData = ["Data", "Quantidade"];
 
-  constructor(private localStorageService : LocalStorageService, private router : Router){};
+  constructor(private localStorageService : LocalStorageService, private router : Router, private rankingService : RankingService){};
 
   ngOnInit(){
     if(this.localStorageService.getLogin().usuario == null && this.localStorageService.getLogin().senha == null){
